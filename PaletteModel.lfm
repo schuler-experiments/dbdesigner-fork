@@ -4,7 +4,7 @@ object PaletteModelFrom: TPaletteModelFrom
   ActiveControl = PageControl
   AutoScroll = False
   BorderIcons = [biSystemMenu, biMaximize]
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'DB Model'
   ClientHeight = 192
   ClientWidth = 221

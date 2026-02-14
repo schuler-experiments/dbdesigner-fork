@@ -3,7 +3,7 @@ object EERExportSQLScriptFrom: TEERExportSQLScriptFrom
   Top = 113
   ActiveControl = ExportSelTablesCBox
   AutoScroll = False
-  BorderStyle = fbsDialog
+  BorderStyle = bsDialog
   Caption = 'Export SQL Script'
   ClientHeight = 579
   ClientWidth = 537

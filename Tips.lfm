@@ -6,7 +6,7 @@ object TipsForm: TTipsForm
   VertScrollBar.Range = 233
   HorzScrollBar.Range = 373
   ActiveControl = TipMemo
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'DBDesigner Fork Tips'
   Color = clBackground
   FormStyle = fsStayOnTop

@@ -3,7 +3,7 @@ object DBConnEditorForm: TDBConnEditorForm
   Top = 220
   ActiveControl = DBConnEd
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Database Connection Editor'
   ClientHeight = 452
   ClientWidth = 486

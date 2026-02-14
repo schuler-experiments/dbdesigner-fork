@@ -3,7 +3,7 @@ object EditorTableForm: TEditorTableForm
   Top = 168
   ActiveControl = TableNameEd
   AutoScroll = False
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'Table Editor'
   ClientHeight = 491
   ClientWidth = 702

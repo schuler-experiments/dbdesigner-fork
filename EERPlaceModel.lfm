@@ -2,7 +2,7 @@ object EERPlaceModelForm: TEERPlaceModelForm
   Left = 289
   Top = 226
   AutoScroll = False
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'Place / Link Model'
   ClientHeight = 351
   ClientWidth = 662

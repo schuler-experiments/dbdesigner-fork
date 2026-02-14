@@ -3,7 +3,7 @@ object EditorRegionForm: TEditorRegionForm
   Top = 331
   ActiveControl = RegionNameEd
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Region Editor'
   ClientHeight = 327
   ClientWidth = 370

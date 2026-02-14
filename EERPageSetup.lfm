@@ -3,7 +3,7 @@ object EERPageSetupForm: TEERPageSetupForm
   Top = 141
   ActiveControl = PropertiesBtn
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Page Setup'
   ClientHeight = 565
   ClientWidth = 762

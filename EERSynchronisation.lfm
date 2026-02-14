@@ -3,7 +3,7 @@ object EERSynchronisationForm: TEERSynchronisationForm
   Top = 227
   ActiveControl = ChangeDBRBtn
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Database Synchronisation'
   ClientHeight = 518
   ClientWidth = 395

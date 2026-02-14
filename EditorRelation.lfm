@@ -3,7 +3,7 @@ object EditorRelationForm: TEditorRelationForm
   Top = 226
   ActiveControl = RelationNameEd
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Relation Editor'
   ClientHeight = 472
   ClientWidth = 414

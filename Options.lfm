@@ -3,7 +3,7 @@ object OptionsForm: TOptionsForm
   Top = 220
   ActiveControl = PageControl
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'DBDesigner Options'
   ClientHeight = 342
   ClientWidth = 744

@@ -3,7 +3,7 @@ object ProgressForm: TProgressForm
   Top = 436
   AutoScroll = False
   BorderIcons = []
-  BorderStyle = fbsDialog
+  BorderStyle = bsDialog
   Caption = 'Progress'
   ClientHeight = 164
   ClientWidth = 352

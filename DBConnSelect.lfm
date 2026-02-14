@@ -3,7 +3,7 @@ object DBConnSelectForm: TDBConnSelectForm
   Top = 234
   ActiveControl = PasswdEd
   AutoScroll = False
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'Select Database Connection'
   ClientHeight = 300
   ClientWidth = 746

@@ -1118,9 +1118,8 @@ object DBImportDataForm: TDBImportDataForm
     Top = 222
   end
   object SourceSQLDataSet: TSQLDataSet
-    MaxBlobSize = -1
     Params = <>
-    SQLConnection = SourceSQLConn
+    Database = SourceSQLConn
     Left = 138
     Top = 222
   end

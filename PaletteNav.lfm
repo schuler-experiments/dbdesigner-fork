@@ -4,7 +4,7 @@ object PaletteNavForm: TPaletteNavForm
   ActiveControl = ZoomTrackBar
   AutoScroll = False
   BorderIcons = [biSystemMenu]
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'Navigator & Info'
   ClientHeight = 174
   ClientWidth = 221

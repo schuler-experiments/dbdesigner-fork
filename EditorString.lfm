@@ -3,7 +3,7 @@ object EditorStringForm: TEditorStringForm
   Top = 311
   ActiveControl = ValueEd
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'EditorStringForm'
   ClientHeight = 61
   ClientWidth = 407

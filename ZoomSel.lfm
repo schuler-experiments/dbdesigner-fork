@@ -3,7 +3,7 @@ object ZoomSelForm: TZoomSelForm
   Top = 327
   ActiveControl = ZoomLBox
   AutoScroll = False
-  BorderStyle = fbsNone
+  BorderStyle = bsNone
   Caption = 'ZoomSelForm'
   ClientHeight = 229
   ClientWidth = 162

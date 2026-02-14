@@ -6,7 +6,7 @@ object SplashForm: TSplashForm
 
   AutoScroll = False
 
-  BorderStyle = fbsNone
+  BorderStyle = bsNone
 
   Caption = 'DB Designer 4'
 

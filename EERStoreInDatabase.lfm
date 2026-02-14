@@ -3,7 +3,7 @@ object EERStoreInDatabaseForm: TEERStoreInDatabaseForm
   Top = 219
   ActiveControl = DBConnEd
   AutoScroll = False
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'Save in Database'
   ClientHeight = 429
   ClientWidth = 395

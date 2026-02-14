@@ -3,7 +3,7 @@ object EditorImageForm: TEditorImageForm
   Top = 274
   ActiveControl = ImagNameEd
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Image Editor'
   ClientHeight = 122
   ClientWidth = 459

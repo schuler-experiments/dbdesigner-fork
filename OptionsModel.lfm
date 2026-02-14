@@ -3,7 +3,7 @@ object OptionsModelForm: TOptionsModelForm
   Top = 225
   ActiveControl = PageControl
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Model Options'
   ClientHeight = 307
   ClientWidth = 743

@@ -2,7 +2,7 @@ object EditorQueryDragTargetForm: TEditorQueryDragTargetForm
   Left = 467
   Top = 332
   AutoScroll = False
-  BorderStyle = fbsNone
+  BorderStyle = bsNone
   Caption = 'Query Drag Target'
   ClientHeight = 195
   ClientWidth = 304

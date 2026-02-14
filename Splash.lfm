@@ -2,7 +2,7 @@ object SplashForm: TSplashForm
   Left = 310
   Top = 257
   AutoScroll = False
-  BorderStyle = fbsNone
+  BorderStyle = bsNone
   Caption = 'DB Designer Fork'
   ClientHeight = 358
   ClientWidth = 700

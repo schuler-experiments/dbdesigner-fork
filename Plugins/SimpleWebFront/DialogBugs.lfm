@@ -6,7 +6,7 @@ object DialogBugsForm: TDialogBugsForm
 
   AutoScroll = False
 
-  BorderStyle = fbsNone
+  BorderStyle = bsNone
 
   Caption = 'Contact'
 

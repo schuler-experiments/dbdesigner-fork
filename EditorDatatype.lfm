@@ -3,7 +3,7 @@ object EditorDatatypeForm: TEditorDatatypeForm
   Top = 288
   ActiveControl = DatatypeNameEd
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Editor Datatype'
   ClientHeight = 399
   ClientWidth = 395

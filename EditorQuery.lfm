@@ -3,7 +3,7 @@ object EditorQueryForm: TEditorQueryForm
   Top = 277
   ActiveControl = DBGrid
   AutoScroll = False
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'Query Editor'
   ClientHeight = 400
   ClientWidth = 700

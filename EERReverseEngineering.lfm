@@ -3,7 +3,7 @@ object EERReverseEngineeringForm: TEERReverseEngineeringForm
   Top = 61
   ActiveControl = BuildRelPrimKeyRBtn
   AutoScroll = False
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'Reverse Engineering'
   ClientHeight = 627
   ClientWidth = 573

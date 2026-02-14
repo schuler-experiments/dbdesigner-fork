@@ -14,7 +14,7 @@ object MainForm: TMainForm
 
   ActiveControl = Group2ComboBox
 
-  BorderStyle = fbsSingle
+  BorderStyle = bsSingle
 
   Caption = 'Simple Web Front Plugin | '
 

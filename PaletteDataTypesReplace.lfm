@@ -3,7 +3,7 @@ object PaletteDataTypesReplaceForm: TPaletteDataTypesReplaceForm
   Top = 477
   ActiveControl = AllTablesRBtn
   AutoScroll = False
-  BorderStyle = fbsDialog
+  BorderStyle = bsDialog
   Caption = 'Replace Datatype'
   ClientHeight = 220
   ClientWidth = 395

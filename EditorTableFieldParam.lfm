@@ -3,7 +3,7 @@ object EditorTableFieldParamForm: TEditorTableFieldParamForm
   Top = 459
   ActiveControl = ParamMaskEdit
   AutoScroll = False
-  BorderStyle = fbsNone
+  BorderStyle = bsNone
   Caption = 'Edit Datatype Params'
   ClientHeight = 69
   ClientWidth = 149

@@ -3,7 +3,7 @@ object EditorNoteForm: TEditorNoteForm
   Top = 351
   ActiveControl = NoteMemo
   AutoScroll = False
-  BorderStyle = fbsToolWindow
+  BorderStyle = bsToolWindow
   Caption = 'Note Editor'
   ClientHeight = 186
   ClientWidth = 298

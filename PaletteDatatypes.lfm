@@ -3,7 +3,7 @@ object PaletteDataTypesForm: TPaletteDataTypesForm
   Top = 24
   ActiveControl = PageControl
   AutoScroll = False
-  BorderStyle = fbsSizeToolWin
+  BorderStyle = bsSizeToolWin
   Caption = 'Datatypes'
   ClientHeight = 229
   ClientWidth = 221
