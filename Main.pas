@@ -487,7 +487,7 @@ begin
   {$ENDIF}
 
   //Get Version string, defined in DBDesigner4.dpr
-  Version:=SplashForm.VersionLbl.Caption;
+  Version:='1.5';
 
   //Initialize DMMain and DMGUI
   DMMain:=TDMMain.Create(self);

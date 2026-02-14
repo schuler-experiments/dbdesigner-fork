@@ -104,15 +104,15 @@ begin
   LoadApplicationFont;
 
   //Show Splash Form
-  SplashForm:=TSplashForm.Create(Application);
-  SplashForm.VersionLbl.Caption:='1.5';
-  SplashForm.Show;
-  SplashForm.Update;
+  //SplashForm:=TSplashForm.Create(Application);
+  //SplashForm.VersionLbl.Caption:='1.5';
+  //SplashForm.Show;
+  //SplashForm.Update;
 
   Application.ShowMainForm := False;
   Application.CreateForm(TMainForm, MainForm);
   //Bring Splash Screen back to top again...
-  SplashForm.BringToFront;
+  //SplashForm.BringToFront;
 
   Application.Run;
 end.
