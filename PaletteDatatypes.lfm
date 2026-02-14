@@ -46,7 +46,7 @@ object PaletteDataTypesForm: TPaletteDataTypesForm
           Width = 213
           Height = 179
           Align = alClient
-          BorderStyle = bsSunkenPanel
+          BorderStyle = bsSingle
           Color = clBtnFace
           Columns = <
             item
@@ -86,7 +86,7 @@ object PaletteDataTypesForm: TPaletteDataTypesForm
           Top = 2
           Width = 211
           Height = 227
-          BorderStyle = bsSunkenPanel
+          BorderStyle = bsSingle
           Color = clBtnFace
           Columns = <
             item
