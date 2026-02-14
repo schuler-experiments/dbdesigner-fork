@@ -261,7 +261,7 @@ object DBConnSelectForm: TDBConnSelectForm
           Tag = 0
           Width = 22
         end>
-      Images = DBConnImgList
+      SmallImages = DBConnImgList
       Items.Data = {
         940000000300000005000000FFFFFFFFFFFFFFFF050000000000000004546573
         74054D5953514C096C6F63616C686F7374047465737411546869732069732061

@@ -38,7 +38,7 @@
         <PackageName Value="LCL"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="48">
+    <Units Count="49">
       <Unit0>
         <Filename Value="DBDesignerFork.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -268,6 +268,10 @@
         <Filename Value="GlobalSysFunctions.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit47>
+      <Unit48>
+        <Filename Value="UITestRunner.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit48>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

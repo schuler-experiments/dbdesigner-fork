@@ -53,7 +53,7 @@ object PaletteDataTypesForm: TPaletteDataTypesForm
               Tag = 0
               Width = 189
             end>
-          Images = DatatypesImgList
+          SmallImages = DatatypesImgList
           Items.Data = {
             7B0000000400000000000000FFFFFFFFFFFFFFFF000000000000000007494E54
             4547455200000000FFFFFFFFFFFFFFFF000000000000000005464C4F41540200

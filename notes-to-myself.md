@@ -146,3 +146,12 @@ Two issues fixed:
    Subtracted 4 from each size prefix.
 
 App runs clean with no errors.
+
+## Fix: "Unknown property: images" Runtime Error
+- **Problem**: `TControl.ReadState` raised "Unknown property: images" when loading forms containing `TListView` with `Images = <ImageListName>`.
+- **Root cause**: In Delphi/CLX, `TListView` has an `Images` property. In LCL, the equivalent property is `SmallImages`.
+- **Note**: `TTreeView.Images` IS valid in LCL and needed no change — only `TListView.Images` was the problem.
+- **Fix**: Changed `Images` → `SmallImages` in 2 .lfm files for TListView components:
+  - `PaletteDatatypes.lfm:56` (CommonDataTypesListView: TListView)
+  - `DBConnSelect.lfm:264` (ConnectionsListView: TListView)
+- **Result**: App starts clean with no property errors (only harmless GTK canberra-gtk-module warning).
