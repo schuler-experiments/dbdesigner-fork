@@ -67,7 +67,6 @@ object TipsForm: TTipsForm
     Width = 343
     Height = 141
     Color = 16056319
-    HMargin = 10
     Lines.Strings = (
       ''
       'When holding down the space key to pan the model, you can also '
