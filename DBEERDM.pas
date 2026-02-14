@@ -51,6 +51,9 @@ unit DBEERDM;
 //
 //----------------------------------------------------------------------------------------------------------------------
 
+
+{$I DBDesigner4.inc}
+
 interface
 
 uses
@@ -403,7 +406,7 @@ begin
         {theTable.ObjName:=DMMain.ReplaceText(theTable.ObjName, '"', '');
         theTable.ObjName:=DMMain.ReplaceText(theTable.ObjName, '''', '');
         theTable.ObjName:=DMMain.ReplaceText(theTable.ObjName, '`', '');
-        theTable.ObjName:=DMMain.ReplaceText(theTable.ObjName, '´', '');}
+        theTable.ObjName:=DMMain.ReplaceText(theTable.ObjName, 'Â´', '');}
 
         //Simply remove table prefix, scott.test
         if(Pos('.', theTable.ObjName)>0)then

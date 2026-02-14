@@ -35,6 +35,9 @@ unit DBDM;
 //
 //----------------------------------------------------------------------------------------------------------------------
 
+
+{$I DBDesigner4.inc}
+
 interface
 
 uses
@@ -94,7 +97,7 @@ type
     //Let the User select a DBConnection
     function GetUserSelectedDBConn(defDBConn: string): TDBConn;
 
-    //General OnButtonClick für DBConn Buttons
+    //General OnButtonClick fÃ¼r DBConn Buttons
     procedure GetDBConnButtonClick(Sender: TObject; defDBConn: string = '');
 
     //List all DB-Tables in a Stringlist

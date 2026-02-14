@@ -34,6 +34,9 @@ unit GlobalSysFunctions;
 //----------------------------------------------------------------------------------------------------------------------
 
 
+
+{$I DBDesigner4.inc}
+
 interface
 
 uses QForms,
@@ -60,10 +63,10 @@ implementation
 //CSIDL_HISTORY              Internet-Verlauf
 //CSIDL_INTERNET_CACHE       "Temporary Internet Files"
 //CSIDL_PERSONAL             Eigene Dateien               $0005
-//CSIDL_PROGRAMS             "Programme" im Startmenü
-//CSIDL_RECENT               "Dokumente" im Startmenü
-//CSIDL_SENDTO               "Senden an" im Kontextmenü
-//CSIDL_STARTMENU            Startmenü
+//CSIDL_PROGRAMS             "Programme" im StartmenÃ¼
+//CSIDL_RECENT               "Dokumente" im StartmenÃ¼
+//CSIDL_SENDTO               "Senden an" im KontextmenÃ¼
+//CSIDL_STARTMENU            StartmenÃ¼
 //CSIDL_STARTUP              Autostart
 
 //e.g. : s:=GetSpecialFolder(CSIDL_RECENT);

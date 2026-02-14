@@ -36,6 +36,9 @@ unit EmbeddedPdfTypes;
 
 {$I EmbeddedPdfConf.inc}
 
+
+{$I ../DBDesigner4.inc}
+
 interface
 
 uses

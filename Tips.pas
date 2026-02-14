@@ -1,5 +1,8 @@
 unit Tips;
 
+
+{$I DBDesigner4.inc}
+
 interface
 
 uses

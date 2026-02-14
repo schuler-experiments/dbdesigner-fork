@@ -1,5 +1,8 @@
 unit PrinterSettings;
 
+
+{$I DBDesigner4.inc}
+
 interface
 
 uses

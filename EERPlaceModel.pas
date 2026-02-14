@@ -1,5 +1,8 @@
 unit EERPlaceModel;
 
+
+{$I DBDesigner4.inc}
+
 interface
 
 uses

@@ -33,6 +33,9 @@ unit EERModel_XML_ERwin41_Import;
 //
 //----------------------------------------------------------------------------------------------------------------------
 
+
+{$I DBDesigner4.inc}
+
 interface
 
 uses xmldom, XMLDoc, XMLIntf;

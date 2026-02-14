@@ -37,3 +37,9 @@
 {$DEFINE USE_SYNEDIT}
 {$DEFINE USE_IXMLDBMODELType}
 {.$DEFINE USE_QTheming}
+
+// FPC/Lazarus compatibility
+{$IFDEF FPC}
+  {$mode delphi}
+  {$H+}  // Use AnsiString by default (Delphi-compatible)
+{$ENDIF}

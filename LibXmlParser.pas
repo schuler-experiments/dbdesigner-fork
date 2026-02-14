@@ -8,7 +8,7 @@ Subject : Progressive XML Parser for all types of XML Files
 ===============================================================================================
 Author  : Stefan Heymann
           Eschenweg 3
-          72076 Tübingen
+          72076 TÃ¼bingen
           GERMANY
 
 E-Mail:   stefan@destructor.de
@@ -233,6 +233,9 @@ Date        Author Version Changes
 
 
 UNIT LibXmlParser;
+
+
+{$I DBDesigner4.inc}
 
 INTERFACE
 
@@ -512,7 +515,7 @@ FUNCTION  StrSFPas    (Start, Finish : PChar) : STRING;                    // Co
 FUNCTION  TrimWs      (Source : STRING) : STRING;                          // Trim Whitespace
 
 FUNCTION  AnsiToUtf8  (Source : ANSISTRING) : STRING;                            // Convert Win-1252 to UTF-8
-FUNCTION  Utf8ToAnsi  (Source : STRING; UnknownChar : CHAR = '¿') : ANSISTRING;  // Convert UTF-8 to Win-1252
+FUNCTION  Utf8ToAnsi  (Source : STRING; UnknownChar : CHAR = 'Â¿') : ANSISTRING;  // Convert UTF-8 to Win-1252
 
 
 (*
@@ -667,7 +670,7 @@ CONST
 
    Example
    --------
-   Transforming the Unicode character U+00E4 LATIN SMALL LETTER A WITH DIAERESIS  ("ä"):
+   Transforming the Unicode character U+00E4 LATIN SMALL LETTER A WITH DIAERESIS  ("Ã¤"):
 
          ISO-8859-1,           Decimal  228
          Win1252,              Hex      $E4
@@ -678,7 +681,7 @@ CONST
                                Binary   11000011 10100100
                                Hex      $C3      $A4
                                Decimal  195      164
-                               ANSI     Ã        ¤         *)
+                               ANSI     Ãƒ        Â¤         *)
 
 
 FUNCTION  AnsiToUtf8 (Source : ANSISTRING) : STRING;
@@ -717,7 +720,7 @@ BEGIN
 END;
 
 
-FUNCTION  Utf8ToAnsi (Source : STRING; UnknownChar : CHAR = '¿') : ANSISTRING;
+FUNCTION  Utf8ToAnsi (Source : STRING; UnknownChar : CHAR = 'Â¿') : ANSISTRING;
           (* Converts the given UTF-8 String to Windows ANSI (Win-1252).
              If a character can not be converted, the "UnknownChar" is inserted. *)
 VAR
