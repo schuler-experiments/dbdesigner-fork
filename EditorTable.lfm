@@ -544,15 +544,6 @@ object EditorTableForm: TEditorTableForm
       Left = 17
       Top = 7
       Height = 155
-      Columns = <
-        item
-          AllowClick = False
-          AllowResize = False
-          MaxWidth = 117
-          MinWidth = 117
-          Tag = 0
-          Width = 117
-        end>
       Items.Data = {
         0400000020000000FFFFFFFFFFFFFFFF936A0340000000000000000000000000
         07496E646963657326000000FFFFFFFFFFFFFFFF936A03400000000000000000

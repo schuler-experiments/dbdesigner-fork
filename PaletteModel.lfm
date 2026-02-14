@@ -943,20 +943,6 @@ object PaletteModelFrom: TPaletteModelFrom
           Height = 200
           BorderStyle = bsNone
           Color = clWhite
-          Columns = <
-            item
-              AllowResize = False
-              Tag = 0
-              Width = 150
-            end
-            item
-              Tag = 0
-              Width = 20
-            end
-            item
-              Tag = 0
-              Width = 20
-            end>
           Font.Color = clBlack
           Font.Height = 11
           Font.Name = 'Sans'
@@ -1007,14 +993,6 @@ object PaletteModelFrom: TPaletteModelFrom
           Align = alClient
           BorderStyle = bsNone
           Color = clWhite
-          Columns = <
-            item
-              AllowClick = False
-              AllowResize = False
-              Caption = 'Tables in Model'
-              Tag = 0
-              Width = 197
-            end>
           Font.Color = clBlack
           Font.Height = 9
           Font.Name = 'Sans'

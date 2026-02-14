@@ -1524,14 +1524,8 @@ object EditorQueryForm: TEditorQueryForm
         Width = 159
         Height = 238
         Align = alClient
-        ColumnClick = False
         ColumnMove = False
         ColumnResize = False
-        Columns = <
-          item
-            Tag = 0
-            Width = 50
-          end>
         Images = StoredSQLImageList
         Items.Data = {
           030000002500000001000000FFFFFFFF7466D200000000000000000002000000

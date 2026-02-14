@@ -922,15 +922,6 @@ object OptionsModelForm: TOptionsModelForm
     Top = 15
     Width = 142
     Height = 242
-    Columns = <
-      item
-        AllowClick = False
-        AllowResize = False
-        MaxWidth = 125
-        MinWidth = 125
-        Tag = 0
-        Width = 125
-      end>
     Items.Data = {
       0400000028000000FFFFFFFFFFFFFFFF0020EE02000000000000000000000000
       0F47656E6572616C204F7074696F6E7328000000FFFFFFFFFFFFFFFF0020EE02

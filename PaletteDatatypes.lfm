@@ -88,11 +88,6 @@ object PaletteDataTypesForm: TPaletteDataTypesForm
           Height = 227
           BorderStyle = bsSingle
           Color = clBtnFace
-          Columns = <
-            item
-              Tag = 0
-              Width = 193
-            end>
           Font.Color = clBlack
           Font.Height = 11
           Font.Name = 'Sans'

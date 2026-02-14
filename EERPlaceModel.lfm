@@ -53,15 +53,6 @@ object EERPlaceModelForm: TEERPlaceModelForm
       Top = 15
       Width = 208
       Height = 284
-      Columns = <
-        item
-          AllowClick = False
-          AllowResize = False
-          MaxWidth = 125
-          MinWidth = 125
-          Tag = 0
-          Width = 125
-        end>
       Images = LMImgList
       ReadOnly = True
       TabOrder = 1

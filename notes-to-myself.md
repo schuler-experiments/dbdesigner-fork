@@ -155,3 +155,17 @@ App runs clean with no errors.
   - `PaletteDatatypes.lfm:56` (CommonDataTypesListView: TListView)
   - `DBConnSelect.lfm:264` (ConnectionsListView: TListView)
 - **Result**: App starts clean with no property errors (only harmless GTK canberra-gtk-module warning).
+
+## Fix: "Unknown property: columns" Runtime Error
+- **Problem**: `TReader` raised "Unknown property: columns" when loading forms with `TTreeView` having CLX-specific `Columns` property.
+- **Root cause**: In CLX, `TTreeView` supported multi-column mode with a `Columns` collection. LCL's `TTreeView` does not have `Columns` (only `TListView` has it in LCL).
+- **Fix**: Removed `Columns = < ... >` blocks from 10 TTreeView instances in 8 .lfm files. Also removed `ColumnClick = False` from 2 TTreeView instances (CLX-only property).
+- **Files modified**: DBConnSelect.lfm, EERPlaceModel.lfm, EERStoreInDatabase.lfm, EditorQuery.lfm, EditorTable.lfm, Options.lfm, OptionsModel.lfm, PaletteDatatypes.lfm, PaletteModel.lfm
+- **TListView Columns**: Left intact (valid in LCL).
+
+## Why Selftest Doesn't Catch Property Errors
+- "Unknown property" exceptions are raised by `TReader.PropertyError` during form resource loading.
+- LCL's `TReader` catches these exceptions internally (try/except in `ReadProperty`/`ReadData`).
+- They never propagate to user code or `Application.OnException`.
+- The selftest only tests button/menu clicks on already-loaded forms.
+- Solution: Could add try/except wrappers around form creation in `ShowPalettesTmrTimer` to detect `EReadError`, or add static .lfm analysis to the selftest.
