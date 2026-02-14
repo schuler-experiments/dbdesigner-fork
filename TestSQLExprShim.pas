@@ -63,7 +63,7 @@ begin
     // Test SetSchemaInfo (table listing)
     WriteLn;
     WriteLn('Testing SetSchemaInfo(stTables):');
-    DS.SetSchemaInfo(4 {stTables}, '', '');  // stTables = 4
+    DS.SetSchemaInfo(1 {stTables}, '', '');  // stTables = 1
     DS.Open;
     while not DS.EOF do
     begin
