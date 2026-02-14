@@ -342,7 +342,6 @@ object MainForm: TMainForm
       Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = []
-      Masked = True
       ParentFont = False
       Transparent = True
       OnClick = ZoomLblClick

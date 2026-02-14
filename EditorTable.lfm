@@ -580,7 +580,6 @@ object EditorTableForm: TEditorTableForm
         Width = 34
         Height = 13
         Caption = 'Indices'
-        Masked = True
         Transparent = True
       end
     end

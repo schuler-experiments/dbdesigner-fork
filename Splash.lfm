@@ -31,7 +31,6 @@ object SplashForm: TSplashForm
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
     Font.Style = []
-    Masked = True
     ParentFont = False
     Transparent = True
     Visible = False
@@ -43,7 +42,6 @@ object SplashForm: TSplashForm
     Height = 13
     Alignment = taRightJustify
     Caption = '4.0.0.0'
-    Masked = True
     Transparent = True
     Visible = False
   end
@@ -62,7 +60,6 @@ object SplashForm: TSplashForm
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
     Font.Style = []
-    Masked = True
     ParentFont = False
     Transparent = True
     Visible = False
@@ -83,7 +80,6 @@ object SplashForm: TSplashForm
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
     Font.Style = []
-    Masked = True
     ParentFont = False
     Transparent = True
     Visible = False
@@ -102,7 +98,6 @@ object SplashForm: TSplashForm
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
     Font.Style = []
-    Masked = True
     ParentFont = False
     Transparent = True
     Visible = False
@@ -123,7 +118,6 @@ object SplashForm: TSplashForm
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
     Font.Style = []
-    Masked = True
     ParentFont = False
     Transparent = True
     Visible = False
@@ -144,7 +138,6 @@ object SplashForm: TSplashForm
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
     Font.Style = []
-    Masked = True
     ParentFont = False
     Transparent = True
     Visible = False
@@ -163,7 +156,6 @@ object SplashForm: TSplashForm
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
     Font.Style = []
-    Masked = True
     ParentFont = False
     Transparent = True
     Visible = False

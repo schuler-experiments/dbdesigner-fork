@@ -236,7 +236,6 @@ object OptionsModelForm: TOptionsModelForm
           Width = 289
           Height = 13
           Caption = 'Reference Definition is activated for the Relation (for InnoDB)'
-          Masked = True
           Transparent = True
         end
         object TableNameInRefsCBox: TCheckBox
@@ -477,7 +476,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Masked = True
         ParentFont = False
         Transparent = True
       end
@@ -493,7 +491,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Masked = True
         ParentFont = False
         Transparent = True
       end
@@ -545,7 +542,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Masked = True
         ParentFont = False
         Transparent = True
       end
@@ -561,7 +557,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Masked = True
         ParentFont = False
         Transparent = True
       end
@@ -577,7 +572,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Masked = True
         ParentFont = False
         Transparent = True
       end
@@ -593,7 +587,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Masked = True
         ParentFont = False
         Transparent = True
       end
@@ -963,7 +956,6 @@ object OptionsModelForm: TOptionsModelForm
       Width = 34
       Height = 13
       Caption = 'Indices'
-      Masked = True
       Transparent = True
     end
   end

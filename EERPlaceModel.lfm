@@ -45,7 +45,6 @@ object EERPlaceModelForm: TEERPlaceModelForm
         Width = 64
         Height = 13
         Caption = 'Linked Model'
-        Masked = True
         Transparent = True
       end
     end

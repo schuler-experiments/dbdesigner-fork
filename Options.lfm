@@ -1022,7 +1022,6 @@ object OptionsForm: TOptionsForm
       Width = 76
       Height = 13
       Caption = 'General Options'
-      Masked = True
       Transparent = True
     end
   end

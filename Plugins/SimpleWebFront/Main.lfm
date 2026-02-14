@@ -3394,7 +3394,6 @@ object MainForm: TMainForm
 
       Caption = 'General Options'
 
-      Masked = True
 
       Transparent = True
 
