@@ -464,6 +464,7 @@ type
 
 var
   MainForm: TMainForm;
+  StartupErrors: TStringList;
 
 implementation
 
@@ -1537,9 +1538,18 @@ begin
 
     if(TipText<>'')then
     begin
-      TipsForm:=TTipsForm.Create(self);
-      TipsForm.TipMemo.Text:=#13#10+TipText;
-      TipsForm.Show;
+      try
+        TipsForm:=TTipsForm.Create(self);
+        TipsForm.TipMemo.Text:=#13#10+TipText;
+        TipsForm.Show;
+      except
+        on E: Exception do
+        begin
+          if StartupErrors = nil then
+            StartupErrors := TStringList.Create;
+          StartupErrors.Add('TipsForm: ' + E.Message);
+        end;
+      end;
     end;
   end;
 
@@ -1553,35 +1563,57 @@ begin
 
   ShowPalettesTmr.Enabled:=False;
 
+  // Initialize startup error tracking
+  if StartupErrors = nil then
+    StartupErrors := TStringList.Create;
+
   //Create Main Palette
-  PaletteToolsForm:=TPaletteToolsForm.Create(self);
-  PaletteToolsForm.Top:=50;
-  PaletteToolsForm.Left:=15;
+  try
+    PaletteToolsForm:=TPaletteToolsForm.Create(self);
+    PaletteToolsForm.Top:=50;
+    PaletteToolsForm.Left:=15;
+  except
+    on E: Exception do
+      StartupErrors.Add('PaletteToolsForm: ' + E.Message);
+  end;
 
   DMEER.SetWorkTool(wtPointer);
 
   //Create NavInfoPalette
-  PaletteNavForm:=TPaletteNavForm.Create(self);
-  PaletteNavForm.Top:=44;
-  PaletteNavForm.Left:=Screen.Width-PaletteNavForm.Width-25;
-
+  try
+    PaletteNavForm:=TPaletteNavForm.Create(self);
+    PaletteNavForm.Top:=44;
+    PaletteNavForm.Left:=Screen.Width-PaletteNavForm.Width-25;
+  except
+    on E: Exception do
+      StartupErrors.Add('PaletteNavForm: ' + E.Message);
+  end;
 
   //Create DatatypesPalette
-  PaletteDataTypesForm:=TPaletteDataTypesForm.Create(self);
-  PaletteDataTypesForm.Top:=60;
-  PaletteDataTypesForm.Left:=Screen.Width-PaletteDataTypesForm.Width-25;
-
+  try
+    PaletteDataTypesForm:=TPaletteDataTypesForm.Create(self);
+    PaletteDataTypesForm.Top:=60;
+    PaletteDataTypesForm.Left:=Screen.Width-PaletteDataTypesForm.Width-25;
+  except
+    on E: Exception do
+      StartupErrors.Add('PaletteDataTypesForm: ' + E.Message);
+  end;
 
   //Create ModelPalette
-  PaletteModelFrom:=TPaletteModelFrom.Create(self);
-  PaletteModelFrom.Top:=380;
-  PaletteModelFrom.Left:=Screen.Width-PaletteModelFrom.Width-25;
+  try
+    PaletteModelFrom:=TPaletteModelFrom.Create(self);
+    PaletteModelFrom.Top:=380;
+    PaletteModelFrom.Left:=Screen.Width-PaletteModelFrom.Width-25;
+  except
+    on E: Exception do
+      StartupErrors.Add('PaletteModelFrom: ' + E.Message);
+  end;
 
 
-  if(PaletteNavForm.Left>Screen.Width)or
-    (PaletteDataTypesForm.Left>Screen.Width)or
-    (PaletteModelFrom.Left>Screen.Width)or
-    (DMGUI.ApplRunFirstTime)then
+  if(DMGUI.ApplRunFirstTime)or
+    (Assigned(PaletteNavForm) and (PaletteNavForm.Left>Screen.Width))or
+    (Assigned(PaletteDataTypesForm) and (PaletteDataTypesForm.Left>Screen.Width))or
+    (Assigned(PaletteModelFrom) and (PaletteModelFrom.Left>Screen.Width))then
     ResetPalettePositionsMIClick(self);
 
   {$IFDEF LINUX}
@@ -1590,7 +1622,13 @@ begin
   {$ENDIF}
 
   //Dock Query Pnl
-  DockedEditorQueryForm:=TEditorQueryForm.Create(self);
+  try
+    DockedEditorQueryForm:=TEditorQueryForm.Create(self);
+  except
+    on E: Exception do
+      StartupErrors.Add('DockedEditorQueryForm: ' + E.Message);
+  end;
+  if Assigned(DockedEditorQueryForm) then
   with TEditorQueryForm(DockedEditorQueryForm) do
   begin
     QueryDockPnl.Parent:=QueryPnl;
@@ -1610,9 +1648,9 @@ begin
 
   if(Not(DMGUI.ShowPalettesDocked))then
   begin
-    PaletteNavForm.Show;
-    PaletteDataTypesForm.Show;
-    PaletteModelFrom.Show;
+    if Assigned(PaletteNavForm) then PaletteNavForm.Show;
+    if Assigned(PaletteDataTypesForm) then PaletteDataTypesForm.Show;
+    if Assigned(PaletteModelFrom) then PaletteModelFrom.Show;
   end
   else
   begin
@@ -1863,11 +1901,17 @@ begin
     if(ActiveMDIChild<>nil)then
       if(ActiveMDIChild.Classname='TEERForm')then
       begin
-        PaletteModelFrom.RefreshTablesTreeView(TEERForm(ActiveMDIChild).EERModel);
-        PaletteDataTypesForm.DisplayDataTypes(TEERForm(ActiveMDIChild).EERModel);
-        PaletteNavForm.SetModelImg(TEERForm(ActiveMDIChild).EERModel);
-        TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(TEERForm(ActiveMDIChild).EERModel);
-        TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(TEERForm(ActiveMDIChild).EERModel);
+        if Assigned(PaletteModelFrom) then
+          PaletteModelFrom.RefreshTablesTreeView(TEERForm(ActiveMDIChild).EERModel);
+        if Assigned(PaletteDataTypesForm) then
+          PaletteDataTypesForm.DisplayDataTypes(TEERForm(ActiveMDIChild).EERModel);
+        if Assigned(PaletteNavForm) then
+          PaletteNavForm.SetModelImg(TEERForm(ActiveMDIChild).EERModel);
+        if Assigned(DockedEditorQueryForm) then
+        begin
+          TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(TEERForm(ActiveMDIChild).EERModel);
+          TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(TEERForm(ActiveMDIChild).EERModel);
+        end;
         SnapToGridBtn.Down:=TEERForm(ActiveMDIChild).EERModel.UsePositionGrid;
       end;
 
@@ -1879,7 +1923,8 @@ begin
     if(ActiveMDIChild<>nil)then
       if(ActiveMDIChild.Classname='TEERForm')then
       begin
-        PaletteModelFrom.TablesTreeView.Repaint;
+        if Assigned(PaletteModelFrom) then
+          PaletteModelFrom.TablesTreeView.Repaint;
       end;
 
     Result:=True;
@@ -1953,11 +1998,17 @@ begin
     if(ActiveMDIChild<>nil)then
       if(ActiveMDIChild.Classname='TEERForm')then
       begin
-        PaletteModelFrom.RefreshTablesTreeView(TEERForm(ActiveMDIChild).EERModel);
-        PaletteDataTypesForm.DisplayDataTypes(TEERForm(ActiveMDIChild).EERModel);
-        PaletteNavForm.SetModelImg(TEERForm(ActiveMDIChild).EERModel);
-        TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(TEERForm(ActiveMDIChild).EERModel);
-        TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(TEERForm(ActiveMDIChild).EERModel);
+        if Assigned(PaletteModelFrom) then
+          PaletteModelFrom.RefreshTablesTreeView(TEERForm(ActiveMDIChild).EERModel);
+        if Assigned(PaletteDataTypesForm) then
+          PaletteDataTypesForm.DisplayDataTypes(TEERForm(ActiveMDIChild).EERModel);
+        if Assigned(PaletteNavForm) then
+          PaletteNavForm.SetModelImg(TEERForm(ActiveMDIChild).EERModel);
+        if Assigned(DockedEditorQueryForm) then
+        begin
+          TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(TEERForm(ActiveMDIChild).EERModel);
+          TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(TEERForm(ActiveMDIChild).EERModel);
+        end;
         if(TEERForm(ActiveMDIChild).EERModel.IsChanged)then
           EnableSaveImgs
         else
@@ -1981,8 +2032,11 @@ begin
       PaletteModelFrom.RefreshTablesTreeView(QCustomEvent_data(QCustomEventH(Event)));
 
     //Clear StoredSQLTree when model is closed
-    TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(QCustomEvent_data(QCustomEventH(Event)));
-    TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(QCustomEvent_data(QCustomEventH(Event)));
+    if Assigned(DockedEditorQueryForm) then
+    begin
+      TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(QCustomEvent_data(QCustomEventH(Event)));
+      TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(QCustomEvent_data(QCustomEventH(Event)));
+    end;
     
     Result:=True;
   end;
@@ -2169,16 +2223,18 @@ begin
     QueryToolsPnl.Show;
     QueryToolsPnl.Top:=1;
 
-    PaletteToolsForm.QueryImg.BringToFront;
+    if Assigned(PaletteToolsForm) then
+      PaletteToolsForm.QueryImg.BringToFront;
 
     if(Not(DMGUI.ShowPalettesDocked))then
     begin
-      if(PaletteDataTypesForm.Visible)then
+      if Assigned(PaletteDataTypesForm) and (PaletteDataTypesForm.Visible)then
       begin
         MainForm.DatatypesMIClick(self);
-        if(PaletteModelFrom.Top>PaletteDataTypesForm.Top+
-          PaletteDataTypesForm.Height-30)then
-          PaletteModelFrom.Top:=PaletteDataTypesForm.Top;
+        if Assigned(PaletteModelFrom) then
+          if(PaletteModelFrom.Top>PaletteDataTypesForm.Top+
+            PaletteDataTypesForm.Height-30)then
+            PaletteModelFrom.Top:=PaletteDataTypesForm.Top;
       end;
     end
     else
@@ -2200,7 +2256,8 @@ begin
     MainForm.Designimg.Show;
     MainForm.Designimg.BringToFront;
     MainForm.QueryImg.Hide;
-    PaletteToolsForm.Designimg.BringToFront;
+    if Assigned(PaletteToolsForm) then
+      PaletteToolsForm.Designimg.BringToFront;
 
     DesignToolsPnl.Show;
     DesignToolsPnl.Top:=1;
@@ -2211,14 +2268,15 @@ begin
 
     if(Not(DMGUI.ShowPalettesDocked))then
     begin
-      if(Not(PaletteDataTypesForm.Visible))and
+      if Assigned(PaletteDataTypesForm) and (Not(PaletteDataTypesForm.Visible))and
         (TabHidePalettes.Count=0)then
       begin
         MainForm.DatatypesMIClick(self);
 
-        if(PaletteModelFrom.Top=PaletteDataTypesForm.Top)then
-          PaletteModelFrom.Top:=PaletteDataTypesForm.Top+
-            PaletteDataTypesForm.Height+27;
+        if Assigned(PaletteModelFrom) and Assigned(PaletteDataTypesForm) then
+          if(PaletteModelFrom.Top=PaletteDataTypesForm.Top)then
+            PaletteModelFrom.Top:=PaletteDataTypesForm.Top+
+              PaletteDataTypesForm.Height+27;
       end;
     end
     else
@@ -2360,10 +2418,14 @@ end;
 
 procedure TMainForm.ApplicationRestore(Sender: TObject);
 begin
-  DMMain.RestoreWinPos(PaletteToolsForm, False);
-  DMMain.RestoreWinPos(PaletteNavForm, False);
-  DMMain.RestoreWinPos(PaletteDataTypesForm, False);
-  DMMain.RestoreWinPos(PaletteModelFrom, False);
+  if PaletteToolsForm <> nil then
+    DMMain.RestoreWinPos(PaletteToolsForm, False);
+  if PaletteNavForm <> nil then
+    DMMain.RestoreWinPos(PaletteNavForm, False);
+  if PaletteDataTypesForm <> nil then
+    DMMain.RestoreWinPos(PaletteDataTypesForm, False);
+  if PaletteModelFrom <> nil then
+    DMMain.RestoreWinPos(PaletteModelFrom, False);
 end;
 
 procedure TMainForm.HidePalettes;
@@ -2380,13 +2442,17 @@ begin
   end
   else
   begin
-    DMMain.SaveWinPos(PaletteToolsForm, False);
-    DMMain.SaveWinPos(PaletteNavForm, False);
-    DMMain.SaveWinPos(PaletteDataTypesForm, False);
-    DMMain.SaveWinPos(PaletteModelFrom, False);
+    if PaletteToolsForm <> nil then
+      DMMain.SaveWinPos(PaletteToolsForm, False);
+    if PaletteNavForm <> nil then
+      DMMain.SaveWinPos(PaletteNavForm, False);
+    if PaletteDataTypesForm <> nil then
+      DMMain.SaveWinPos(PaletteDataTypesForm, False);
+    if PaletteModelFrom <> nil then
+      DMMain.SaveWinPos(PaletteModelFrom, False);
 
     TabHidePalettes.Clear;
-    if(PaletteToolsForm.Visible)then
+    if(PaletteToolsForm <> nil) and (PaletteToolsForm.Visible)then
     begin
       TabHidePalettes.Add(PaletteToolsForm);
       ToolsMIClick(self);
@@ -2396,17 +2462,17 @@ begin
       TabHidePalettes.Add(ToolsPnl);
       ToolsdockedMIClick(self);
     end;
-    if(PaletteNavForm.Visible)then
+    if(PaletteNavForm <> nil) and (PaletteNavForm.Visible)then
     begin
       TabHidePalettes.Add(PaletteNavForm);
       NavigatorInfoMIClick(self);
     end;
-    if(PaletteDataTypesForm.Visible)then
+    if(PaletteDataTypesForm <> nil) and (PaletteDataTypesForm.Visible)then
     begin
       TabHidePalettes.Add(PaletteDataTypesForm);
       DatatypesMIClick(self);
     end;
-    if(PaletteModelFrom.Visible)then
+    if(PaletteModelFrom <> nil) and (PaletteModelFrom.Visible)then
     begin
       TabHidePalettes.Add(PaletteModelFrom);
       DBModelMIClick(self);
@@ -3508,12 +3574,32 @@ end;
 procedure TMainForm.SelfTestTmrTimer(Sender: TObject);
 var
   FailCount: Integer;
+  I: Integer;
 begin
   SelfTestTmr.Enabled := False;  // One-shot
   WriteLn('=== DBDesigner Fork Self-Test Mode ===');
   WriteLn('Running UI tests...');
   WriteLn('');
+
+  // Phase -1: Check for startup form loading errors
+  if (StartupErrors <> nil) and (StartupErrors.Count > 0) then
+  begin
+    WriteLn('--- Phase -1: Startup Form Loading Errors ---');
+    WriteLn('');
+    for I := 0 to StartupErrors.Count - 1 do
+      WriteLn('[FAIL] Startup error: ' + StartupErrors[I]);
+    WriteLn('');
+    WriteLn('Found ' + IntToStr(StartupErrors.Count) + ' startup error(s).');
+    WriteLn('These are exceptions during form creation (e.g., unknown CLX properties in .lfm files).');
+    WriteLn('');
+  end;
+
   FailCount := RunUITests(Self);
+
+  // Add startup errors to fail count
+  if (StartupErrors <> nil) and (StartupErrors.Count > 0) then
+    FailCount := FailCount + StartupErrors.Count;
+
   WriteLn('');
   if FailCount = 0 then
     WriteLn('Self-test PASSED: no failures detected.')
@@ -3581,5 +3667,8 @@ begin
       end;
     end;
 end;
+
+finalization
+  StartupErrors.Free;
 
 end.

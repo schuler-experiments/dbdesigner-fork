@@ -1524,8 +1524,6 @@ object EditorQueryForm: TEditorQueryForm
         Width = 159
         Height = 238
         Align = alClient
-        ColumnMove = False
-        ColumnResize = False
         Images = StoredSQLImageList
         Items.Data = {
           030000002500000001000000FFFFFFFF7466D200000000000000000002000000
@@ -1542,7 +1540,6 @@ object EditorQueryForm: TEditorQueryForm
         MultiSelect = True
         ParentShowHint = False
         PopupMenu = StoredSQLPopupMenu
-        ShowColumnHeaders = True
         ShowHint = True
         TabOrder = 0
         OnChange = StoredSQLTreeViewChange
