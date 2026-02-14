@@ -87,3 +87,10 @@ ab48590 Add SQL export test program
 f52b469 Fix SetSchemaInfo test
 1408ab9 Add SQLite and SQLExpr shim integration tests
 ```
+
+
+### Fix: Font.Weight Runtime Error (Latest)
+- **Problem**: `TControl.ReadState` raised errors when loading .lfm forms containing `Font.Weight = 40` — a CLX/Qt property that doesn't exist in LCL.
+- **Fix**: Removed all 54 `Font.Weight` / `TitleFont.Weight` lines from 17 .lfm files.
+- **Also fixed**: Plugin .lpi files had hardcoded absolute paths (`/workspaces/dbdesigner-fork`); changed to relative paths (`../../`).
+- **Result**: All 5 binaries compile and run without the Weight error.

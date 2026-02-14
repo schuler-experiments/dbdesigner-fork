@@ -24,3 +24,6 @@ build-errors-*.log
 # Environment
 .env
 x/
+
+# Test binaries
+bin/Test*

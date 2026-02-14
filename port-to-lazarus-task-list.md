@@ -45,7 +45,7 @@
 ### 0.4 Form File Conversion
 - [X] Batch-copy all 39 `.xfm` files to `.lfm` (root directory)
 - [X] Batch-copy plugin `.xfm` files to `.lfm` (`Plugins/*/`)
-- [ ] Open each `.lfm` in Lazarus and note unknown properties
+- [X] Open each `.lfm` in Lazarus and note unknown properties (Font.Weight removed)
 - [X] Remove CLX-specific properties (`WidgetFlags`, etc.) from `.lfm` files
 
 ### 0.5 First Compilation Attempt
