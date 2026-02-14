@@ -516,7 +516,7 @@ object EditorTableForm: TEditorTableForm
           Font.CharSet = 0
           Font.Color = clBlack
           Font.Height = 12
-          Font.Name = 'Microsoft Sans Serif'
+          Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
           Font.Weight = 40

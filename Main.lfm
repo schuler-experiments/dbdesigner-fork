@@ -339,7 +339,7 @@ object MainForm: TMainForm
       Font.CharSet = 0
       Font.Color = clBlack
       Font.Height = 9
-      Font.Name = 'Microsoft Sans Serif'
+      Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = []
       Font.Weight = 40
@@ -359,7 +359,7 @@ object MainForm: TMainForm
       Font.CharSet = 0
       Font.Color = clBlack
       Font.Height = 9
-      Font.Name = 'Microsoft Sans Serif'
+      Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = []
       Font.Weight = 40
@@ -450,7 +450,7 @@ object MainForm: TMainForm
         Font.CharSet = 0
         Font.Color = clBlack
         Font.Height = 9
-        Font.Name = 'Microsoft Sans Serif'
+        Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
         Font.Weight = 40
@@ -2844,7 +2844,7 @@ object MainForm: TMainForm
         Font.CharSet = 0
         Font.Color = clGray
         Font.Height = 11
-        Font.Name = 'Microsoft Sans Serif'
+        Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = [fsBold]
         ParentFont = False
@@ -2897,7 +2897,7 @@ object MainForm: TMainForm
         Font.CharSet = 0
         Font.Color = clGray
         Font.Height = 11
-        Font.Name = 'Microsoft Sans Serif'
+        Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = [fsBold]
         ParentFont = False
@@ -2960,7 +2960,7 @@ object MainForm: TMainForm
         Font.CharSet = 0
         Font.Color = clGray
         Font.Height = 11
-        Font.Name = 'Microsoft Sans Serif'
+        Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = [fsBold]
         ParentFont = False

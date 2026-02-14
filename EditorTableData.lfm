@@ -328,7 +328,7 @@ object EditorTableDataForm: TEditorTableDataForm
               Font.CharSet = 0
               Font.Color = clBlack
               Font.Height = 11
-              Font.Name = 'Courier New'
+              Font.Name = 'Monospace'
               Font.Pitch = fpVariable
               Font.Style = []
               Font.Weight = 40
@@ -345,7 +345,7 @@ object EditorTableDataForm: TEditorTableDataForm
               Font.CharSet = 0
               Font.Color = clBlack
               Font.Height = 11
-              Font.Name = 'Courier New'
+              Font.Name = 'Monospace'
               Font.Pitch = fpVariable
               Font.Style = []
               Font.Weight = 40
@@ -932,7 +932,7 @@ object EditorTableDataForm: TEditorTableDataForm
           DataSource = OutputDataSrc
           Font.Color = clBlack
           Font.Height = 11
-          Font.Name = 'MS Shell Dlg'
+          Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
           Font.Weight = 40
@@ -942,7 +942,7 @@ object EditorTableDataForm: TEditorTableDataForm
           TitleFont.CharSet = 0
           TitleFont.Color = clBlack
           TitleFont.Height = 9
-          TitleFont.Name = 'Microsoft Sans Serif'
+          TitleFont.Name = 'Sans'
           TitleFont.Pitch = fpVariable
           TitleFont.Style = []
           TitleFont.Weight = 40

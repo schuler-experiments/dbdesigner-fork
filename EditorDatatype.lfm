@@ -86,7 +86,7 @@ object EditorDatatypeForm: TEditorDatatypeForm
       Font.CharSet = 0
       Font.Color = clBlack
       Font.Height = 11
-      Font.Name = 'Microsoft Sans Serif'
+      Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = [fsBold]
       Glyph.Data = {
@@ -111,7 +111,7 @@ object EditorDatatypeForm: TEditorDatatypeForm
       Font.CharSet = 0
       Font.Color = clBlack
       Font.Height = 11
-      Font.Name = 'Microsoft Sans Serif'
+      Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = [fsBold]
       Glyph.Data = {
@@ -167,7 +167,7 @@ object EditorDatatypeForm: TEditorDatatypeForm
       Font.CharSet = 0
       Font.Color = clBlack
       Font.Height = 11
-      Font.Name = 'Microsoft Sans Serif'
+      Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = [fsBold]
       Glyph.Data = {
@@ -193,7 +193,7 @@ object EditorDatatypeForm: TEditorDatatypeForm
       Font.CharSet = 0
       Font.Color = clBlack
       Font.Height = 11
-      Font.Name = 'Microsoft Sans Serif'
+      Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = [fsBold]
       Glyph.Data = {

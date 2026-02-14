@@ -95,7 +95,7 @@ object PaletteDataTypesForm: TPaletteDataTypesForm
             end>
           Font.Color = clBlack
           Font.Height = 11
-          Font.Name = 'MS Shell Dlg'
+          Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
           Font.Weight = 40

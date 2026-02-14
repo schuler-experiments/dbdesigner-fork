@@ -3332,7 +3332,7 @@ object MainForm: TMainForm
 
     Font.Height = 11
 
-    Font.Name = 'MS Shell Dlg'
+    Font.Name = 'Sans'
 
     Font.Pitch = fpVariable
 

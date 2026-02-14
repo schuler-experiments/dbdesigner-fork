@@ -65,7 +65,7 @@ object SplashForm: TSplashForm
 
     Font.Height = 9
 
-    Font.Name = 'Microsoft Sans Serif'
+    Font.Name = 'Sans'
 
     Font.Pitch = fpVariable
 
@@ -107,7 +107,7 @@ object SplashForm: TSplashForm
 
     Font.Height = 9
 
-    Font.Name = 'Microsoft Sans Serif'
+    Font.Name = 'Sans'
 
     Font.Pitch = fpVariable
 
@@ -167,7 +167,7 @@ object SplashForm: TSplashForm
 
     Font.Height = 9
 
-    Font.Name = 'Microsoft Sans Serif'
+    Font.Name = 'Sans'
 
     Font.Pitch = fpVariable
 
@@ -211,7 +211,7 @@ object SplashForm: TSplashForm
 
     Font.Height = 9
 
-    Font.Name = 'Microsoft Sans Serif'
+    Font.Name = 'Sans'
 
     Font.Pitch = fpVariable
 

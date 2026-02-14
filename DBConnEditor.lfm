@@ -132,7 +132,7 @@ object DBConnEditorForm: TDBConnEditorForm
         Height = 21
         Font.Color = clBlack
         Font.Height = 11
-        Font.Name = 'MS Shell Dlg'
+        Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = [fsBold]
         ParentFont = False
