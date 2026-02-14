@@ -4,13 +4,14 @@ interface
 uses Classes, DB;
 
 type
+  TUpdateKind = (ukModify, ukInsert, ukDelete);
   TResolverResponse = (rrSkip, rrAbort, rrMerge, rrApply, rrIgnore);
 
   EUpdateError = class(EDatabaseError)
   end;
 
   TUpdateErrorEvent = procedure(Sender: TObject; DataSet: TDataSet;
-    E: EUpdateError; UpdateKind: Integer; var Response: TResolverResponse) of object;
+    E: EUpdateError; UpdateKind: TUpdateKind; var Response: TResolverResponse) of object;
 
   TDataSetProvider = class(TComponent)
   private

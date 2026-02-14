@@ -2027,7 +2027,7 @@ object EditorQueryForm: TEditorQueryForm
       end
     end
   end
-  object OutputQry: TSQLQuery
+  object OutputQry: TSQLDataSet
     ParamCheck = False
     Params = <>
     Left = 232
@@ -2035,14 +2035,10 @@ object EditorQueryForm: TEditorQueryForm
   end
   object OutputDataSetProvider: TDataSetProvider
     DataSet = OutputQry
-    OnUpdateError = OutputDataSetProviderUpdateError
     Left = 262
     Top = 292
   end
   object OutputClientDataSet: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'OutputDataSetProvider'
     AfterOpen = OutputClientDataSetAfterOpen
     Left = 292
     Top = 292

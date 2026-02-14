@@ -52,7 +52,7 @@ type
     TopPnl: TPanel;
     BottomPnl: TPanel;
     TableLbl: TLabel;
-    OutputQry: TSQLQuery;
+    OutputQry: TSQLDataSet;
     OutputDataSetProvider: TDataSetProvider;
     OutputClientDataSet: TClientDataSet;
     OutputDataSrc: TDataSource;
