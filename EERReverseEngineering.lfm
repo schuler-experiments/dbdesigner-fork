@@ -98,7 +98,6 @@ object EERReverseEngineeringForm: TEERReverseEngineeringForm
       Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = []
-      Font.Weight = 40
       ParentFont = False
     end
   end
@@ -586,7 +585,6 @@ object EERReverseEngineeringForm: TEERReverseEngineeringForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         ParentFont = False
         TabOrder = 1
         object Label3: TLabel
@@ -605,7 +603,6 @@ object EERReverseEngineeringForm: TEERReverseEngineeringForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           WordWrap = True
         end

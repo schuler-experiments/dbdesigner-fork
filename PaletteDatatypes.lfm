@@ -98,7 +98,6 @@ object PaletteDataTypesForm: TPaletteDataTypesForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           Images = DatatypesImgList
           Items.Data = {
             05000000260000000000000000000000C0BE9AB6000000000000000005000000

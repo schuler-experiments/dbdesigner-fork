@@ -71,7 +71,6 @@ object SplashForm: TSplashForm
 
     Font.Style = []
 
-    Font.Weight = 40
 
     Masked = True
 
@@ -113,7 +112,6 @@ object SplashForm: TSplashForm
 
     Font.Style = []
 
-    Font.Weight = 40
 
     Masked = True
 
@@ -173,7 +171,6 @@ object SplashForm: TSplashForm
 
     Font.Style = []
 
-    Font.Weight = 40
 
     Masked = True
 
@@ -217,7 +214,6 @@ object SplashForm: TSplashForm
 
     Font.Style = []
 
-    Font.Weight = 40
 
     Masked = True
 

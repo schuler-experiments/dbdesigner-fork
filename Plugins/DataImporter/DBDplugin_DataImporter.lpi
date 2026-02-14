@@ -59,7 +59,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);../.."/>
-      <OtherUnitFiles Value="/workspaces/dbdesigner-fork;/workspaces/dbdesigner-fork/clx_shims;/workspaces/dbdesigner-fork/EmbeddedPDF"/>
+      <OtherUnitFiles Value="../../;../../clx_shims;../../EmbeddedPDF"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

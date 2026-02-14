@@ -962,7 +962,6 @@ object PaletteModelFrom: TPaletteModelFrom
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           Images = ModelImgList
           Items.Data = {
             03000000250000000000000000000000803B3402010000000000000003000000
@@ -1021,7 +1020,6 @@ object PaletteModelFrom: TPaletteModelFrom
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           Images = ModelImgList
           Items.Data = {
             03000000280000000000000000000000803B3402010000000000000002000000

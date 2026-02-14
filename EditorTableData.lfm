@@ -331,7 +331,6 @@ object EditorTableDataForm: TEditorTableDataForm
               Font.Name = 'Monospace'
               Font.Pitch = fpVariable
               Font.Style = []
-              Font.Weight = 40
               ParentFont = False
               TabOrder = 0
             end
@@ -348,7 +347,6 @@ object EditorTableDataForm: TEditorTableDataForm
               Font.Name = 'Monospace'
               Font.Pitch = fpVariable
               Font.Style = []
-              Font.Weight = 40
               Lines.Strings = (
                 '12F534855476A3CE')
               ParentFont = False
@@ -935,7 +933,6 @@ object EditorTableDataForm: TEditorTableDataForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           TabOrder = 0
@@ -945,7 +942,6 @@ object EditorTableDataForm: TEditorTableDataForm
           TitleFont.Name = 'Sans'
           TitleFont.Pitch = fpVariable
           TitleFont.Style = []
-          TitleFont.Weight = 40
           OnColEnter = DBGridColEnter
           OnDblClick = DBGridDblClick
         end

@@ -280,7 +280,6 @@ object OptionsForm: TOptionsForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         ParentColor = False
         ParentFont = False
       end

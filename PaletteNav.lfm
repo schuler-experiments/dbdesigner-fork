@@ -130,7 +130,6 @@ object PaletteNavForm: TPaletteNavForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           Masked = True
           ParentFont = False
           Transparent = True
@@ -147,7 +146,6 @@ object PaletteNavForm: TPaletteNavForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           TabOrder = 1
           Text = '100%'
@@ -215,7 +213,6 @@ object PaletteNavForm: TPaletteNavForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           TabOrder = 1
           OnExit = LeftEditExit
@@ -233,7 +230,6 @@ object PaletteNavForm: TPaletteNavForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           TabOrder = 2
           OnExit = LeftEditExit
@@ -251,7 +247,6 @@ object PaletteNavForm: TPaletteNavForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           TabOrder = 0
           OnExit = NameEditExit
@@ -285,7 +280,6 @@ object PaletteNavForm: TPaletteNavForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           TabOrder = 3
           OnExit = WidthEdExit
@@ -311,7 +305,6 @@ object PaletteNavForm: TPaletteNavForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           TabOrder = 4
           OnExit = WidthEdExit
@@ -337,7 +330,6 @@ object PaletteNavForm: TPaletteNavForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           TabOrder = 11
           OnExit = NameEditExit

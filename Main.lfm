@@ -342,7 +342,6 @@ object MainForm: TMainForm
       Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = []
-      Font.Weight = 40
       Masked = True
       ParentFont = False
       Transparent = True
@@ -362,7 +361,6 @@ object MainForm: TMainForm
       Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = []
-      Font.Weight = 40
       ParentFont = False
     end
     object DBConnPnl: TPanel
@@ -453,7 +451,6 @@ object MainForm: TMainForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         ParentFont = False
       end
     end

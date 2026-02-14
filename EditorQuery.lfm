@@ -1033,7 +1033,6 @@ object EditorQueryForm: TEditorQueryForm
           Font.Name = 'Verdana'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           Lines.Strings = (
             'SELECT * FROM product'
             'WHERE price>30')
@@ -1075,7 +1074,6 @@ object EditorQueryForm: TEditorQueryForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           PopupMenu = DBGridPopupMenu
@@ -1086,7 +1084,6 @@ object EditorQueryForm: TEditorQueryForm
           TitleFont.Name = 'Sans'
           TitleFont.Pitch = fpVariable
           TitleFont.Style = []
-          TitleFont.Weight = 40
           OnColEnter = DBGridColEnter
           OnDrawColumnCell = DBGridDrawColumnCell
           OnDblClick = DBGridDblClick
@@ -1703,7 +1700,6 @@ object EditorQueryForm: TEditorQueryForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           ParentFont = False
           ReadOnly = True
           TabOrder = 1
@@ -1789,7 +1785,6 @@ object EditorQueryForm: TEditorQueryForm
             Font.Name = 'Monospace'
             Font.Pitch = fpVariable
             Font.Style = []
-            Font.Weight = 40
             ParentFont = False
             TabOrder = 0
           end
@@ -1806,7 +1801,6 @@ object EditorQueryForm: TEditorQueryForm
             Font.Name = 'Monospace'
             Font.Pitch = fpVariable
             Font.Style = []
-            Font.Weight = 40
             Lines.Strings = (
               '12F534855476A3CE')
             ParentFont = False

@@ -280,7 +280,6 @@ object MainForm: TMainForm
     Font.Name = 'Courier'
     Font.Pitch = fpVariable
     Font.Style = []
-    Font.Weight = 40
     ParentFont = False
     ScrollBars = ssVertical
     TabOrder = 2

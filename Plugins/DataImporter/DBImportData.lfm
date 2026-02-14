@@ -563,7 +563,6 @@ object DBImportDataForm: TDBImportDataForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         ParentFont = False
         Visible = False
       end
@@ -641,7 +640,6 @@ object DBImportDataForm: TDBImportDataForm
         Font.Name = 'Lucida Console'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         Options = [goRangeSelect]
         ParentFont = False
         ParentShowHint = False
@@ -921,7 +919,6 @@ object DBImportDataForm: TDBImportDataForm
       Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = []
-      Font.Weight = 40
       ParentFont = False
     end
   end

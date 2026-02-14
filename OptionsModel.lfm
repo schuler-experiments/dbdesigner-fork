@@ -52,7 +52,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         ParentColor = False
         ParentFont = False
       end
@@ -478,7 +477,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         Masked = True
         ParentFont = False
         Transparent = True
@@ -495,7 +493,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         Masked = True
         ParentFont = False
         Transparent = True
@@ -548,7 +545,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         Masked = True
         ParentFont = False
         Transparent = True
@@ -565,7 +561,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         Masked = True
         ParentFont = False
         Transparent = True
@@ -582,7 +577,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         Masked = True
         ParentFont = False
         Transparent = True
@@ -599,7 +593,6 @@ object OptionsModelForm: TOptionsModelForm
         Font.Name = 'Sans'
         Font.Pitch = fpVariable
         Font.Style = []
-        Font.Weight = 40
         Masked = True
         ParentFont = False
         Transparent = True

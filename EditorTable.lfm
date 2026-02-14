@@ -518,7 +518,6 @@ object EditorTableForm: TEditorTableForm
           Font.Name = 'Sans'
           Font.Pitch = fpVariable
           Font.Style = []
-          Font.Weight = 40
           HMargin = 2
           ParentFont = False
           PopupMenu = StdInsertsPopupMenu

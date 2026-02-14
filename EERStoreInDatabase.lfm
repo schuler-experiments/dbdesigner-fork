@@ -93,7 +93,6 @@ object EERStoreInDatabaseForm: TEERStoreInDatabaseForm
       Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = []
-      Font.Weight = 40
       ParentFont = False
     end
   end
