@@ -26,7 +26,6 @@ object EditorTableForm: TEditorTableForm
     Height = 6
     Cursor = crVSplit
     Align = alBottom
-    OnCanResize = OptionSplitterCanResize
     OnMoved = OptionSplitterMoved
   end
   object OptionsPnl: TPanel
