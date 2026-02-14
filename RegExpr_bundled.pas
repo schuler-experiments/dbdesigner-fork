@@ -435,6 +435,7 @@ interface
 {$DEFINE DebugRegExpr} // define for dump/trace enabling
 
 {$DEFINE reRealExceptionAddr} // if defined then exceptions will
+{$IFDEF FPC}{$UNDEF reRealExceptionAddr}{$ENDIF}
 // jump to appropriate source line, not to Error procedure
 
 {$DEFINE ComplexBraces} // define for beta-version of braces
@@ -922,7 +923,7 @@ type
   end;
 
 const
-  RegExprInvertCaseFunction : TRegExprInvertCaseFunction = TRegExpr.InvertCaseFunction;
+  RegExprInvertCaseFunction : TRegExprInvertCaseFunction = nil;
   // defaul for InvertCase property
 
 function ExecRegExpr (const ARegExpr, AInputStr : RegExprString) : boolean;
@@ -4256,6 +4257,8 @@ procedure TRegExpr.Error (AErrorID : integer);
 // be carefull - placed here code will be always compiled with
 // compiler optimization flag
 
+initialization
+  RegExprInvertCaseFunction := TRegExpr.InvertCaseFunction;
 end.
 
 

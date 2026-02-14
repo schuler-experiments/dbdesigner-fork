@@ -88,7 +88,7 @@ begin
   OnKeyDown:=DoKeyDown;
   OnExit:=DoTheExit;
 
-  Parent:=TWidgetControl(Sender);
+  Parent:=TWinControl(Sender);
 end;
 
 

@@ -1,14 +1,43 @@
 unit SqlExpr;
 {$mode delphi}
 interface
-uses Classes, DB, SQLDB;
+uses Classes, DB, SQLDB, SysUtils, DBXpress;
+
+const
+  // Schema type constants (Delphi dbExpress)
+  stNoSchema = 0;
+  stTables = 1;
+  stSysTables = 2;
+  stColumns = 3;
+  stIndexes = 4;
+  stProcedures = 5;
 
 type
-  // Stub types - will be replaced with SQLDB equivalents in Phase 2
   TSQLConnection = class(TSQLConnector)
+  private
+    FDriverName: string;
+    FGetDriverFunc: string;
+    FLibraryName: string;
+    FVendorLib: string;
+    FTableScope: TTableScopes;
+    FActiveStatements: Integer;
+  public
+    property ActiveStatements: Integer read FActiveStatements;
+  published
+    property DriverName: string read FDriverName write FDriverName;
+    property GetDriverFunc: string read FGetDriverFunc write FGetDriverFunc;
+    property LibraryName: string read FLibraryName write FLibraryName;
+    property VendorLib: string read FVendorLib write FVendorLib;
+    property TableScope: TTableScopes read FTableScope write FTableScope;
   end;
-  TSQLDataSet = class(TSQLQuery)
+
+  // Re-export TSQLQuery with dbExpress extensions
+  TSQLDataSet = class(SQLDB.TSQLQuery)
+  public
+    procedure SetSchemaInfo(SchemaType: Integer; const SchemaObjectName, SchemaPattern: string);
+    function ExecSQL(ExecDirect: Boolean): Integer; overload;
   end;
+
   TSQLMonitor = class(TComponent)
   private
     FSQLConnection: TComponent;
@@ -26,6 +55,18 @@ type
   end;
 
 implementation
+
+procedure TSQLDataSet.SetSchemaInfo(SchemaType: Integer; const SchemaObjectName, SchemaPattern: string);
+begin
+  // No-op stub - dbExpress schema info not directly applicable to SQLDB
+  // The caller typically sets SQL.Text after this call anyway
+end;
+
+function TSQLDataSet.ExecSQL(ExecDirect: Boolean): Integer;
+begin
+  inherited ExecSQL;
+  Result := RowsAffected;
+end;
 
 constructor TSQLMonitor.Create(AOwner: TComponent);
 begin

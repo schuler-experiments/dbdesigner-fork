@@ -43,7 +43,7 @@ interface
 
 uses
 {$IFNDEF LINUX}Windows, {$ENDIF}
-{$IFNDEF NOZLIB}ZLib, {$ENDIF}
+{$IFNDEF NOZLIB}{$IFDEF FPC}zstream{$ELSE}ZLib{$ENDIF}, {$ENDIF}
   SysUtils, Classes;
 
 const

@@ -44,7 +44,7 @@ interface
 uses
   Qt, SysUtils, Types, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ImgList, ComCtrls, DBDM, Grids, Buttons, SqlExpr,
-  ExtCtrls, IniFiles, Menus, LCLType, StrUtils, Contnrs;
+  ExtCtrls, IniFiles, Menus, LCLType, StrUtils, Contnrs, TreeNodeSubItems;
 
 type
   TDBConnSelectForm = class(TForm)
@@ -111,8 +111,8 @@ type
     procedure DeleteHostMIClick(Sender: TObject);
     procedure DBConnTVMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure DBConnTVCustomDrawItem(Sender: TCustomViewControl;
-      Item: TCustomViewItem; Canvas: TCanvas; const Rect: TRect;
+    procedure DBConnTVCustomDrawItem(Sender: TCustomListView;
+      Item: TListItem; Canvas: TCanvas; const Rect: TRect;
       State: TCustomDrawState; Stage: TCustomDrawStage;
       var DefaultDraw: Boolean);
     procedure RefreshDBConnList;
@@ -343,9 +343,9 @@ begin
 
     for i:=1 to NetworkHosts.Count-1 do
     begin
-      theIni.WriteString('Host'+IntToStr(i), 'HostName', NetworkHosts.Item[i-1].Text);
-      theIni.WriteString('Host'+IntToStr(i), 'IP', NetworkHosts.Item[i-1].SubItems[1]);
-      theIni.WriteString('Host'+IntToStr(i), 'User_Name', NetworkHosts.Item[i-1].SubItems[2]);
+      theIni.WriteString('Host'+IntToStr(i), 'HostName', NetworkHosts.Items[i-1].Text);
+      theIni.WriteString('Host'+IntToStr(i), 'IP', NetworkHosts.Items[i-1].SubItems[1]);
+      theIni.WriteString('Host'+IntToStr(i), 'User_Name', NetworkHosts.Items[i-1].SubItems[2]);
     end;
 
     theIni.UpdateFile;
@@ -721,7 +721,7 @@ begin
             node.DeleteChildren;
 
             DMDB.SchemaSQLQuery.ParamCheck:=False;
-            DMDB.SchemaSQLQuery.SetSchemaInfo(stNoSchema, '', '');
+            // DMDB.SchemaSQLQuery.SetSchemaInfo(stNoSchema, '', ''); // dbExpress-specific, not needed for SQLDB
             DMDB.SchemaSQLQuery.SQL.Text:='show databases';
             DMDB.SchemaSQLQuery.Open;
             while(Not(DMDB.SchemaSQLQuery.EOF))do
@@ -863,10 +863,10 @@ begin
 
                 //Select new created db
                 for i:=0 to theTreeNode.Count-1 do
-                  if(CompareText(theTreeNode.Item[i].Text, dbname)=0)then
+                  if(CompareText(theTreeNode.Items[i].Text, dbname)=0)then
                   begin
-                    theTreeNode.Item[i].Selected:=True;
-                    DBConnTVItemClick(self, mbLeft, theTreeNode.Item[i], Point(0, 0));
+                    theTreeNode.Items[i].Selected:=True;
+                    DBConnTVItemClick(self, mbLeft, theTreeNode.Items[i], Point(0, 0));
 
                     break;
                   end;
@@ -959,7 +959,7 @@ begin
 end;
 
 procedure TDBConnSelectForm.DBConnTVCustomDrawItem(
-  Sender: TCustomViewControl; Item: TCustomViewItem; Canvas: TCanvas;
+  Sender: TCustomListView; Item: TListItem; Canvas: TCanvas;
   const Rect: TRect; State: TCustomDrawState; Stage: TCustomDrawStage;
   var DefaultDraw: Boolean);
 var x: integer;
@@ -980,7 +980,7 @@ begin
         DBConnImgList.Draw(Canvas, x, Rect.Top+1, TTreeNode(Item).SelectedIndex);
 
         theRect.Left:=x+18;
-        Brush.Color:=clActiveHighlight;
+        Brush.Color:=clHighlight;
         FillRect(theRect);
       end
       else
@@ -1062,8 +1062,8 @@ begin
 
         ItemFound:=False;
         for j:=0 to NetworkHosts.Count-1 do
-          if(NetworkHosts.Item[j].SubItems.Count>0)then
-            if(CompareText(NetworkHosts.Item[j].SubItems[1], TDBConn(DBConns[i]).Params.Values['HostName'])=0)then
+          if(NetworkHosts.Items[j].SubItems.Count>0)then
+            if(CompareText(NetworkHosts.Items[j].SubItems[1], TDBConn(DBConns[i]).Params.Values['HostName'])=0)then
               ItemFound:=True;
 
         if(Not(ItemFound))then

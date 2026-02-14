@@ -108,7 +108,7 @@ begin
   DatatypeCBox.OnCloseUp:=DoTheCloseUp;
 {$ENDIF}
 
-  Parent:=TWidgetControl(Sender);
+  Parent:=TWinControl(Sender);
 end;
 
 procedure TEditorTableFieldDatatypeInplaceEditor.SetData(theEERModel: TEERModel; theTableEditor: TForm; theTableColumn: TEERColumn; theDatatype: TEERDatatype;
@@ -128,7 +128,7 @@ begin
   DatatypeCBox.Items.Clear;
   for i:=0 to EERModel.Datatypes.Count-1 do
     DatatypeCBox.Items.Add(TEERDatatype(EERModel.Datatypes[i]).TypeName);
-  DatatypeCBox.Sort;
+  DatatypeCBox.Sorted := True;
 
   DatatypeCBox.Text:=theDatatype.TypeName+DatatypeParams;
 

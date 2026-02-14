@@ -43,7 +43,7 @@ uses
   SysUtils, Types, Classes, Variants, LCLType, Graphics, Controls, Forms,
   Dialogs, StdCtrls, FMTBcd, DB, DBClient, Provider, SqlExpr, Buttons,
   ExtCtrls, DBCtrls, Grids, DBGrids, ComCtrls, EERModel, IniFiles,
-  Menus, Clipbrd, {$IFDEF USE_SYNEDIT}QSynEdit, QSynHighlighterSQL, {$ENDIF}
+  Menus, Clipbrd, {$IFDEF USE_SYNEDIT}SynEdit, SynHighlighterSQL, {$ENDIF}
   {$IFDEF MSWINDOWS}Windows, ShellAPI, {$ENDIF}
   Qt, ImgList, EmbeddedPdfDB;
 
@@ -218,8 +218,8 @@ type
 
     procedure RefreshStoredSQLTreeView(theModel: TEERModel; ExpandedNodesList: TStringList = nil);
     procedure StoredSQLTreeViewChange(Sender: TObject; Node: TTreeNode);
-    procedure StoredSQLTreeViewCustomDrawItem(Sender: TCustomViewControl;
-      Item: TCustomViewItem; Canvas: TCanvas; const Rect: TRect;
+    procedure StoredSQLTreeViewCustomDrawItem(Sender: TCustomListView;
+      Item: TListItem; Canvas: TCanvas; const Rect: TRect;
       State: TCustomDrawState; Stage: TCustomDrawStage;
       var DefaultDraw: Boolean);
     procedure StoredSQLEditBtnClick(Sender: TObject);
@@ -353,7 +353,7 @@ begin
   theEERTable:=nil;
 
   OutputQry.SQLConnection:=DMDB.SQLConn;
-  BlobPageControl.Style:=tsNoTabs;
+  BlobPageControl.ShowTabs := False; // was tsNoTabs
 
   BlobHexMemo.Text:='';
 
@@ -1484,13 +1484,13 @@ begin
 end;
 
 procedure TEditorQueryForm.StoredSQLTreeViewCustomDrawItem(
-  Sender: TCustomViewControl; Item: TCustomViewItem; Canvas: TCanvas;
+  Sender: TCustomListView; Item: TListItem; Canvas: TCanvas;
   const Rect: TRect; State: TCustomDrawState; Stage: TCustomDrawStage;
   var DefaultDraw: Boolean);
 begin
   {with Canvas do
   begin
-    Pen.Color:=clDark;
+    Pen.Color:=clBtnShadow;
     MoveTo(0, Rect.Bottom-1);
     LineTo(StoredSQLTreeView.Width+30, Rect.Bottom-1);
 

@@ -160,7 +160,7 @@ begin
 
   OutputQry.SQLConnection:=DMDB.SQLConn;
 
-  BlobPageControl.Style:=tsNoTabs;
+  BlobPageControl.ShowTabs := False; // was tsNoTabs
   BlobPnl.Width:=0;
   SQLPnl.Width:=0;
 

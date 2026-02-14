@@ -82,9 +82,8 @@ type
     ReorderTablesbyRegionMI: TMenuItem;
     procedure FormResize(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure ModelTVCustomDrawItem(Sender: TCustomViewControl;
-      Item: TCustomViewItem; Canvas: TCanvas; const Rect: TRect;
-      State: TCustomDrawState; Stage: TCustomDrawStage;
+    procedure ModelTVCustomDrawItem(Sender: TCustomTreeView;
+      Node: TTreeNode; State: TCustomDrawState;
       var DefaultDraw: Boolean);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 
@@ -137,7 +136,7 @@ var theSize: tSize;
 begin
   DMMain.InitForm(self);
   
-  PageControl.Style:=tsNoTabs;
+  PageControl.ShowTabs := False; // was tsNoTabs
 
   theSize:=Canvas.TextExtent('All Types');
   ModelTV.Left:=1;
@@ -169,15 +168,20 @@ begin
 end;
 
 procedure TPaletteModelFrom.ModelTVCustomDrawItem(
-  Sender: TCustomViewControl; Item: TCustomViewItem; Canvas: TCanvas;
-  const Rect: TRect; State: TCustomDrawState; Stage: TCustomDrawStage;
+  Sender: TCustomTreeView; Node: TTreeNode; State: TCustomDrawState;
   var DefaultDraw: Boolean);
 var theRegion: TEERRegion;
   s: string;
+  Canvas: TCanvas;
+  Rect: TRect;
+  Item: TTreeNode;
 begin
+  Canvas := ModelTV.Canvas;
+  Item := Node;
+  Rect := Node.DisplayRect(True);
   with Canvas do
   begin
-    Pen.Color:=clDark;
+    Pen.Color:=clBtnShadow;
     MoveTo(0, Rect.Bottom-1);
     LineTo(ModelTV.Width+30, Rect.Bottom-1);
   end;
@@ -200,8 +204,7 @@ begin
             Canvas.FillRect(Types.Rect(Rect.Left, Rect.Top,
               ModelTV.Width+30, Rect.Bottom-1));
 
-            TablesTreeView.Images.Draw(Canvas, Rect.Left, Rect.Top,
-              0, itImage, True);
+            TablesTreeView.Images.Draw(Canvas, Rect.Left, Rect.Top, 0, True);
 
             Canvas.TextOut(Rect.Left+16, Rect.Top+2, TTreeNode(Item).Text);
 

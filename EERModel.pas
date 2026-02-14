@@ -6136,7 +6136,7 @@ begin
   newItem.Name:='CopyTableFieldNameMI';
   newItem.Caption:=DMMain.GetTranslatedMessage('Copy Selected Fieldname', 58);
   newItem.OnClick:=PopupMenuCopyTableFieldName;
-  newItem.OnShow:=PopupMenuCopyTableFieldNameShow;
+  // newItem.OnShow:=PopupMenuCopyTableFieldNameShow; // CLX-specific, not available in LCL
   newItem.ImageIndex:=4;
   PopupMenuEERTable.Items.Add(newItem);
 
@@ -7717,7 +7717,7 @@ begin
 
 
   Visible:=False;
-  Parent:=TWidgetControl(AOwner);
+  Parent:=TWinControl(AOwner);
   Name:=DMMain.GetValidObjectName(TheName);
 
   ObjName:=TheName;
@@ -8184,7 +8184,7 @@ begin
     end;
 
     //Paint Tbl
-    Pen.Color:=clDark;
+    Pen.Color:=clBtnShadow;
     Brush.Color:=clWhite;
 
     //FillBG
@@ -8247,11 +8247,11 @@ begin
             if(IsLinkedObject)then
               Pen.Color:=$00C66931
             else
-              Pen.Color:=clDark;
+              Pen.Color:=clBtnShadow;
             MoveTo(xo+1, yo+EvalZoomFac(20+17*ypos-1));
             LineTo(xo+width-4, yo+EvalZoomFac(20+17*ypos-1));
 
-            Pen.Color:=clDark;
+            Pen.Color:=clBtnShadow;
           end;
 
         txt:=TEERColumn(Columns[i]).ColName;
@@ -8288,11 +8288,11 @@ begin
             if(IsLinkedObject)then
               Pen.Color:=$00C66931
             else
-              Pen.Color:=clDark;
+              Pen.Color:=clBtnShadow;
             MoveTo(xo+1, yo+EvalZoomFac(20+17*ypos-1));
             LineTo(xo+width-4, yo+EvalZoomFac(20+17*ypos-1));
 
-            Pen.Color:=clDark;
+            Pen.Color:=clBtnShadow;
 
             SepLineDrawed:=True;
           end;
@@ -8357,7 +8357,7 @@ begin
       Pen.Color:=clBlack;
     end
     else
-      Pen.Color:=clDark;
+      Pen.Color:=clBtnShadow;
 
     if(IsLinkedObject)then
       Pen.Color:=$00C66931;
@@ -10160,7 +10160,7 @@ constructor TEERRel.Create(AOwner: TComponent; TheName: string);
 begin
   inherited Create(AOwner);
 
-  Parent:=TWidgetControl(AOwner);
+  Parent:=TWinControl(AOwner);
   Name:=DMMain.GetValidObjectName(TheName);
   Visible:=False;
 
@@ -10197,7 +10197,7 @@ begin
   // Create End Paint Box
 
   RelEnd:=TPaintBox.Create(AOwner);
-  RelEnd.Parent:=TWidgetControl(AOwner);
+  RelEnd.Parent:=TWinControl(AOwner);
   RelEnd.Name:=TheName+'_RelEnd';
   RelEnd.Visible:=False;
 
@@ -10216,7 +10216,7 @@ begin
   // Create Middle Paint Box
 
   RelMiddle:=TPaintBox.Create(AOwner);
-  RelMiddle.Parent:=TWidgetControl(AOwner);
+  RelMiddle.Parent:=TWinControl(AOwner);
   RelMiddle.Name:=TheName+'_RelMiddle';
   RelMiddle.Visible:=False;
 
@@ -10236,7 +10236,7 @@ begin
 
   //Create Relation-Caption
   RelCaption:=TPaintBox.Create(AOwner);
-  RelCaption.Parent:=TWidgetControl(AOwner);
+  RelCaption.Parent:=TWinControl(AOwner);
   RelCaption.Name:=TheName+'_RelCaption';
   RelCaption.Visible:=False;
   RelCaption.Font.Name:=ParentEERModel.DefModelFont;
@@ -10256,7 +10256,7 @@ begin
   // Create StartInterval and EndInterval Paint Box
 
   RelStartInterval:=TPaintBox.Create(AOwner);
-  RelStartInterval.Parent:=TWidgetControl(AOwner);
+  RelStartInterval.Parent:=TWinControl(AOwner);
   RelStartInterval.Name:=TheName+'_RelStartInterval';
   RelStartInterval.Visible:=False;
   RelStartInterval.Font.Name:=ParentEERModel.DefModelFont;
@@ -10274,7 +10274,7 @@ begin
 
 
   RelEndInterval:=TPaintBox.Create(AOwner);
-  RelEndInterval.Parent:=TWidgetControl(AOwner);
+  RelEndInterval.Parent:=TWinControl(AOwner);
   RelEndInterval.Name:=TheName+'_RelEndInterval';
   RelEndInterval.Visible:=False;
   RelEndInterval.Font.Name:=ParentEERModel.DefModelFont;
@@ -10837,7 +10837,7 @@ begin
           if(IsLinkedObject)then
             Pen.Color:=$00C66931
           else
-            Pen.Color:=clMid;
+            Pen.Color:=clBtnFace;
         end
         else
         begin
@@ -10961,7 +10961,7 @@ begin
       //Rectangle(xo+0, yo+0, xo+width-1, yo+height-1);
 
       if(RelKind=rk_1nNonId)then
-        Pen.Color:=clMid;
+        Pen.Color:=clBtnFace;
 
       for i:=0 to ord(selected) do
       begin
@@ -10978,7 +10978,7 @@ begin
             if(IsLinkedObject)then
               Pen.Color:=$00C66931
             else
-              Pen.Color:=clMid;
+              Pen.Color:=clBtnFace;
           end
           else
           begin
@@ -11084,7 +11084,7 @@ begin
         j:=0;
 
       if(RelKind=rk_1nNonId)then
-        Pen.Color:=clMid;
+        Pen.Color:=clBtnFace;
 
       //Draw 2nd time for selection
       for i:=0 to j do
@@ -11104,7 +11104,7 @@ begin
             if(IsLinkedObject)then
               Pen.Color:=$00C66931
             else
-              Pen.Color:=clMid;
+              Pen.Color:=clBtnFace;
           end
           else
           begin
@@ -12258,7 +12258,7 @@ constructor TEERNote.Create(AOwner: TComponent; TheName: string);
 begin
   inherited Create(AOwner);
 
-  Parent:=TWidgetControl(AOwner);
+  Parent:=TWinControl(AOwner);
   Name:=DMMain.GetValidObjectName(TheName);
 
   Font.Name:=ParentEERModel.DefModelFont;
@@ -12492,7 +12492,7 @@ constructor TEERRegion.Create(AOwner: TComponent; TheName: string);
 begin
   inherited Create(AOwner);
 
-  Parent:=TWidgetControl(AOwner);
+  Parent:=TWinControl(AOwner);
   Name:=DMMain.GetValidObjectName(TheName);
 
   Font.Name:=ParentEERModel.DefModelFont;
@@ -13257,7 +13257,7 @@ constructor TEERImage.Create(AOwner: TComponent; TheName: string);
 begin
   inherited Create(AOwner);
 
-  Parent:=TWidgetControl(AOwner);
+  Parent:=TWinControl(AOwner);
   Name:=DMMain.GetValidObjectName(TheName);
 
   Visible:=False;
@@ -13564,7 +13564,7 @@ begin
     'StrechImg="'+IntToStr(Ord(StrechImg))+'" '+
     'ImgWidth="'+IntToStr(Img.Width)+'" '+
     'ImgHeight="'+IntToStr(Img.Height)+'" '+
-    'ImgFormat="'+Img.Format+'" '+
+    'ImgFormat="BMP" '+ // CLX Img.Format not available in LCL
     'ImgData="';
 
   //Create a memory stream to convert image data
@@ -13613,7 +13613,7 @@ begin
     StrechImg:=(theXMLImage.StrechImg=1);
     Img.Width:=theXMLImage.ImgWidth;
     Img.Height:=theXMLImage.ImgHeight;
-    Img.Format:=theXMLImage.ImgFormat;
+    // Img.Format:=theXMLImage.ImgFormat; // CLX-specific, not available in LCL
 
     imgdata:=theXMLImage.ImgData;
 
@@ -13666,7 +13666,7 @@ begin
     StrechImg:=(theXMLParser.CurAttr.Value('StrechImg')='1');
     Img.Width:=StrToInt(theXMLParser.CurAttr.Value('ImgWidth'));
     Img.Height:=StrToInt(theXMLParser.CurAttr.Value('ImgHeight'));
-    Img.Format:=theXMLParser.CurAttr.Value('ImgFormat');
+    // Img.Format:=theXMLParser.CurAttr.Value('ImgFormat'); // CLX-specific, not available in LCL
 
     imgdata:=theXMLParser.CurAttr.Value('ImgData');
 
@@ -13728,7 +13728,7 @@ constructor TEERStoredProc.Create(AOwner: TComponent; TheName: string);
 begin
   inherited Create(AOwner);
 
-  Parent:=TWidgetControl(AOwner);
+  Parent:=TWinControl(AOwner);
   Name:=DMMain.GetValidObjectName(TheName);
 
   Font.Name:=ParentEERModel.DefModelFont;

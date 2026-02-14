@@ -815,7 +815,7 @@ begin
     //Draw Header
     else
     begin
-      Brush.Color:=clButton;
+      Brush.Color:=clBtnFace;
       Brush.Style:=bsSolid;
       FillRect(Rect);
 
@@ -832,7 +832,7 @@ begin
         LineTo(Rect.Right-2, Rect.Top+1);
       end;
 
-      Pen.Color:=clShadow;
+      Pen.Color:=clBtnShadow;
       MoveTo(Rect.Left, Rect.Bottom-1);
       LineTo(Rect.Right-1{$IFDEF LINUX}+1{$ENDIF}, Rect.Bottom-1);
       if(ACol<>0)and(ACol<>2)then
@@ -981,8 +981,8 @@ begin
       if(ARow<>DragStartRow)then
       begin
         //if(ssShift in DragShiftState)and(ssCtrl in DragShiftState)then
-        if(ssShift in Application.KeyState)and
-          (ssCtrl in Application.KeyState)then
+        if(ssShift in GetKeyShiftState)and
+          (ssCtrl in GetKeyShiftState)then
         begin
           //when Ctrl+Shift is pressed assign same datatype
           theCol:=TEERColumn(EERTable.Columns[ARow-1]);
@@ -1520,7 +1520,7 @@ begin
       else
       begin
         IndexColListBox.Enabled:=True;
-        IndexColListBox.Color:=clBase;
+        IndexColListBox.Color:=clWindow;
       end;
     end;
   end;

@@ -284,12 +284,16 @@ begin
     theIni.WriteString('GeneralSettings', 'DelaySplashScreen',
       IntToStr(DelaySplashScreen));
 
+{$IFNDEF FPC}
     case Application.Style.DefaultStyle of
       dsWindows: theIni.WriteString('GeneralSettings', 'ApplicationStyle', '1');
       dsMotifPlus: theIni.WriteString('GeneralSettings', 'ApplicationStyle', '2');
       dsQtSGI: theIni.WriteString('GeneralSettings', 'ApplicationStyle', '3');
       dsPlatinum: theIni.WriteString('GeneralSettings', 'ApplicationStyle', '4');
     end;
+{$ELSE}
+    theIni.WriteString('GeneralSettings', 'ApplicationStyle', '1');
+{$ENDIF}
 
     theIni.WriteString('GeneralSettings', 'ShowPalettesDocked',
       IntToStr(Ord(ShowPalettesDocked)));

@@ -72,16 +72,14 @@ type
     AllDatatypesPBox: TPaintBox;
     procedure FormResize(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure AllDataTypesTVCustomDrawItem(Sender: TCustomViewControl;
-      Item: TCustomViewItem; Canvas: TCanvas; const Rect: TRect;
-      State: TCustomDrawState; Stage: TCustomDrawStage;
+    procedure AllDataTypesTVCustomDrawItem(Sender: TCustomTreeView;
+      Node: TTreeNode; State: TCustomDrawState;
       var DefaultDraw: Boolean);
 
     procedure DisplayDataTypes(theModel: TEERModel);
     procedure CommonDataTypesListViewCustomDrawItem(
-      Sender: TCustomViewControl; Item: TCustomViewItem; Canvas: TCanvas;
-      const Rect: TRect; State: TCustomDrawState; Stage: TCustomDrawStage;
-      var DefaultDraw: Boolean);
+      Sender: TCustomListView; Item: TListItem;
+      State: TCustomDrawState; var DefaultDraw: Boolean);
     procedure CommonDataTypesListViewDblClick(Sender: TObject);
     procedure CommonDataTypesListViewMouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -137,7 +135,7 @@ begin
 
   CommonDataTypesListViewRowHeight:=-1;
 
-  PageControl.Style:=tsNoTabs;
+  PageControl.ShowTabs := False; // was tsNoTabs
   CommonDatatypesPBoxClick(self);
 
   theSize:=Canvas.TextExtent('All Types');
@@ -245,14 +243,19 @@ begin
 end;
 
 procedure TPaletteDataTypesForm.AllDataTypesTVCustomDrawItem(
-  Sender: TCustomViewControl; Item: TCustomViewItem; Canvas: TCanvas;
-  const Rect: TRect; State: TCustomDrawState; Stage: TCustomDrawStage;
+  Sender: TCustomTreeView; Node: TTreeNode; State: TCustomDrawState;
   var DefaultDraw: Boolean);
 var theSize: TSize;
   theNode: TTreeNode;
   s: string;
   i: integer;
+  Canvas: TCanvas;
+  Rect: TRect;
+  Item: TTreeNode;
 begin
+  Canvas := AllDataTypesTV.Canvas;
+  Item := Node;
+  Rect := Node.DisplayRect(True);
   {with TTreeNode(Item) do begin
     Offset := (Rect.Right - Rect.Left - Canvas.TextWidth(Text)) div 2;
     Canvas.Ellipse(Rect);
@@ -264,11 +267,11 @@ begin
     Pen.Color:=clWhite;
     MoveTo(0, Rect.Top);
     LineTo(Rect.Right, Rect.Top);
-    Pen.Color:=clDark;
+    Pen.Color:=clBtnShadow;
     MoveTo(0, Rect.Bottom-1);
     LineTo(AllDataTypesTV.Width+30, Rect.Bottom-1);
 
-    theNode:=AllDataTypesTV.Items[AllDataTypesTV.Items.IndexOf(Item)];
+    theNode:=TTreeNode(Item);
 
 
     if(Assigned(theNode.Data))then
@@ -308,10 +311,14 @@ begin
 end;
 
 procedure TPaletteDataTypesForm.CommonDataTypesListViewCustomDrawItem(
-  Sender: TCustomViewControl; Item: TCustomViewItem; Canvas: TCanvas;
-  const Rect: TRect; State: TCustomDrawState; Stage: TCustomDrawStage;
-  var DefaultDraw: Boolean);
+  Sender: TCustomListView; Item: TListItem;
+  State: TCustomDrawState; var DefaultDraw: Boolean);
+var
+  Canvas: TCanvas;
+  Rect: TRect;
 begin
+  Canvas := CommonDataTypesListView.Canvas;
+  Rect := Item.DisplayRect(drBounds);
   if(CommonDataTypesListViewRowHeight=-1)then
     CommonDataTypesListViewRowHeight:=Rect.Bottom-Rect.Top;
 
@@ -320,7 +327,7 @@ begin
     Pen.Color:=clWhite;
     MoveTo(0, Rect.Top);
     LineTo(Rect.Right, Rect.Top);
-    Pen.Color:=clDark;
+    Pen.Color:=clBtnShadow;
     MoveTo(0, Rect.Bottom-1);
     LineTo(AllDataTypesTV.Width+30, Rect.Bottom-1);
   end;

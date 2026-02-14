@@ -87,7 +87,7 @@ begin
   WindowXBorder:=-4;
 
   {$IFDEF LINUX}
-  BorderStyle:=fbsSingle;
+  BorderStyle:=bsSingle;
   {$ENDIF}
 end;
 

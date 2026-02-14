@@ -41,8 +41,8 @@ unit DBDM;
 interface
 
 uses
-  SysUtils, Classes, LCLType, DBXpress, FMTBcd, DBClient, Provider, SqlExpr,
-  DB, IniFiles, Forms, Controls, Qt, Dialogs, Contnrs;
+  SysUtils, Classes, LCLType, DBXpress, FMTBcd, DBClient, Provider,
+  DB, SQLDB, SqlExpr, IniFiles, Forms, Controls, Qt, Dialogs, Contnrs;
 
 type
   // Class storing a Database-Connection
@@ -75,10 +75,10 @@ type
   TDMDB = class(TDataModule)
     SQLConn: TSQLConnection;
     OutputDataSrc: TDataSource;
-    OutputQry: TSQLQuery;
+    OutputQry: TSQLDataSet;
     OutputDataSetProvider: TDataSetProvider;
     OutputClientDataSet: TClientDataSet;
-    SchemaSQLQuery: TSQLQuery;
+    SchemaSQLQuery: TSQLDataSet;
 
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);

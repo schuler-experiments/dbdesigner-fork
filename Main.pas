@@ -367,7 +367,7 @@ type
     procedure Save2DiskImgClick(Sender: TObject);
     procedure Save2DBImgClick(Sender: TObject);
 
-    function EventFilter(Sender: QObjectH; Event: QEventH): Boolean; override;
+    {$IFNDEF FPC}function EventFilter(Sender: QObjectH; Event: QEventH): Boolean; override;{$ENDIF}
 
     procedure wtPointerSBtnClick(Sender: TObject);
     procedure wtPointerSBtnMouseEnter(Sender: TObject);
@@ -1703,6 +1703,7 @@ begin
   SaveinDatabaseMIClick(self);
 end;
 
+{$IFNDEF FPC}
 function TMainForm.EventFilter(Sender: QObjectH; Event: QEventH): Boolean;
 var Pint: ^Integer;
   Ppoint: ^TPoint;
@@ -2119,6 +2120,7 @@ begin
   if(Result=False)then
     EventFilter:=inherited EventFilter(Sender, Event);
 end;
+{$ENDIF}
 
 procedure TMainForm.SetApplStyle(ApplStyle: integer);
 begin

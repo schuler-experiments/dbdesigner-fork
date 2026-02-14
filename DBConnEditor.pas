@@ -43,7 +43,8 @@ interface
 
 uses
   LCLType, Qt, SysUtils, Types, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Grids, Buttons, DBDM, SqlExpr, IniFiles, ExtCtrls, ComCtrls, StrUtils;
+  StdCtrls, Grids, Buttons, DBDM, DBXpress, SqlExpr, IniFiles, ExtCtrls, ComCtrls, StrUtils,
+  TreeNodeSubItems;
 
 type
   TDBConnEditorForm = class(TForm)
@@ -340,7 +341,7 @@ begin
     theDBHost.HostName:=DBConn.Params.Values['HostName'];
     theDBHost.User_Name:='root';
 
-    theChildTreeNode:=DBConnSelectForm.DBConnTV.Items.Insert(DBConnSelectForm.NetworkHosts.Item[DBConnSelectForm.NetworkHosts.Count-1], theDBHost.Caption);
+    theChildTreeNode:=DBConnSelectForm.DBConnTV.Items.Insert(DBConnSelectForm.NetworkHosts.Items[DBConnSelectForm.NetworkHosts.Count-1], theDBHost.Caption);
     theChildTreeNode.Data:=theDBHost;
     theChildTreeNode.ImageIndex:=4;
     theChildTreeNode.SelectedIndex:=4;

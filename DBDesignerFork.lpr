@@ -91,7 +91,7 @@ uses
   LibXmlParser in 'LibXmlParser.pas',
 
   EERPlaceModel in 'EERPlaceModel.pas',
-  RegExpr in 'RegExpr.pas',
+  // RegExpr, // using system regexpr
   GlobalSysFunctions in 'GlobalSysFunctions.pas';
 
 {$R *.res}

@@ -387,16 +387,23 @@ begin
 end;
 
 procedure TDMMain.LoadACursor(crNumber: integer; fname, fname_mask: string; XSpot, YSpot: integer);
+{$IFDEF FPC}
+begin
+  // LCL cursor loading - simplified from Qt API
+  if not FileExists(fname) then
+    raise EInOutError.Create(GetTranslatedMessage('File %s does not exist.', 24, fname));
+  // TODO: Implement custom cursor loading for LCL
+  // Custom cursor loading from bitmap files not yet implemented
+end;
+{$ELSE}
 var BMap, BMask: QBitMapH;
   FN : WideString;
   format: string;
 begin
-  //Check ist Files exist
   if(Not(FileExists(fname)))then
     raise EInOutError.Create(GetTranslatedMessage('File %s does not exist.', 24, fname));
   if(Not(FileExists(fname_mask)))then
     raise EInOutError.Create(GetTranslatedMessage('File %s does not exist.', 24, fname_mask));
-
   FN:=fname;
   BMap:=QBitmap_create(@FN, PChar(Format));
   FN:=fname_mask;
@@ -405,6 +412,7 @@ begin
   QBitmap_destroy(BMap);
   QBitmap_destroy(BMask);
 end;
+{$ENDIF}
 
 function TDMMain.ReplaceText(txt, such, ers: string): string;
 begin
@@ -573,7 +581,7 @@ begin
   //Write IniFile
   theIni:=TMemIniFile.Create(SettingsPath+ProgName+'_Settings.ini');
   try
-    if(QWidget_isMaximized(win.Handle))then
+    if(win.WindowState = wsMaximized)then
       theIni.WriteInteger('WindowPositions', winname+'State', 1)
     else
     begin
@@ -778,7 +786,7 @@ end;
 procedure TCmdExecThread.Execute;
 begin
   {$IFDEF LINUX}
-  if FCommand <> '' then FReturnValue := Libc.System(PChar(FCommand));
+  {$IFDEF FPC}if FCommand <> '' then FReturnValue := fpSystem(FCommand);{$ELSE}if FCommand <> '' then FReturnValue := Libc.System(PChar(FCommand));{$ENDIF}
   {$ENDIF}
   FDone := True;
   Synchronize(FireCompleteEvent);
@@ -948,7 +956,7 @@ begin
       s1:=Copy(s1, Pos(sep, s1)+1, Length(s1));
     end
     else
-      s1[Pos(sep, s1)]:='';
+      Delete(s1, Pos(sep, s1), 1);
   end;
 
   s1:=Trim(Copy(s, p1, p2-p1-1));
@@ -1499,18 +1507,28 @@ end;
 {$ENDIF}
 
 procedure TDMMain.SaveBitmap(Handle: QPixmapH; FileName: string; FileType: string; JPGQuality: integer = 75);
+{$IFDEF FPC}
+var
+  Pic: TPicture;
+begin
+  // LCL replacement - Handle is unused, caller should pass bitmap directly
+  // This is a stub - actual implementation will need rework
+  if(Copy(FileType, 1, 1)='.')then
+    FileType:=Copy(FileType, 2, Length(FileType));
+  // TODO: Implement LCL bitmap saving
+end;
+{$ELSE}
 var lWideStr: WideString;
 begin
   lWideStr:=FileName;
-
   if(Copy(FileType, 1, 1)='.')then
     FileType:=Copy(FileType, 2, Length(FileType));
-
   if(Uppercase(FileType)='PNG')or(Uppercase(FileType)='BMP')then
     QPixMap_save(Handle, @lWideStr, PChar(Uppercase(FileType)))
   else if(FileType='JPEG')or(FileType='JPG')then
     QPixMap_save(Handle, @lWideStr, PChar('JPEG'), JPGQuality);
 end;
+{$ENDIF}
 
 function TDMMain.GetFileSize(fname: string): string;
 var f: file of Byte;
@@ -1596,7 +1614,7 @@ begin
     Cardinal(WidgetFlags_WStyle_StaysOnTop));
 
   //Get Pos
-  QWidget_pos(QOpenWidgetH(theForm.Handle), @P);
+  P.X := theForm.Left; P.Y := theForm.Top; // LCL replacement for QWidget_pos
   P.X:=P.X+WinPosCorrection[Ord(theForm.BorderStyle)].X;
   P.Y:=P.Y+WinPosCorrection[Ord(theForm.BorderStyle)].Y;
 
@@ -1618,7 +1636,7 @@ begin
     Cardinal(WidgetFlags_WStyle_StaysOnTop));
 
   //Get Pos
-  QWidget_pos(QOpenWidgetH(theForm.Handle), @P);
+  P.X := theForm.Left; P.Y := theForm.Top; // LCL replacement for QWidget_pos
   P.X:=P.X+WinPosCorrection[Ord(theForm.BorderStyle)].X;
   P.Y:=P.Y+WinPosCorrection[Ord(theForm.BorderStyle)].Y;
 
@@ -1872,11 +1890,15 @@ end;
 
 function sendCLXEvent(receiver: QObjectH; event: QEventH): Boolean;
 begin
+  {$IFDEF FPC}
+  Result := False; // TODO: Implement LCL equivalent
+  {$ELSE}
   try
     Result := QApplication_sendEvent(receiver, event);
   finally
     QEvent_destroy(event);
   end;
+  {$ENDIF}
 end;
 
 end.
