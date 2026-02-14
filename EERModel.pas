@@ -1931,11 +1931,22 @@ end;
 // Functions
 
 procedure TEERModel.AddImgToPopupImgList(fname: string);
-var theImg: TBitmap;
+var
+  theImg: TBitmap;
+  thePic: TPicture;
 begin
+  thePic:=TPicture.Create;
   theImg:=TBitmap.Create;
-  theImg.LoadFromFile(fname);
-  PopUpMenuImgs.Add(theImg, nil);
+  try
+    thePic.LoadFromFile(fname);
+    theImg.Width := thePic.Width;
+    theImg.Height := thePic.Height;
+    theImg.Canvas.Draw(0, 0, thePic.Graphic);
+    PopUpMenuImgs.Add(theImg, nil);
+  finally
+    thePic.Free;
+    theImg.Free;
+  end;
 end;
 
 procedure TEERModel.LoadModelBitmaps;
