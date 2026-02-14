@@ -751,7 +751,7 @@ begin
   FCmdThread := TCmdExecThread.Create;
   //FCmdThread.OnComplete := InternalComplete;
   FCmdThread.Command := command;
-  FCmdThread.Resume;
+  FCmdThread.Start;
 
   //Wenn erwünscht, warten bis Programm beendet wird.
   if(wait4proz=1)then

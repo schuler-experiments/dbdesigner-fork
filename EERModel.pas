@@ -3130,9 +3130,9 @@ begin
           ModelName:=Copy(ExtractFileName(ModelFilename),
             1, Length(ExtractFileName(ModelFilename))-Length(ExtractFileExt(ModelFilename)));
 
-        DecSep:=DecimalSeparator;
+        DecSep:=DefaultFormatSettings.DecimalSeparator;
         try
-          DecimalSeparator:='.';
+          DefaultFormatSettings.DecimalSeparator:='.';
 
           WriteLn(theFile, '<GLOBALSETTINGS '+
             'ModelName="'+DMMain.EncodeText4XML(ModelName)+'" '+
@@ -3173,7 +3173,7 @@ begin
             'CanvasHeight="'+IntToStr(EERModel_Height)+'" '+
             '/>');
         finally
-          DecimalSeparator:=DecSep;
+          DefaultFormatSettings.DecimalSeparator:=DecSep;
         end;
 
 
@@ -3247,9 +3247,9 @@ begin
         WriteLn(theFile, '</REGIONCOLORS>');
 
         //Reserved Words
-        DecSep:=DecimalSeparator;
+        DecSep:=DefaultFormatSettings.DecimalSeparator;
         try
-          DecimalSeparator:='.';
+          DefaultFormatSettings.DecimalSeparator:='.';
 
           WriteLn(theFile, '<POSITIONMARKERS>');
           for i:=0 to PosMarkers.Count-1 do
@@ -3257,7 +3257,7 @@ begin
               'X="'+IntToStr(TPosMarker(PosMarkers.Items[i]).X)+'" Y="'+IntToStr(TPosMarker(PosMarkers.Items[i]).Y)+'" />');
           WriteLn(theFile, '</POSITIONMARKERS>');
         finally
-          DecimalSeparator:=DecSep;
+          DefaultFormatSettings.DecimalSeparator:=DecSep;
         end;
 
 
@@ -3841,9 +3841,9 @@ var Parser: TXmlParser;
   end;
 
 begin
-  DecSep:=DecimalSeparator;
+  DecSep:=DefaultFormatSettings.DecimalSeparator;
   try
-    DecimalSeparator:='.';
+    DefaultFormatSettings.DecimalSeparator:='.';
 
     DisableModelRefresh:=True;
     try
@@ -4274,7 +4274,7 @@ begin
         Parser.Free;
       end;
     finally
-      DecimalSeparator:=DecSep;
+      DefaultFormatSettings.DecimalSeparator:=DecSep;
     end;
     
 
@@ -4391,9 +4391,9 @@ begin
     begin
       ModelFilename:=fname;
 
-      DecSep:=DecimalSeparator;
+      DecSep:=DefaultFormatSettings.DecimalSeparator;
       try
-        DecimalSeparator:='.';
+        DefaultFormatSettings.DecimalSeparator:='.';
 
         //----------------------------------------------------
         //Read Settings
@@ -4547,7 +4547,7 @@ begin
           EERModel_Height:=2842;
         end;
       finally
-        DecimalSeparator:=DecSep;
+        DefaultFormatSettings.DecimalSeparator:=DecSep;
       end;
 
       //----------------------------------------------------
@@ -4693,9 +4693,9 @@ begin
 
       //Read Position Markers
       try
-        DecSep:=DecimalSeparator;
+        DecSep:=DefaultFormatSettings.DecimalSeparator;
         try
-          DecimalSeparator:='.';
+          DefaultFormatSettings.DecimalSeparator:='.';
 
           try
             for i:=0 to theDoc.SETTINGS.POSITIONMARKERS.Count-1 do
@@ -4713,7 +4713,7 @@ begin
           except
           end;
         finally
-          DecimalSeparator:=DecSep;
+          DefaultFormatSettings.DecimalSeparator:=DecSep;
         end;
       except
         on x: Exception do

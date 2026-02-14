@@ -509,10 +509,10 @@ end;
 function TEERPageSetupForm.GetPageSize(s: string): TSize;
 var oldsep: char;
 begin
-  oldsep:=DecimalSeparator;
+  oldsep:=DefaultFormatSettings.DecimalSeparator;
 
   try
-    DecimalSeparator:='.';
+    DefaultFormatSettings.DecimalSeparator:='.';
 
     s:=Copy(s, Pos('(', s)+1, Length(s));
 
@@ -537,7 +537,7 @@ begin
       GetPageSize.cy:=Round(StrToFloat(Trim(Copy(s, 1, Pos(' ', s)-1)))*2.54*10);
     end;
   finally
-    DecimalSeparator:=oldsep;
+    DefaultFormatSettings.DecimalSeparator:=oldsep;
   end;
 end;
 
