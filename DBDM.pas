@@ -47,6 +47,7 @@ uses
 type
   // Class storing a Database-Connection
   TDBConn = class(TPersistent)
+  public
     constructor Create;
     destructor Destroy; override;
 
@@ -64,6 +65,7 @@ type
 
   // Class to store a Database-Hosts
   TDBHost = class(TPersistent)
+  public
     constructor Create;
     destructor Destroy;  override;
   public

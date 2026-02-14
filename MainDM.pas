@@ -1757,6 +1757,7 @@ var z1, z2: integer;
   theBuffer: Array [0..1024] of Char;
   Bytes2Write, BytesWritten: integer;
 begin
+  Result := '';
   BytesWritten:=0;
   Bytes2Write:=0;
   while(BytesWritten*2<Length(XMLData))do

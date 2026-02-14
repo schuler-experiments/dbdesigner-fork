@@ -36,7 +36,7 @@ type
 
   TSQLDataSet = class(SQLDB.TSQLQuery)
   public
-    procedure SetSchemaInfo(SchemaType: Integer; const SchemaObjectName, SchemaPattern: string);
+    procedure SetSchemaInfo(SchemaType: Integer; const SchemaObjectName, SchemaPattern: string); reintroduce;
     function ExecSQL(ExecDirect: Boolean): Integer; overload;
     function GetQuoteChar: string;
   end;
