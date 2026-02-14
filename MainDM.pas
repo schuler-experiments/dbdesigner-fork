@@ -184,7 +184,7 @@ type
     {$ENDIF}
 
     //Save Bitmap als PNG, JPG or BMP
-    procedure SaveBitmap(Handle: QPixmapH; FileName: string; FileType: string; JPGQuality: integer = 75);
+    procedure SaveBitmap(Handle: {$IFDEF FPC}HBITMAP{$ELSE}QPixmapH{$ENDIF}; FileName: string; FileType: string; JPGQuality: integer = 75);
 
     function GetFileSize(fname: string): string;
     function GetFileDate(fname: string): TDateTime;
@@ -1506,7 +1506,7 @@ begin
 end;
 {$ENDIF}
 
-procedure TDMMain.SaveBitmap(Handle: QPixmapH; FileName: string; FileType: string; JPGQuality: integer = 75);
+procedure TDMMain.SaveBitmap(Handle: {$IFDEF FPC}HBITMAP{$ELSE}QPixmapH{$ENDIF}; FileName: string; FileType: string; JPGQuality: integer = 75);
 {$IFDEF FPC}
 var
   Pic: TPicture;

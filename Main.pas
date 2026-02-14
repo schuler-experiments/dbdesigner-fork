@@ -70,7 +70,7 @@ interface
 
 uses
   SysUtils, Types, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Menus, LCLType, ComCtrls, Grids, DBGrids,
+  StdCtrls, ExtCtrls, Menus, LCLType, LCLIntf, ComCtrls, Grids, DBGrids,
   DBXpress, DB, SqlExpr, ImgList, Buttons, DBCtrls, QT, Printers,
   Clipbrd, QStyle,
 {$IFDEF USE_QTheming}QThemed,{$ENDIF}
@@ -474,7 +474,7 @@ uses MainDM, ZoomSel, EER,
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  Application.OnEvent:=DoApplicationEvent;
+  // Application.OnEvent:=DoApplicationEvent; // CLX event hook not available in LCL
 
   //Get Version string, defined in DBDesigner4.dpr
   Version:=SplashForm.VersionLbl.Caption;
@@ -1357,19 +1357,8 @@ end;
 procedure TMainForm.StyleStandardMIClick(Sender: TObject);
 begin
   TMenuItem(Sender).Checked:=Not(TMenuItem(Sender).Checked);
-  case TMenuItem(Sender).Tag of
-    0:
-      Application.Style.DefaultStyle:=dsWindows;
-    1:
-      Application.Style.DefaultStyle:=dsMotifPlus;
-    2:
-      Application.Style.DefaultStyle:=dsQtSGI;
-    3:
-      begin
-        Application.Style.DefaultStyle:=dsWindows;
-        Application.Style.DefaultStyle:=dsPlatinum;
-      end;
-  end;
+  // CLX Application.Style not available in LCL
+  // case TMenuItem(Sender).Tag of ... end;
 end;
 
 procedure TMainForm.SQLDropScriptMIClick(Sender: TObject);
@@ -3005,7 +2994,7 @@ begin
               if(ActiveMDIChild.Classname='TEERForm')then
               begin
                 TEERForm(ActiveMDIChild).EERModel.MoveSelectedEERObjects(
-                  (Ord(Key=Key_right)-Ord(Key=VK_LEFT))*
+                  (Ord(Key=VK_RIGHT)-Ord(Key=VK_LEFT))*
                     (1+9*Ord(theShiftState=[ssShift]))*
                     (1+49*Ord(theShiftState=[ssCtrl, ssShift])),
                   (Ord(Key=VK_DOWN)-Ord(Key=VK_UP))*
@@ -3125,7 +3114,7 @@ begin
     else if(Key=Key_Control)and(SpaceDown)then
     begin
       //Use Application.keystate because theShiftState is wrong
-      if(ssAlt in Application.keystate)then
+      if(GetKeyState(VK_MENU) < 0)then
         DMEER.SetCurrentWorkTool(wtZoomOut)
       else
         DMEER.SetCurrentWorkTool(wtHand);
@@ -3135,7 +3124,7 @@ begin
     else if(Key=Key_Alt)and(SpaceDown)then
     begin
       //Use Application.keystate because theShiftState is wrong
-      if(ssCtrl in Application.keystate)then
+      if(GetKeyState(VK_CONTROL) < 0)then
         DMEER.SetCurrentWorkTool(wtZoomIn)
       else
         DMEER.SetCurrentWorkTool(wtHand);
@@ -3297,8 +3286,8 @@ begin
   try
     TEERForm(ActiveMDIChild).EERModel.PaintModelToImage(ModelBmp, True);
 
-    QClipboard_clear(Clipboard.Handle);
-    QClipboard_setPixmap(Clipboard.Handle, ModelBmp.Handle);
+    // TODO: Copy bitmap to clipboard using LCL API
+    Clipboard.Assign(ModelBmp);
   finally
     ModelBmp.Free;
   end;

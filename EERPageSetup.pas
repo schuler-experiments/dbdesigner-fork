@@ -103,6 +103,9 @@ type
     procedure SetPrinterValues;
     procedure PortraitRBtnClick(Sender: TObject);
     procedure StartPrintBtnClick(Sender: TObject);
+  public
+    procedure HideEdits;
+    procedure ShowEdits;
   private
     FCurrentPageSize: TPageSize;
     function GetPrinterMargins: TSize;
@@ -115,8 +118,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure VPagesSpinEditChanged(Sender: TObject; NewValue: Integer);
 
-    procedure HideEdits;
-    procedure ShowEdits;
+
 
     procedure SetModelSelPages;
     procedure StoreSelPagesInModel;

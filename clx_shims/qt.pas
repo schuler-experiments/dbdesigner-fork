@@ -44,6 +44,88 @@ const
   QEventType_EditImage = LM_USER + 108;
   QEventType_DeleteObject = LM_USER + 109;
 
+
+  // CLX Key constants (mapped to LCL VK_ constants)
+  Key_A = Ord('A');
+  Key_B = Ord('B');
+  Key_C = Ord('C');
+  Key_D = Ord('D');
+  Key_E = Ord('E');
+  Key_F = Ord('F');
+  Key_G = Ord('G');
+  Key_H = Ord('H');
+  Key_I = Ord('I');
+  Key_J = Ord('J');
+  Key_K = Ord('K');
+  Key_L = Ord('L');
+  Key_M = Ord('M');
+  Key_N = Ord('N');
+  Key_O = Ord('O');
+  Key_P = Ord('P');
+  Key_Q = Ord('Q');
+  Key_R = Ord('R');
+  Key_S = Ord('S');
+  Key_T = Ord('T');
+  Key_U = Ord('U');
+  Key_V = Ord('V');
+  Key_W = Ord('W');
+  Key_X = Ord('X');
+  Key_Y = Ord('Y');
+  Key_Z = Ord('Z');
+  Key_0 = Ord('0');
+  Key_1 = Ord('1');
+  Key_2 = Ord('2');
+  Key_3 = Ord('3');
+  Key_4 = Ord('4');
+  Key_5 = Ord('5');
+  Key_6 = Ord('6');
+  Key_7 = Ord('7');
+  Key_8 = Ord('8');
+  Key_9 = Ord('9');
+  Key_Alt = VK_MENU;
+  Key_Control = VK_CONTROL;
+  Key_Shift = VK_SHIFT;
+
+  // CLX event types
+  QEventType_KeyPress = LM_KEYDOWN;
+  QEventType_KeyRelease = LM_KEYUP;
+
+  // Arrow/special key constants
+  Key_Left = VK_LEFT;
+  Key_Right = VK_RIGHT;
+  Key_Up = VK_UP;
+  Key_Down = VK_DOWN;
+  Key_Escape = VK_ESCAPE;
+  Key_Return = VK_RETURN;
+  Key_Enter = VK_RETURN;
+  Key_Tab = VK_TAB;
+  Key_Space = VK_SPACE;
+  Key_Delete = VK_DELETE;
+  Key_Backspace = VK_BACK;
+  Key_Insert = VK_INSERT;
+  Key_Home = VK_HOME;
+  Key_End = VK_END;
+  Key_Prior = VK_PRIOR;
+  Key_Next = VK_NEXT;
+  Key_F1 = VK_F1;
+  Key_F2 = VK_F2;
+  Key_F3 = VK_F3;
+  Key_F4 = VK_F4;
+  Key_F5 = VK_F5;
+  Key_F6 = VK_F6;
+  Key_F7 = VK_F7;
+  Key_F8 = VK_F8;
+  Key_F9 = VK_F9;
+  Key_F10 = VK_F10;
+  Key_F11 = VK_F11;
+  Key_F12 = VK_F12;
+
+  // CLX application styles
+  dsWindows = 0;
+  dsMotifPlus = 1;
+  dsQtSGI = 2;
+  dsPlatinum = 3;
+
   // Widget flag constants
   WidgetFlags_WStyle_StaysOnTop = $00000001;
   WidgetFlags_WStyle_Dialog = $00000002;
@@ -55,6 +137,7 @@ function QCustomEvent_create(eventType: Integer; data: Pointer = nil): QCustomEv
 function QCustomEvent_data(event: QCustomEventH): Pointer;
 procedure QEvent_destroy(event: QEventH);
 function QEvent_type(event: QEventH): Integer;
+function ButtonStateToShiftState(ButtonState: Integer): TShiftState;
 
 procedure QApplication_postEvent(receiver: QObjectH; event: QCustomEventH);
 function QApplication_sendEvent(receiver: QObjectH; event: QEventH): Boolean;
@@ -88,6 +171,14 @@ procedure QPrinter_setPrinterName(printer: QPrinterH; const name: WideString);
 function QCursor_create: Pointer;
 
 implementation
+
+function ButtonStateToShiftState(ButtonState: Integer): TShiftState;
+begin
+  Result := [];
+  if (ButtonState and $100) <> 0 then Include(Result, ssShift);
+  if (ButtonState and $200) <> 0 then Include(Result, ssCtrl);
+  if (ButtonState and $400) <> 0 then Include(Result, ssAlt);
+end;
 
 // Event functions - store event type and data in allocated memory blocks
 
@@ -150,12 +241,12 @@ begin
     Dispose(PEventRec(event));
 end;
 
-function QBitmap_create: QBitMapH;
+function QBitmap_create: QBitMapH; overload;
 begin
   Result := nil;
 end;
 
-function QBitmap_create(w, h: Integer): QBitMapH;
+function QBitmap_create(w, h: Integer): QBitMapH; overload;
 begin
   Result := nil;
 end;
