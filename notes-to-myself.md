@@ -108,3 +108,14 @@ f52b469 Fix SetSchemaInfo test
 - Set `Version := '1.5'` directly in `Main.pas` instead of reading from `SplashForm.VersionLbl.Caption`
 - App now starts clean with no errors (exit 124 = killed by timeout = stayed alive)
 - Future fix: could convert splashscreen.png to BMP, or use `TPicture.LoadFromFile` which auto-detects format
+
+## CLX Color Constants Replaced (commit 2921ded)
+Replaced deprecated CLX/Qt color constants with LCL equivalents in 10 .lfm files (35 replacements):
+- clDark → clBtnShadow, clButton → clBtnFace, clNormalBackground → clWindow
+- clText → clWindowText, clMidlight → clBtnHighlight
+
+## Gtk-Message: Failed to load module "canberra-gtk-module"
+This is a **harmless** GTK warning. The app uses GTK2 (LCL default), but only the GTK3 
+version of the canberra sound module is installed. To silence it:
+  sudo apt install libcanberra-gtk-module
+This has zero impact on application functionality - it's only about UI sound effects.
