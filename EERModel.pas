@@ -1486,8 +1486,8 @@ begin
       end
       else
       begin
-        mouse_posx:=TForm(parent).HorzScrollBar.Position;
-        mouse_posy:=TForm(parent).VertScrollBar.Position;
+        mouse_posx:=TScrollingWinControl(parent).HorzScrollBar.Position;
+        mouse_posy:=TScrollingWinControl(parent).VertScrollBar.Position;
       end;
 
       MouseIsDown:=True;
@@ -1541,27 +1541,27 @@ begin
       end
       else
       begin
-        if(TForm(parent).HorzScrollBar<>nil)then
+        if(TScrollingWinControl(parent).HorzScrollBar<>nil)then
         begin
-          TForm(parent).HorzScrollBar.Position:=
+          TScrollingWinControl(parent).HorzScrollBar.Position:=
             mouse_posx+(Mouse.CursorPos.X-mouse_absx)*-1;
 {$IFDEF LINUX}
-          if(TForm(parent).HorzScrollBar.Position<0)then
-            TForm(parent).HorzScrollBar.Position:=0;
-          if(TForm(parent).HorzScrollBar.Position>TForm(parent).HorzScrollBar.Range-TForm(parent).ClientWidth)then
-            TForm(parent).HorzScrollBar.Position:=TForm(parent).HorzScrollBar.Range-TForm(parent).ClientWidth;
+          if(TScrollingWinControl(parent).HorzScrollBar.Position<0)then
+            TScrollingWinControl(parent).HorzScrollBar.Position:=0;
+          if(TScrollingWinControl(parent).HorzScrollBar.Position>TScrollingWinControl(parent).HorzScrollBar.Range-TScrollingWinControl(parent).ClientWidth)then
+            TScrollingWinControl(parent).HorzScrollBar.Position:=TScrollingWinControl(parent).HorzScrollBar.Range-TScrollingWinControl(parent).ClientWidth;
 {$ENDIF}
         end;
 
-        if(TForm(parent).HorzScrollBar<>nil)then
+        if(TScrollingWinControl(parent).HorzScrollBar<>nil)then
         begin
-          TForm(parent).VertScrollBar.Position:=
+          TScrollingWinControl(parent).VertScrollBar.Position:=
             mouse_posy+(Mouse.CursorPos.Y-mouse_absy)*-1;
 {$IFDEF LINUX}
-          if(TForm(parent).VertScrollBar.Position<0)then
-            TForm(parent).VertScrollBar.Position:=0;
-          if(TForm(parent).VertScrollBar.Position>TForm(parent).VertScrollBar.Range-TForm(parent).ClientHeight)then
-            TForm(parent).VertScrollBar.Position:=TForm(parent).VertScrollBar.Range-TForm(parent).ClientHeight;
+          if(TScrollingWinControl(parent).VertScrollBar.Position<0)then
+            TScrollingWinControl(parent).VertScrollBar.Position:=0;
+          if(TScrollingWinControl(parent).VertScrollBar.Position>TScrollingWinControl(parent).VertScrollBar.Range-TScrollingWinControl(parent).ClientHeight)then
+            TScrollingWinControl(parent).VertScrollBar.Position:=TScrollingWinControl(parent).VertScrollBar.Range-TScrollingWinControl(parent).ClientHeight;
 {$ENDIF}
         end;
       end;
@@ -1675,13 +1675,13 @@ begin
   try
     ZoomFac:=NewZoomFac;
 
-    hsc:=TForm(parent).HorzScrollBar.Position;
-    vsc:=TForm(parent).VertScrollBar.Position;
+    hsc:=TScrollingWinControl(parent).HorzScrollBar.Position;
+    vsc:=TScrollingWinControl(parent).VertScrollBar.Position;
 
     if(X>-1)and(Y>-1)then
     begin
-      x2scroll:=((X-TForm(parent).HorzScrollBar.Position)-(TForm(parent).Width div 2));
-      y2scroll:=((Y-TForm(parent).VertScrollBar.Position)-(TForm(parent).Height div 2))
+      x2scroll:=((X-TScrollingWinControl(parent).HorzScrollBar.Position)-(TScrollingWinControl(parent).Width div 2));
+      y2scroll:=((Y-TScrollingWinControl(parent).VertScrollBar.Position)-(TScrollingWinControl(parent).Height div 2))
     end
     else
     begin
@@ -1689,37 +1689,37 @@ begin
       y2scroll:=0;
     end;
 
-    hscW:=TForm(parent).HorzScrollBar.Range;
-    hscH:=TForm(parent).VertScrollBar.Range;
+    hscW:=TScrollingWinControl(parent).HorzScrollBar.Range;
+    hscH:=TScrollingWinControl(parent).VertScrollBar.Range;
 
     //if the model becomes bigger than the form, reset position
-    if(Width<TForm(parent).Width)and
-      (EvalZoomFac(EERModel_Width)>TForm(parent).Width)then
+    if(Width<TScrollingWinControl(parent).Width)and
+      (EvalZoomFac(EERModel_Width)>TScrollingWinControl(parent).Width)then
       Left:=0;
-    if(Height<TForm(parent).Height)and
-      (EvalZoomFac(EERModel_Height)>TForm(parent).Height)then
+    if(Height<TScrollingWinControl(parent).Height)and
+      (EvalZoomFac(EERModel_Height)>TScrollingWinControl(parent).Height)then
       Top:=0;
 
     //If a scrollbar disapears, reset precached Values
-    if(Width>TForm(parent).Width)and
-      (EvalZoomFac(EERModel_Width)<TForm(parent).Width)then
+    if(Width>TScrollingWinControl(parent).Width)and
+      (EvalZoomFac(EERModel_Width)<TScrollingWinControl(parent).Width)then
     begin
       Width:=EvalZoomFac(EERModel_Width);
 
-      vsc:=TForm(parent).VertScrollBar.Position;
-      hscW:=TForm(parent).HorzScrollBar.Range;
+      vsc:=TScrollingWinControl(parent).VertScrollBar.Position;
+      hscW:=TScrollingWinControl(parent).HorzScrollBar.Range;
     end
     else
       Width:=EvalZoomFac(EERModel_Width);
 
     //If a scrollbar disapears, reset precached Values
-    if(Height>TForm(parent).Height)and
-      (EvalZoomFac(EERModel_Height)<TForm(parent).Height)then
+    if(Height>TScrollingWinControl(parent).Height)and
+      (EvalZoomFac(EERModel_Height)<TScrollingWinControl(parent).Height)then
     begin
       Height:=EvalZoomFac(EERModel_Height);
 
-      hsc:=TForm(parent).HorzScrollBar.Position;
-      hscW:=TForm(parent).HorzScrollBar.Range;
+      hsc:=TScrollingWinControl(parent).HorzScrollBar.Position;
+      hscW:=TScrollingWinControl(parent).HorzScrollBar.Range;
     end
     else
       Height:=EvalZoomFac(EERModel_Height);
@@ -1727,32 +1727,32 @@ begin
 
 
 
-    if(Width>=TForm(parent).Width)then
+    if(Width>=TScrollingWinControl(parent).Width)then
     begin
       if(hscW>0)then
-        TForm(parent).HorzScrollBar.Position:=
-          Round(hsc*(TForm(parent).HorzScrollBar.Range/hscW))-
-          Round((TForm(parent).Width/2 - ((TForm(parent).Width /2)*(TForm(parent).HorzScrollBar.Range/hscW))))+
+        TScrollingWinControl(parent).HorzScrollBar.Position:=
+          Round(hsc*(TScrollingWinControl(parent).HorzScrollBar.Range/hscW))-
+          Round((TScrollingWinControl(parent).Width/2 - ((TScrollingWinControl(parent).Width /2)*(TScrollingWinControl(parent).HorzScrollBar.Range/hscW))))+
           x2scroll;
     end
     else
     begin
-      Left:=(TForm(parent).Width-Width) div 2;
-      TForm(parent).Invalidate;
+      Left:=(TScrollingWinControl(parent).Width-Width) div 2;
+      TScrollingWinControl(parent).Invalidate;
     end;
 
-    if(Height>=TForm(parent).Height)then
+    if(Height>=TScrollingWinControl(parent).Height)then
     begin
       if(hscH>0)then
-        TForm(parent).VertScrollBar.Position:=
-          Round(vsc*(TForm(parent).VertScrollBar.Range/hscH))-
-          Round((TForm(parent).Height/2 - ((TForm(parent).Height /2)*(TForm(parent).VertScrollBar.Range/hscH))))+
+        TScrollingWinControl(parent).VertScrollBar.Position:=
+          Round(vsc*(TScrollingWinControl(parent).VertScrollBar.Range/hscH))-
+          Round((TScrollingWinControl(parent).Height/2 - ((TScrollingWinControl(parent).Height /2)*(TScrollingWinControl(parent).VertScrollBar.Range/hscH))))+
           y2scroll;
     end
     else
     begin
-      Top:=(TForm(parent).Height-Height) div 2;
-      TForm(parent).Invalidate;
+      Top:=(TScrollingWinControl(parent).Height-Height) div 2;
+      TScrollingWinControl(parent).Invalidate;
     end;
 
 
@@ -1869,8 +1869,8 @@ begin
   if(nr>=0)and(nr<=9)then
   begin
     TPosMarker(PosMarkers.Items[nr]).ZoomFac:=GetZoomFac;
-    TPosMarker(PosMarkers.Items[nr]).X:=TForm(parent).HorzScrollBar.Position;
-    TPosMarker(PosMarkers.Items[nr]).Y:=TForm(parent).VertScrollBar.Position;
+    TPosMarker(PosMarkers.Items[nr]).X:=TScrollingWinControl(parent).HorzScrollBar.Position;
+    TPosMarker(PosMarkers.Items[nr]).Y:=TScrollingWinControl(parent).VertScrollBar.Position;
   end;
 end;
 
@@ -1883,8 +1883,8 @@ begin
         TPosMarker(PosMarkers.Items[nr]).X,
         TPosMarker(PosMarkers.Items[nr]).Y);
 
-      TForm(parent).HorzScrollBar.Position:=TPosMarker(PosMarkers.Items[nr]).X;
-      TForm(parent).VertScrollBar.Position:=TPosMarker(PosMarkers.Items[nr]).Y;
+      TScrollingWinControl(parent).HorzScrollBar.Position:=TPosMarker(PosMarkers.Items[nr]).X;
+      TScrollingWinControl(parent).VertScrollBar.Position:=TPosMarker(PosMarkers.Items[nr]).Y;
     end;
 end;
 
@@ -3135,13 +3135,13 @@ begin
       begin
         WriteLn(theFile, '<SETTINGS>');
 
-        if(Assigned(TForm(parent).HorzScrollBar))then
-          xpos:=TForm(parent).HorzScrollBar.Position
+        if(Assigned(TScrollingWinControl(parent).HorzScrollBar))then
+          xpos:=TScrollingWinControl(parent).HorzScrollBar.Position
         else
           xpos:=0;
 
-        if(Assigned(TForm(parent).VertScrollBar))then
-          ypos:=TForm(parent).VertScrollBar.Position
+        if(Assigned(TScrollingWinControl(parent).VertScrollBar))then
+          ypos:=TScrollingWinControl(parent).VertScrollBar.Position
         else
           ypos:=0;
 
@@ -3946,9 +3946,9 @@ begin
                 end;
 
                 //Set parent's form caption
-                if(TForm(Parent).ClassNameIs('TEERForm'))then
-                  TForm(Parent).Caption:=Copy(TForm(Parent).Caption, 1,
-                    Pos('|', TForm(Parent).Caption))+
+                if(Owner.ClassNameIs('TEERForm'))then
+                  TForm(Owner).Caption:=Copy(TForm(Owner).Caption, 1,
+                    Pos('|', TForm(Owner).Caption))+
                     ' '+ModelName;
 
                 try
@@ -3956,8 +3956,8 @@ begin
                   SetZoomFac(StrToFloat(Parser.CurAttr.Value('ZoomFac')));
                   if(MoveToSavedPosition)then
                   begin
-                    TForm(parent).HorzScrollBar.Position:=StrToInt(Parser.CurAttr.Value('XPos'));
-                    TForm(parent).VertScrollBar.Position:=StrToInt(Parser.CurAttr.Value('YPos'));
+                    TScrollingWinControl(parent).HorzScrollBar.Position:=StrToInt(Parser.CurAttr.Value('XPos'));
+                    TScrollingWinControl(parent).VertScrollBar.Position:=StrToInt(Parser.CurAttr.Value('YPos'));
                   end;
                   DefaultDataType:=StrToInt(Parser.CurAttr.Value('DefaultDataType'));
                   DefaultTablePrefix:=StrToInt(Parser.CurAttr.Value('DefaultTablePrefix'));
@@ -4442,9 +4442,9 @@ begin
         end;
 
         //Set parent's form caption
-        if(TForm(Parent).ClassNameIs('TEERForm'))then
-          TForm(Parent).Caption:=Copy(TForm(Parent).Caption, 1,
-            Pos('|', TForm(Parent).Caption))+
+        if(Owner.ClassNameIs('TEERForm'))then
+          TForm(Owner).Caption:=Copy(TForm(Owner).Caption, 1,
+            Pos('|', TForm(Owner).Caption))+
             ' '+ModelName;
 
         try
@@ -4452,8 +4452,8 @@ begin
           SetZoomFac(StrToFloat(theDoc.SETTINGS.GLOBALSETTINGS.ZoomFac));
           if(MoveToSavedPosition)then
           begin
-            TForm(parent).HorzScrollBar.Position:=theDoc.SETTINGS.GLOBALSETTINGS.XPos;
-            TForm(parent).VertScrollBar.Position:=theDoc.SETTINGS.GLOBALSETTINGS.YPos;
+            TScrollingWinControl(parent).HorzScrollBar.Position:=theDoc.SETTINGS.GLOBALSETTINGS.XPos;
+            TScrollingWinControl(parent).VertScrollBar.Position:=theDoc.SETTINGS.GLOBALSETTINGS.YPos;
           end;
           DefaultDataType:=theDoc.SETTINGS.GLOBALSETTINGS.DefaultDataType;
           DefaultTablePrefix:=theDoc.SETTINGS.GLOBALSETTINGS.DefaultTablePrefix;
@@ -10781,31 +10781,30 @@ end;
 
 procedure TEERRel.DoPaint_RelMiddle(Sender: TObject);
 begin
-  //Painting is done by DoPaint cause it is called for refreshes
-  //PaintObj2Canvas_RelMiddle(RelMiddle.Canvas, 0, 0);
+  PaintObj2Canvas_RelMiddle(RelMiddle.Canvas, 0, 0);
 end;
 
 procedure TEERRel.DoPaint_RelEnd(Sender: TObject);
 begin
-  //Painting is done by DoPaint cause it is called for refreshes
-  //PaintObj2Canvas_RelEnd(RelEnd.Canvas, 0, 0);
+  PaintObj2Canvas_RelEnd(RelEnd.Canvas, 0, 0);
 end;
 
 procedure TEERRel.DoPaint_Caption(Sender: TObject);
 begin
-  //Painting is done by DoPaint cause it is called for refreshes
-  {if(DMMain.DisplayRelationNames)then
-    PaintObj2Canvas_RelCaption(RelCaption.Canvas, 0, 0);}
+  if(DMEER.DisplayRelationNames)and(Not(Splitted))then
+    PaintObj2Canvas_RelCaption(RelCaption.Canvas, 0, 0);
 end;
 
 procedure TEERRel.DoPaint_StartInterval(Sender: TObject);
 begin
-  //Painting is done by DoPaint cause it is called for refreshes
+  if(DMEER.Notation=noStandard2)or(Splitted)then
+    PaintObj2Canvas_RelStartInterval(RelStartInterval.Canvas, 0, 0);
 end;
 
 procedure TEERRel.DoPaint_EndInterval(Sender: TObject);
 begin
-  //Painting is done by DoPaint cause it is called for refreshes
+  if(DMEER.Notation=noStandard2)or(Splitted)then
+    PaintObj2Canvas_RelEndInterval(RelEndInterval.Canvas, 0, 0);
 end;
 
 procedure TEERRel.PaintObj2Canvas(theCanvas: TCanvas; xo, yo: integer);

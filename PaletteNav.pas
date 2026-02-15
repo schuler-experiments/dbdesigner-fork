@@ -228,11 +228,11 @@ begin
           Pen.Width:=2;
           Brush.Style:=bsClear;
 
-          XFac:=NavPBox.Width/MainForm.FActiveEERForm.HorzScrollBar.Range;
-          YFac:=NavPBox.Height/MainForm.FActiveEERForm.VertScrollBar.Range;
+          XFac:=NavPBox.Width/TEERForm(MainForm.FActiveEERForm).ScrollBox.HorzScrollBar.Range;
+          YFac:=NavPBox.Height/TEERForm(MainForm.FActiveEERForm).ScrollBox.VertScrollBar.Range;
 
-          x:=Round(MainForm.FActiveEERForm.HorzScrollBar.Position*XFac)+1;
-          y:=Round(MainForm.FActiveEERForm.VertScrollBar.Position*YFac)+1;
+          x:=Round(TEERForm(MainForm.FActiveEERForm).ScrollBox.HorzScrollBar.Position*XFac)+1;
+          y:=Round(TEERForm(MainForm.FActiveEERForm).ScrollBox.VertScrollBar.Position*YFac)+1;
           w:=Round(MainForm.FActiveEERForm.Width*XFac);
           h:=Round(MainForm.FActiveEERForm.Height*YFac);
 
@@ -467,11 +467,11 @@ begin
         mouse_absx:=Mouse.CursorPos.X;
         mouse_absy:=Mouse.CursorPos.Y;
 
-        XFac:=NavPBox.Width/MainForm.FActiveEERForm.HorzScrollBar.Range;
-        YFac:=NavPBox.Height/MainForm.FActiveEERForm.VertScrollBar.Range;
+        XFac:=NavPBox.Width/TEERForm(MainForm.FActiveEERForm).ScrollBox.HorzScrollBar.Range;
+        YFac:=NavPBox.Height/TEERForm(MainForm.FActiveEERForm).ScrollBox.VertScrollBar.Range;
 
-        {mouse_posx:=Round(MainForm.FActiveEERForm.HorzScrollBar.Position*XFac)+1;
-        mouse_posy:=Round(MainForm.FActiveEERForm.VertScrollBar.Position*YFac)+1;}
+        {mouse_posx:=Round(TEERForm(MainForm.FActiveEERForm).ScrollBox.HorzScrollBar.Position*XFac)+1;
+        mouse_posy:=Round(TEERForm(MainForm.FActiveEERForm).ScrollBox.VertScrollBar.Position*YFac)+1;}
 
         w:=Round(MainForm.FActiveEERForm.Width*XFac);
         h:=Round(MainForm.FActiveEERForm.Height*YFac);
@@ -492,8 +492,8 @@ var XFac, YFac: double;
 begin
   if(Shift=[ssLeft])and(MouseIsDown)then
   begin
-    XFac:=NavPBox.Width/MainForm.FActiveEERForm.HorzScrollBar.Range;
-    YFac:=NavPBox.Height/MainForm.FActiveEERForm.VertScrollBar.Range;
+    XFac:=NavPBox.Width/TEERForm(MainForm.FActiveEERForm).ScrollBox.HorzScrollBar.Range;
+    YFac:=NavPBox.Height/TEERForm(MainForm.FActiveEERForm).ScrollBox.VertScrollBar.Range;
 
     newXpos:=Round((mouse_posx+Mouse.CursorPos.X-mouse_absx)/XFac);
     newYpos:=Round((mouse_posy+Mouse.CursorPos.Y-mouse_absy)/YFac);
@@ -504,15 +504,15 @@ begin
     if(newYpos<0)then
       newYpos:=0;
 
-    if(newXpos>MainForm.FActiveEERForm.HorzScrollBar.Range-MainForm.FActiveEERForm.Width)then
-      newXpos:=MainForm.FActiveEERForm.HorzScrollBar.Range-MainForm.FActiveEERForm.Width;
+    if(newXpos>TEERForm(MainForm.FActiveEERForm).ScrollBox.HorzScrollBar.Range-TEERForm(MainForm.FActiveEERForm).ScrollBox.ClientWidth)then
+      newXpos:=TEERForm(MainForm.FActiveEERForm).ScrollBox.HorzScrollBar.Range-TEERForm(MainForm.FActiveEERForm).ScrollBox.ClientWidth;
 
-    if(newYpos>MainForm.FActiveEERForm.VertScrollBar.Range-MainForm.FActiveEERForm.Height)then
-      newYpos:=MainForm.FActiveEERForm.VertScrollBar.Range-MainForm.FActiveEERForm.Height;
+    if(newYpos>TEERForm(MainForm.FActiveEERForm).ScrollBox.VertScrollBar.Range-TEERForm(MainForm.FActiveEERForm).ScrollBox.ClientHeight)then
+      newYpos:=TEERForm(MainForm.FActiveEERForm).ScrollBox.VertScrollBar.Range-TEERForm(MainForm.FActiveEERForm).ScrollBox.ClientHeight;
 
 
-    MainForm.FActiveEERForm.HorzScrollBar.Position:=newXpos;
-    MainForm.FActiveEERForm.VertScrollBar.Position:=newYpos;
+    TEERForm(MainForm.FActiveEERForm).ScrollBox.HorzScrollBar.Position:=newXpos;
+    TEERForm(MainForm.FActiveEERForm).ScrollBox.VertScrollBar.Position:=newYpos;
 
     NavPBoxPaint(self);
   end;

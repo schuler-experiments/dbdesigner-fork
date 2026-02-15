@@ -3,8 +3,7 @@ object EERForm: TEERForm
   Top = 312
   Width = 395
   Height = 334
-  VertScrollBar.Range = 33
-  HorzScrollBar.Range = 33
+
   Caption = 'DB Model |'
   Color = clBtnFace
   FormStyle = fsNormal

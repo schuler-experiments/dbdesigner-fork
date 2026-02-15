@@ -74,6 +74,7 @@ type
   public
     { Public declarations }
 
+    ScrollBox: TScrollBox;
     EERModel: TEERModel;
     theFormMenuItem: TMenuItem;
   end;
@@ -99,8 +100,23 @@ begin
   theFormMenuItem:=nil;
   FormIsClosing:=False;
 
+  // Embed this form inside MainForm's EERPanel (replaces MDI child behavior)
+  BorderStyle := bsNone;
+  Parent := MainForm.EERPanel;
+  Align := alClient;
+
+  // Create a ScrollBox to provide scrollbars for the diagram
+  ScrollBox := TScrollBox.Create(self);
+  ScrollBox.Parent := self;
+  ScrollBox.Align := alClient;
+  ScrollBox.AutoScroll := True;
+  ScrollBox.BorderStyle := bsNone;
+  ScrollBox.Color := clBtnShadow;
+
   try
     EERModel:=TEERModel.Create(self);
+    // Reparent EERModel to the ScrollBox so scrollbars work
+    EERModel.Parent := ScrollBox;
 
     Font.Name:=EERModel.DefModelFont;
     Canvas.Font.Name:=EERModel.DefModelFont;
@@ -127,11 +143,6 @@ begin
   NavPaletteTimer.Enabled:=True;
 
   Cursor:=crArrow;
-
-  // Embed this form inside MainForm's EERPanel (replaces MDI child behavior)
-  BorderStyle := bsNone;
-  Parent := MainForm.EERPanel;
-  Align := alClient;
 end;
 
 procedure TEERForm.FormActivate(Sender: TObject);
@@ -238,13 +249,13 @@ end;
 
 procedure TEERForm.NavPaletteTimerTimer(Sender: TObject);
 begin
-  if(Assigned(HorzScrollBar))then
+  if(Assigned(ScrollBox))and(Assigned(ScrollBox.HorzScrollBar))then
   begin
-    if(HorzScrollBar.Position<>PrevXPos)or
-      (VertScrollBar.Position<>PrevYPos)then
+    if(ScrollBox.HorzScrollBar.Position<>PrevXPos)or
+      (ScrollBox.VertScrollBar.Position<>PrevYPos)then
     begin
-      PrevXPos:=HorzScrollBar.Position;
-      PrevYPos:=VertScrollBar.Position;
+      PrevXPos:=ScrollBox.HorzScrollBar.Position;
+      PrevYPos:=ScrollBox.VertScrollBar.Position;
 
       DMEER.RefreshNavPalette;
     end;
