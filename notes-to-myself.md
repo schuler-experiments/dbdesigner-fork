@@ -289,3 +289,14 @@ After fixes, verify by:
 2. `xvfb-run -a ./bin/DBDesignerFork --selftest` — no new failures
 3. Visual inspection: open EditorTable, DBConnSelect, EditorQuery dialogs and verify icons appear
 4. Check stderr for any "wrong image format" or "Unknown property" errors
+
+### Results — Phase A: IMGL Conversion ✅ COMPLETED (commit d7ece4f)
+- All 7 TImageList IMGL→LCL conversions successful
+- Created `imgl_to_lcl.py` converter tool
+- **Fixed the only startup error**: `DockedEditorQueryForm: Error reading StoredSQLImageList.Bitmap: Wrong image format`
+- Selftest now shows: **167 tests, 82 PASS, 0 FAIL, 85 SKIP — "Self-test PASSED: no failures detected"**
+- Additional forms now load correctly (PaletteNavForm, PaletteDataTypesForm, PaletteModelFrom discovered by test runner)
+
+### Remaining Work
+- **Phase B**: TMenuItem.Bitmap restoration in PaletteModel.lfm (6 menu icons) — LOW PRIORITY
+- **Phase C**: TPanel.Bitmap backgrounds — COSMETIC, optional
