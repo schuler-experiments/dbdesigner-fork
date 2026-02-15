@@ -150,7 +150,7 @@ var
 
 implementation
 
-uses DBDM, MainDM, GUIDM, EER;
+uses DBDM, MainDM, GUIDM, EER, Main;
 
 {$R *.lfm}
 
@@ -792,13 +792,13 @@ end;
 
 procedure TEditorTableDataForm.GetDBConn2SBtnClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
+  if(TMainForm(Application.MainForm).FActiveEERForm<>nil)then
   begin
-    if(ActiveMDIChild.Classname='TEERForm')then
+    if(TMainForm(Application.MainForm).FActiveEERForm.Classname='TEERForm')then
     begin
-      DMDB.GetDBConnButtonClick(Sender, TEERForm(TForm(Application.MainForm).ActiveMDIChild).EERModel.DefQueryDBConn);
+      DMDB.GetDBConnButtonClick(Sender, TEERForm(TMainForm(Application.MainForm).FActiveEERForm).EERModel.DefQueryDBConn);
       if(DMDB.CurrentDBConn<>nil)then
-        TEERForm(ActiveMDIChild).EERModel.DefQueryDBConn:=DMDB.CurrentDBConn.Name;
+        TEERForm(TMainForm(Application.MainForm).FActiveEERForm).EERModel.DefQueryDBConn:=DMDB.CurrentDBConn.Name;
     end;
   end
   else

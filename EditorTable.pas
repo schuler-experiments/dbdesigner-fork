@@ -1412,7 +1412,7 @@ begin
         'the Column will be added again.'+#13#10#13#10+
         'To delete this Column permanently you have to remove the appropriate '+
         'Relation.'+#13#10#13#10+
-        'Are you shure you want to delete the Column?', 2, theCol.ColName), mtConfirmation,
+        'Are you sure you want to delete the Column?', 2, theCol.ColName), mtConfirmation,
         [mbYes, mbNo], 0)<>mrYes)then
         continue;
 
@@ -1703,7 +1703,7 @@ begin
             '[Automatically create Index on FK Fields] option is enabled. '+#13#10#13#10+
             'To disable automatical Index creation please check the model''s '+
             'edit options.'+#13#10#13#10+
-            'Are you shure you want to delete the selected index?', 6),
+            'Are you sure you want to delete the selected index?', 6),
             mtConfirmation, [mbYes, mbNo], 0)=mrYes)then
           begin
             //Check all relations and set FKRefDefIndex_Obj_id=-1

@@ -341,7 +341,7 @@ var
 
 implementation
 
-uses DBDM, MainDM, GUIDM, EERDM, EER;
+uses DBDM, MainDM, GUIDM, EERDM, EER, Main;
 
 {$R *.lfm}
 
@@ -914,7 +914,7 @@ var name, initalFolderName: string;
   theSQLCmd: TStoredSQLCmd;
   i: integer;
 begin
-  if(TForm(Application.MainForm).ActiveMDIChild=nil)then
+  if(TMainForm(Application.MainForm).FActiveEERForm=nil)then
     Exit;
 
   {initalFolderName:='';
@@ -969,13 +969,13 @@ begin
   //when not connected to DB, connect now
   if(DMDB.CurrentDBConn=nil)then
   begin
-    if(TForm(Application.MainForm).ActiveMDIChild<>nil)then
+    if(TMainForm(Application.MainForm).FActiveEERForm<>nil)then
     begin
-      if(TForm(Application.MainForm).ActiveMDIChild.Classname='TEERForm')then
+      if(TMainForm(Application.MainForm).FActiveEERForm.Classname='TEERForm')then
       begin
-        DMDB.GetDBConnButtonClick(Sender, TEERForm(TForm(Application.MainForm).ActiveMDIChild).EERModel.DefQueryDBConn);
+        DMDB.GetDBConnButtonClick(Sender, TEERForm(TMainForm(Application.MainForm).FActiveEERForm).EERModel.DefQueryDBConn);
         if(DMDB.CurrentDBConn<>nil)then
-          TEERForm(TForm(Application.MainForm).ActiveMDIChild).EERModel.DefQueryDBConn:=DMDB.CurrentDBConn.Name;
+          TEERForm(TMainForm(Application.MainForm).FActiveEERForm).EERModel.DefQueryDBConn:=DMDB.CurrentDBConn.Name;
       end;
     end
     else
@@ -1011,7 +1011,7 @@ begin
   currentHistoryPos:=0;
 
   //Keep only 20 SQL Cmds in History
-  if(TForm(Application.MainForm).ActiveMDIChild<>nil)then
+  if(TMainForm(Application.MainForm).FActiveEERForm<>nil)then
   begin
     HistoryCount:=0;
     i:=0;
@@ -1595,7 +1595,7 @@ var theSQLCmd: TStoredSQLCmd;
   //ExpandedNodes: TStringList;
   i: integer;
 begin
-  if(TForm(Application.MainForm).ActiveMDIChild=nil)then
+  if(TMainForm(Application.MainForm).FActiveEERForm=nil)then
     Exit;
 
   if(not StoredSQLTreeView.IsEditing)then
@@ -2263,7 +2263,7 @@ procedure TEditorQueryForm.StoredSQLTreeViewDragOver(Sender,
   Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
 begin
   if(Source<>nil)and
-    (TForm(Application.MainForm).ActiveMDIChild=nil)then
+    (TMainForm(Application.MainForm).FActiveEERForm=nil)then
   begin
     if(Source.ClassNameIs('TMemo'))then
     begin
@@ -2708,7 +2708,7 @@ begin
   Accept:=False;
 
   if(Assigned(Source))and
-    (TForm(Application.MainForm).ActiveMDIChild<>nil)then
+    (TMainForm(Application.MainForm).FActiveEERForm<>nil)then
   begin
     if(Source.ClassNameIs('TMemo'))then
       if(TMemo(Source).Name='SQLMemo')then
@@ -2729,7 +2729,7 @@ var theSQLCmd: TStoredSQLCmd;
   theOldCmdPos: integer;
   StorePos, txt: string;
 begin
-  if(TForm(Application.MainForm).ActiveMDIChild=nil)then
+  if(TMainForm(Application.MainForm).FActiveEERForm=nil)then
     Exit;
 
   if(Assigned(Source))then
@@ -2786,7 +2786,7 @@ end;
 procedure TEditorQueryForm.TempSQLStore1SBtnClick(Sender: TObject);
 var theStoredCmdPos: integer;
 begin
-  if(TForm(Application.MainForm).ActiveMDIChild=nil)then
+  if(TMainForm(Application.MainForm).FActiveEERForm=nil)then
     Exit;
 
   theStoredCmdPos:=theEERModel.GetStoredSQLCmdIndex(
@@ -2815,7 +2815,7 @@ end;
 procedure TEditorQueryForm.TempSQLStore1SBtnMouseEnter(Sender: TObject);
 var theStoredCmdPos: integer;
 begin
-  if(TForm(Application.MainForm).ActiveMDIChild=nil)then
+  if(TMainForm(Application.MainForm).FActiveEERForm=nil)then
     Exit;
 
   //Set the Hint when mouse enters the button
@@ -2896,7 +2896,7 @@ begin
     end
     else if(Source.ClassNameIs('TSpeedButton'))then
       if(Copy(TSpeedButton(Source).Name, 1, 12)='TempSQLStore')and
-        (TForm(Application.MainForm).ActiveMDIChild<>nil)then
+        (TMainForm(Application.MainForm).FActiveEERForm<>nil)then
       begin
         theStoredCmdPos:=theEERModel.GetStoredSQLCmdIndex(
           ct_SQLDragDropStores, IntToStr(TSpeedButton(Source).Tag));

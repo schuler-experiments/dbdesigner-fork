@@ -1441,7 +1441,7 @@ procedure TEERModel.DoMouseDown(Sender: TObject; Button: TMouseButton;
 begin
   if(Button=mbLeft)then
   begin
-    //Make shure that no TextImput has the focus
+    //Make sure that no TextInput has the focus
     if(Application.MainForm.ActiveControl<>nil)then
       Application.MainForm.ActiveControl:=nil;
 
@@ -7344,7 +7344,7 @@ procedure TEERObj.DoMouseDown(Sender: TObject; Button: TMouseButton;
 begin
   if(Button=mbLeft)then
   begin
-    //Make shure that no TextImput has the focus
+    //Make sure that no TextInput has the focus
     if(Application.MainForm.ActiveControl<>nil)then
       Application.MainForm.ActiveControl:=nil;
   
@@ -10444,7 +10444,7 @@ procedure TEERRel.DoMouseDown(Sender: TObject; Button: TMouseButton;
 begin
   if(Button=mbLeft)then
   begin
-    //Make shure that no TextImput has the focus
+    //Make sure that no TextInput has the focus
     if(Application.MainForm.ActiveControl<>nil)then
       Application.MainForm.ActiveControl:=nil;
   
@@ -12578,7 +12578,7 @@ procedure TEERRegion.DoMouseDown(Sender: TObject; Button: TMouseButton;
 begin
   if(Button=mbLeft)then
   begin
-    //Make shure that no TextImput has the focus
+    //Make sure that no TextInput has the focus
     if(Application.MainForm.ActiveControl<>nil)then
       Application.MainForm.ActiveControl:=nil;
   

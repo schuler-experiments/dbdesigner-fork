@@ -452,6 +452,7 @@ type
     procedure SelfTestTmrTimer(Sender: TObject);
   public
     { Public declarations }
+    FActiveEERForm: TCustomForm;
     Version: string;
 
     SpaceDown: Boolean;
@@ -580,17 +581,17 @@ end;
 
 procedure TMainForm.ZoomLblClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
+  if(FActiveEERForm<>nil)then
   begin
-    if(ActiveMDIChild.Classname='TEERForm')then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       ZoomSelForm:=TZoomSelForm.Create(self);
       try
         ZoomSelForm.Left:=Left+6;
         ZoomSelForm.Top:=Top+Height-ZoomSelForm.Height+15;
-        ZoomSelForm.FocusZoom(TEERForm(ActiveMDIChild).EERModel.GetZoomFac);
+        ZoomSelForm.FocusZoom(TEERForm(FActiveEERForm).EERModel.GetZoomFac);
         if(ZoomSelForm.ShowModal=mrOK)then
-          TEERForm(ActiveMDIChild).EERModel.SetZoomFac(ZoomSelForm.ZoomFac);
+          TEERForm(FActiveEERForm).EERModel.SetZoomFac(ZoomSelForm.ZoomFac);
       finally
         ZoomSelForm.Free;
       end;
@@ -625,28 +626,28 @@ end;
 
 procedure TMainForm.SaveAsMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
-      TEERForm(ActiveMDIChild).SaveAs;
+      TEERForm(FActiveEERForm).SaveAs;
     end;
 end;
 
 procedure TMainForm.SaveMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
-      if(TEERForm(ActiveMDIChild).EERModel.ModelFilename='')or(CompareText(Copy(TEERForm(ActiveMDIChild).EERModel.ModelFilename, 1, Length('Noname')), 'Noname')=0)then
+      if(TEERForm(FActiveEERForm).EERModel.ModelFilename='')or(CompareText(Copy(TEERForm(FActiveEERForm).EERModel.ModelFilename, 1, Length('Noname')), 'Noname')=0)then
         SaveAsMIClick(self)
       else
       begin
-        TEERForm(ActiveMDIChild).EERModel.SaveToFile(TEERForm(ActiveMDIChild).EERModel.ModelFilename);
+        TEERForm(FActiveEERForm).EERModel.SaveToFile(TEERForm(FActiveEERForm).EERModel.ModelFilename);
 
-        TEERForm(ActiveMDIChild).EERModel.IsChanged:=False;
+        TEERForm(FActiveEERForm).EERModel.IsChanged:=False;
         DisableSaveImgs;
 
-        DMGUI.SetStatusCaption(DMMain.GetTranslatedMessage('The model was successfully saved to %s.', 198, TEERForm(ActiveMDIChild).EERModel.ModelFilename));
+        DMGUI.SetStatusCaption(DMMain.GetTranslatedMessage('The model was successfully saved to %s.', 198, TEERForm(FActiveEERForm).EERModel.ModelFilename));
       end;
     end;
 end;
@@ -659,9 +660,9 @@ begin
     raise EInOutError.Create(DMMain.GetTranslatedMessage('File not found:', 11)+#13#10+
       fname);
 
-  if(AppendModel)and(ActiveMDIChild<>nil)then
+  if(AppendModel)and(FActiveEERForm<>nil)then
   begin
-    theEERForm:=TEERForm(ActiveMDIChild);
+    theEERForm:=TEERForm(FActiveEERForm);
 
     //Get new IDs for objects in the file
     theModelStr:=TStringList.Create;
@@ -681,27 +682,27 @@ begin
   begin
     theEERForm:=nil;
 
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
-        if(CompareText(Copy(TEERForm(ActiveMDIChild).EERModel.ModelFilename, 1, 6), 'Noname')=0)and
-          (Not(TEERForm(ActiveMDIChild).EERModel.IsChanged))then
-          theEERForm:=TEERForm(ActiveMDIChild);
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
+        if(CompareText(Copy(TEERForm(FActiveEERForm).EERModel.ModelFilename, 1, 6), 'Noname')=0)and
+          (Not(TEERForm(FActiveEERForm).EERModel.IsChanged))then
+          theEERForm:=TEERForm(FActiveEERForm);
 
     if(theEERForm=nil)then
       theEERForm:=TEERForm(NewEERModel);
   end;
 
-  theEERForm.EERModel.LoadFromFile(fname, Not(((AppendModel)and(ActiveMDIChild<>nil))), ((AppendModel)and(ActiveMDIChild<>nil)),
-    Not(((AppendModel)and(ActiveMDIChild<>nil))), ((AppendModel)and(ActiveMDIChild<>nil)));
+  theEERForm.EERModel.LoadFromFile(fname, Not(((AppendModel)and(FActiveEERForm<>nil))), ((AppendModel)and(FActiveEERForm<>nil)),
+    Not(((AppendModel)and(FActiveEERForm<>nil))), ((AppendModel)and(FActiveEERForm<>nil)));
 
   //Add file to recentopenfiles list
-  if(Not((AppendModel)and(ActiveMDIChild<>nil)))then
+  if(Not((AppendModel)and(FActiveEERForm<>nil)))then
   begin
     DMGUI.AddFileToRecentFilesList(fname);
   end;
 
   //Delete temp file if the model was appended
-  if(AppendModel)and(ActiveMDIChild<>nil)then
+  if(AppendModel)and(FActiveEERForm<>nil)then
     DeleteFile(fname);
 
   theEERForm.WindowState:=wsMaximized;
@@ -717,9 +718,9 @@ begin
   TMenuItem(Sender).Checked:=True;
   DMEER.DisplayMode:=TMenuItem(Sender).Tag;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(ActiveMDIChild).EERModel.Refresh;
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      TEERForm(FActiveEERForm).EERModel.Refresh;
 end;
 
 procedure TMainForm.PhysicalSchemaLevelMIClick(Sender: TObject);
@@ -727,9 +728,9 @@ begin
   TMenuItem(Sender).Checked:=Not(TMenuItem(Sender).Checked);
   DMEER.DisplayPhysicalSchema:=TMenuItem(Sender).Checked;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(ActiveMDIChild).EERModel.Refresh;
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      TEERForm(FActiveEERForm).EERModel.Refresh;
 end;
 
 procedure TMainForm.NewMIClick(Sender: TObject);
@@ -750,6 +751,7 @@ begin
 
   theEERForm.Show;
 
+  FActiveEERForm := theEERForm;
   NewEERModel:=theEERForm;
 end;
 
@@ -828,19 +830,19 @@ end;
 
 procedure TMainForm.CloseMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      ActiveMDIChild.Close;
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      FActiveEERForm.Close;
 end;
 
 procedure TMainForm.EERModelOptionsMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       OptionsModelForm:=TOptionsModelForm.Create(self);
       try
-        OptionsModelForm.SetModel(TEERForm(ActiveMDIChild).EERModel);
+        OptionsModelForm.SetModel(TEERForm(FActiveEERForm).EERModel);
         OptionsModelForm.ShowModal;
       finally
         OptionsModelForm.Free;
@@ -853,12 +855,12 @@ var ObjectList: TList;
   i, j: integer;
   s: string;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       ObjectList:=TList.Create;
       try
-        TEERForm(ActiveMDIChild).EERModel.GetEERObjectList([EERAllObjects], ObjectList, True);
+        TEERForm(FActiveEERForm).EERModel.GetEERObjectList([EERAllObjects], ObjectList, True);
 
         //Add ALL relations from tables
         for i:=0 to ObjectList.Count-1 do
@@ -876,7 +878,7 @@ begin
 
           end;
 
-        TEERForm(ActiveMDIChild).EERModel.SortEERObjectListByObjName(ObjectList);
+        TEERForm(FActiveEERForm).EERModel.SortEERObjectListByObjName(ObjectList);
 
         s:='';
         for i:=0 to ObjectList.Count-1 do
@@ -887,7 +889,7 @@ begin
         if(MessageDlg('Are you sure you want to delete the selected Objects?'+#13#10+
           'The following Objects will be deleted:'+#13#10#13#10+
           s, mtConfirmation, [mbYes, mbNo], 0)=mrYes)then
-          TEERForm(ActiveMDIChild).EERModel.DeleteSelectedObjs;
+          TEERForm(FActiveEERForm).EERModel.DeleteSelectedObjs;
       finally
         ObjectList.Free;
       end;
@@ -898,9 +900,9 @@ procedure TMainForm.DeleteMIShow(Sender: TObject);
 begin
   TMenuItem(Sender).Enabled:=False;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      if(TEERForm(ActiveMDIChild).EERModel.GetSelectedObjsCount>0)then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      if(TEERForm(FActiveEERForm).EERModel.GetSelectedObjsCount>0)then
         TMenuItem(Sender).Enabled:=True;
 
 end;
@@ -910,11 +912,11 @@ begin
   TMenuItem(Sender).Checked:=Not(TMenuItem(Sender).Checked);
   DMEER.Notation:=TMenuItem(Sender).Tag;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
-      TEERForm(ActiveMDIChild).EERModel.SetZoomFac(TEERForm(ActiveMDIChild).EERModel.GetZoomFac);
-      TEERForm(ActiveMDIChild).EERModel.Refresh;
+      TEERForm(FActiveEERForm).EERModel.SetZoomFac(TEERForm(FActiveEERForm).EERModel.GetZoomFac);
+      TEERForm(FActiveEERForm).EERModel.Refresh;
     end;
 end;
 
@@ -956,9 +958,9 @@ begin
   TMenuItem(Sender).Checked:=Not(TMenuItem(Sender).Checked);
   DMEER.DisplayRelationNames:=TMenuItem(Sender).Checked;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(ActiveMDIChild).EERModel.Refresh;
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      TEERForm(FActiveEERForm).EERModel.Refresh;
 end;
 
 procedure TMainForm.ResetPalettePositionsMIClick(Sender: TObject);
@@ -995,14 +997,14 @@ end;
 
 procedure TMainForm.PageSetupMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       HidePalettes;
 
       EERPageSetupForm:=TEERPageSetupForm.Create(self);
       try
-        EERPageSetupForm.SetModel(TEERForm(ActiveMDIChild).EERModel);
+        EERPageSetupForm.SetModel(TEERForm(FActiveEERForm).EERModel);
         EERPageSetupForm.ShowModal;
       finally
         EERPageSetupForm.Free;
@@ -1024,8 +1026,8 @@ procedure TMainForm.SaveModelasImageMIClick(Sender: TObject);
 var ModelBmp: TBitmap;
   theSaveDialog: TSaveDialog;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       theSaveDialog:=TSaveDialog.Create(nil);
       try
@@ -1062,7 +1064,7 @@ begin
           //Save File
           ModelBmp:=TBitmap.Create;
           try
-            TEERForm(ActiveMDIChild).EERModel.PaintModelToImage(ModelBmp, (TMenuItem(Sender).Tag=2));
+            TEERForm(FActiveEERForm).EERModel.PaintModelToImage(ModelBmp, (TMenuItem(Sender).Tag=2));
 
             //Use this function to save PNGs, too
             DMMain.SaveBitmap(ModelBmp.Handle, theSaveDialog.Filename, ExtractFileExt(theSaveDialog.Filename));
@@ -1081,9 +1083,9 @@ begin
   TMenuItem(Sender).Checked:=Not(TMenuItem(Sender).Checked);
   DMEER.ShowForeignKeys:=TMenuItem(Sender).Checked;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(ActiveMDIChild).EERModel.Refresh;
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      TEERForm(FActiveEERForm).EERModel.Refresh;
 end;
 
 procedure TMainForm.DisplayPageGridMIClick(Sender: TObject);
@@ -1091,9 +1093,9 @@ begin
   TMenuItem(Sender).Checked:=Not(TMenuItem(Sender).Checked);
   DMEER.DisplayPaperGrid:=TMenuItem(Sender).Checked;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(ActiveMDIChild).EERModel.GridPaintBox.Visible:=TMenuItem(Sender).Checked;
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      TEERForm(FActiveEERForm).EERModel.GridPaintBox.Visible:=TMenuItem(Sender).Checked;
 end;
 
 procedure TMainForm.ListTableIndicesMIClick(Sender: TObject);
@@ -1101,21 +1103,21 @@ begin
   TMenuItem(Sender).Checked:=Not(TMenuItem(Sender).Checked);
   DMEER.DisplayTableIndices:=TMenuItem(Sender).Checked;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(ActiveMDIChild).EERModel.Refresh;
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      TEERForm(FActiveEERForm).EERModel.Refresh;
 end;
 
 procedure TMainForm.PrintMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       HidePalettes;
 
       EERPageSetupForm:=TEERPageSetupForm.Create(self);
       try
-        EERPageSetupForm.SetModel(TEERForm(ActiveMDIChild).EERModel);
+        EERPageSetupForm.SetModel(TEERForm(FActiveEERForm).EERModel);
         EERPageSetupForm.HideEdits;
         EERPageSetupForm.ShowModal;
       finally
@@ -1131,10 +1133,10 @@ end;
 procedure TMainForm.SelectAllMIClick(Sender: TObject);
 var i: integer;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
-      with TEERForm(ActiveMDIChild).EERModel do
+      with TEERForm(FActiveEERForm).EERModel do
       begin
         //Set Font for all EER-Objects
         for i:=ComponentCount-1 downto 0 do
@@ -1142,7 +1144,7 @@ begin
             TEERObj(Components[I]).SetSelected(True);
       end;
 
-      TEERForm(ActiveMDIChild).EERModel.Refresh;
+      TEERForm(FActiveEERForm).EERModel.Refresh;
     end;
 end;
 
@@ -1152,20 +1154,20 @@ begin
   begin
     TMenuItem(Sender).Enabled:=False;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
       TMenuItem(Sender).Enabled:=True;
   end;
 end;
 
 procedure TMainForm.SQLCreateScriptMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       EERExportSQLScriptFrom:=TEERExportSQLScriptFrom.Create(self);
       try
-        EERExportSQLScriptFrom.SetModel(TEERForm(ActiveMDIChild).EERModel);
+        EERExportSQLScriptFrom.SetModel(TEERForm(FActiveEERForm).EERModel);
         EERExportSQLScriptFrom.ShowModal;
       finally
         EERExportSQLScriptFrom.Free;
@@ -1175,14 +1177,14 @@ end;
 
 procedure TMainForm.ReverseEngineeringMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       HidePalettes;
 
       EERReverseEngineeringForm:=TEERReverseEngineeringForm.Create(self);
       try
-        if(EERReverseEngineeringForm.SetData(TEERForm(ActiveMDIChild).EERModel))then
+        if(EERReverseEngineeringForm.SetData(TEERForm(FActiveEERForm).EERModel))then
           EERReverseEngineeringForm.ShowModal;
       finally
         EERReverseEngineeringForm.Free;
@@ -1199,21 +1201,21 @@ var s, ctext: string;
   f: TextFile;
   i, anz: integer;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      if(TEERForm(ActiveMDIChild).EERModel.GetSelectedObjsCount>0)then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      if(TEERForm(FActiveEERForm).EERModel.GetSelectedObjsCount>0)then
       begin
         s:='';
 
-        TEERForm(ActiveMDIChild).EERModel.SaveToFile(
+        TEERForm(FActiveEERForm).EERModel.SaveToFile(
           DMMain.SettingsPath+'clipboard.xml',
           False, True, False);
 
         anz:=0;
-        for i:=0 to TEERForm(ActiveMDIChild).EERModel.ComponentCount-1 do
+        for i:=0 to TEERForm(FActiveEERForm).EERModel.ComponentCount-1 do
         begin
-          if(TEERForm(ActiveMDIChild).EERModel.Components[i].ClassParent=TEERObj)then
-            if(TEERObj(TEERForm(ActiveMDIChild).EERModel.Components[i]).Selected)then
+          if(TEERForm(FActiveEERForm).EERModel.Components[i].ClassParent=TEERObj)then
+            if(TEERObj(TEERForm(FActiveEERForm).EERModel.Components[i]).Selected)then
               inc(anz);
         end;
 
@@ -1244,8 +1246,8 @@ var f: TextFile;
   ctext: string;
   i, anz: integer;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
       if(Clipboard.AsText<>'')then
       begin
         //ctext:=Clipboard.AsText;
@@ -1261,21 +1263,21 @@ begin
           CloseFile(f);
         end;
 
-        for i:=0 to TEERForm(ActiveMDIChild).EERModel.ComponentCount-1 do
-          if(TEERForm(ActiveMDIChild).EERModel.Components[i].ClassParent=TEERObj)then
-            if(TEERObj(TEERForm(ActiveMDIChild).EERModel.Components[i]).Selected)then
-              TEERObj(TEERForm(ActiveMDIChild).EERModel.Components[i]).SetSelected(False);
+        for i:=0 to TEERForm(FActiveEERForm).EERModel.ComponentCount-1 do
+          if(TEERForm(FActiveEERForm).EERModel.Components[i].ClassParent=TEERObj)then
+            if(TEERObj(TEERForm(FActiveEERForm).EERModel.Components[i]).Selected)then
+              TEERObj(TEERForm(FActiveEERForm).EERModel.Components[i]).SetSelected(False);
 
         //Load Clipboard, ignore Settings, Select
-        TEERForm(ActiveMDIChild).EERModel.LoadFromFile(
+        TEERForm(FActiveEERForm).EERModel.LoadFromFile(
           DMMain.SettingsPath+'clipboard.xml',
           False, True);
 
         anz:=0;
-        for i:=0 to TEERForm(ActiveMDIChild).EERModel.ComponentCount-1 do
+        for i:=0 to TEERForm(FActiveEERForm).EERModel.ComponentCount-1 do
         begin
-          if(TEERForm(ActiveMDIChild).EERModel.Components[i].ClassParent=TEERObj)then
-            if(TEERTable(TEERForm(ActiveMDIChild).EERModel.Components[i]).Selected)then
+          if(TEERForm(FActiveEERForm).EERModel.Components[i].ClassParent=TEERObj)then
+            if(TEERTable(TEERForm(FActiveEERForm).EERModel.Components[i]).Selected)then
               inc(anz);
         end;
 
@@ -1290,8 +1292,8 @@ procedure TMainForm.PasteMIShow(Sender: TObject);
 begin
   TMenuItem(Sender).Enabled:=False;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
       if(Copy(Clipboard.AsText, 1, 1)='<')then
         TMenuItem(Sender).Enabled:=True;
 end;
@@ -1304,10 +1306,10 @@ end;
 
 procedure TMainForm.DatabasesyncronisationMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
-      if(TEERForm(ActiveMDIChild).EERModel.GetEERObjectCount([EERTable])=0)then
+      if(TEERForm(FActiveEERForm).EERModel.GetEERObjectCount([EERTable])=0)then
         MessageDlg(DMMain.GetTranslatedMessage('There are no tables in the model which can be syncronised.', 15),
           mtError, [mbOK], 0)
       else
@@ -1316,7 +1318,7 @@ begin
 
         EERSynchronisationForm:=TEERSynchronisationForm.Create(self);
         try
-          if(EERSynchronisationForm.SetData(TEERForm(ActiveMDIChild).EERModel))then
+          if(EERSynchronisationForm.SetData(TEERForm(FActiveEERForm).EERModel))then
             EERSynchronisationForm.ShowModal;
         finally
           EERSynchronisationForm.Free;
@@ -1332,15 +1334,15 @@ procedure TMainForm.UndoMIShow(Sender: TObject);
 begin
   TMenuItem(Sender).Enabled:=False;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      if(TEERForm(ActiveMDIChild).EERModel.CurrentAction>-1)then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      if(TEERForm(FActiveEERForm).EERModel.CurrentAction>-1)then
       begin
         TMenuItem(Sender).Enabled:=True;
         TMenuItem(Sender).Caption:=DMMain.GetTranslatedMessage('Undo', 16)+' '+
-          TEERForm(ActiveMDIChild).EERModel.GetActionName(
-            TEERActionLog(TEERForm(ActiveMDIChild).EERModel.ActionLog[
-              TEERForm(ActiveMDIChild).EERModel.CurrentAction]).ActionType);
+          TEERForm(FActiveEERForm).EERModel.GetActionName(
+            TEERActionLog(TEERForm(FActiveEERForm).EERModel.ActionLog[
+              TEERForm(FActiveEERForm).EERModel.CurrentAction]).ActionType);
       end
       else
       begin
@@ -1350,26 +1352,26 @@ end;
 
 procedure TMainForm.UndoMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      if(TEERForm(ActiveMDIChild).EERModel.CurrentAction>-1)then
-        TEERForm(ActiveMDIChild).EERModel.UndoActions(TEERForm(ActiveMDIChild).EERModel.CurrentAction);
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      if(TEERForm(FActiveEERForm).EERModel.CurrentAction>-1)then
+        TEERForm(FActiveEERForm).EERModel.UndoActions(TEERForm(FActiveEERForm).EERModel.CurrentAction);
 end;
 
 procedure TMainForm.RedoMIShow(Sender: TObject);
 begin
   TMenuItem(Sender).Enabled:=False;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      if(TEERForm(ActiveMDIChild).EERModel.CurrentAction<
-        TEERForm(ActiveMDIChild).EERModel.ActionLog.Count-1)then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      if(TEERForm(FActiveEERForm).EERModel.CurrentAction<
+        TEERForm(FActiveEERForm).EERModel.ActionLog.Count-1)then
       begin
         TMenuItem(Sender).Enabled:=True;
         TMenuItem(Sender).Caption:=DMMain.GetTranslatedMessage('Redo', 17)+' '+
-          TEERForm(ActiveMDIChild).EERModel.GetActionName(
-            TEERActionLog(TEERForm(ActiveMDIChild).EERModel.ActionLog[
-              TEERForm(ActiveMDIChild).EERModel.CurrentAction+1]).ActionType);
+          TEERForm(FActiveEERForm).EERModel.GetActionName(
+            TEERActionLog(TEERForm(FActiveEERForm).EERModel.ActionLog[
+              TEERForm(FActiveEERForm).EERModel.CurrentAction+1]).ActionType);
       end
       else
       begin
@@ -1379,11 +1381,11 @@ end;
 
 procedure TMainForm.RedoMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      if(TEERForm(ActiveMDIChild).EERModel.CurrentAction<
-        TEERForm(ActiveMDIChild).EERModel.ActionLog.Count-1)then
-        TEERForm(ActiveMDIChild).EERModel.RedoActions(TEERForm(ActiveMDIChild).EERModel.CurrentAction+1);
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      if(TEERForm(FActiveEERForm).EERModel.CurrentAction<
+        TEERForm(FActiveEERForm).EERModel.ActionLog.Count-1)then
+        TEERForm(FActiveEERForm).EERModel.RedoActions(TEERForm(FActiveEERForm).EERModel.CurrentAction+1);
 end;
 
 procedure TMainForm.StyleStandardMIClick(Sender: TObject);
@@ -1395,12 +1397,12 @@ end;
 
 procedure TMainForm.SQLDropScriptMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       EERExportSQLScriptFrom:=TEERExportSQLScriptFrom.Create(self);
       try
-        EERExportSQLScriptFrom.SetModel(TEERForm(ActiveMDIChild).EERModel, 1);
+        EERExportSQLScriptFrom.SetModel(TEERForm(FActiveEERForm).EERModel, 1);
         EERExportSQLScriptFrom.ShowModal;
       finally
         EERExportSQLScriptFrom.Free;
@@ -1425,17 +1427,17 @@ end;
 
 procedure TMainForm.SaveinDatabaseMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       HidePalettes;
 
       EERStoreInDatabaseForm:=TEERStoreInDatabaseForm.Create(self);
       try
-        if(EERStoreInDatabaseForm.SetData(TEERForm(ActiveMDIChild).EERModel, True))then
+        if(EERStoreInDatabaseForm.SetData(TEERForm(FActiveEERForm).EERModel, True))then
           if(EERStoreInDatabaseForm.ShowModal=mrOk)then
           begin
-            TEERForm(ActiveMDIChild).EERModel.IsChanged:=False;
+            TEERForm(FActiveEERForm).EERModel.IsChanged:=False;
             DisableSaveImgs;
           end;
       finally
@@ -1450,7 +1452,7 @@ end;
 procedure TMainForm.OpenfromDatabaseMIClick(Sender: TObject);
 var theEERForm: TEERForm;
 begin
-  if(ActiveMDIChild=nil)then
+  if(FActiveEERForm=nil)then
   begin
     theEERForm:=TEERForm(NewEERModel);
   end
@@ -1458,11 +1460,11 @@ begin
   begin
     theEERForm:=nil;
 
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
-        if(CompareText(Copy(TEERForm(ActiveMDIChild).EERModel.ModelFilename, 1, 6), 'Noname')=0)and
-          (Not(TEERForm(ActiveMDIChild).EERModel.IsChanged))then
-          theEERForm:=TEERForm(ActiveMDIChild);
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
+        if(CompareText(Copy(TEERForm(FActiveEERForm).EERModel.ModelFilename, 1, 6), 'Noname')=0)and
+          (Not(TEERForm(FActiveEERForm).EERModel.IsChanged))then
+          theEERForm:=TEERForm(FActiveEERForm);
 
     if(theEERForm=nil)then
       theEERForm:=TEERForm(NewEERModel);
@@ -1503,11 +1505,11 @@ procedure TMainForm.RefreshTmrTimer(Sender: TObject);
 begin
   RefreshTmr.Enabled:=False;
 
-  if(ActiveMDIChild<>nil)then
+  if(FActiveEERForm<>nil)then
   begin
-    if(ActiveMDIChild.Classname='TEERForm')then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
-      if(TEERForm(ActiveMDIChild).EERModel.IsChanged)then
+      if(TEERForm(FActiveEERForm).EERModel.IsChanged)then
         EnableSaveImgs
       else
         DisableSaveImgs;
@@ -1690,7 +1692,7 @@ begin
       end;
 
   //Reopen last file when no para was specified
-  if(ActiveMDIChild=nil)then
+  if(FActiveEERForm=nil)then
   begin
     if(DMGUI.ReopenLastFile)and(DMGUI.GetRecentFileCount>0)then
       OpenFile(DMGUI.GetRecentFileName(0), False)
@@ -1904,21 +1906,21 @@ begin
 
   if(QEvent_type(Event)=QEventType_RefreshPalettes)then
   begin
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
       begin
         if Assigned(PaletteModelFrom) then
-          PaletteModelFrom.RefreshTablesTreeView(TEERForm(ActiveMDIChild).EERModel);
+          PaletteModelFrom.RefreshTablesTreeView(TEERForm(FActiveEERForm).EERModel);
         if Assigned(PaletteDataTypesForm) then
-          PaletteDataTypesForm.DisplayDataTypes(TEERForm(ActiveMDIChild).EERModel);
+          PaletteDataTypesForm.DisplayDataTypes(TEERForm(FActiveEERForm).EERModel);
         if Assigned(PaletteNavForm) then
-          PaletteNavForm.SetModelImg(TEERForm(ActiveMDIChild).EERModel);
+          PaletteNavForm.SetModelImg(TEERForm(FActiveEERForm).EERModel);
         if Assigned(DockedEditorQueryForm) then
         begin
-          TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(TEERForm(ActiveMDIChild).EERModel);
-          TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(TEERForm(ActiveMDIChild).EERModel);
+          TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(TEERForm(FActiveEERForm).EERModel);
+          TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(TEERForm(FActiveEERForm).EERModel);
         end;
-        SnapToGridBtn.Down:=TEERForm(ActiveMDIChild).EERModel.UsePositionGrid;
+        SnapToGridBtn.Down:=TEERForm(FActiveEERForm).EERModel.UsePositionGrid;
       end;
 
     Result:=True;
@@ -1926,8 +1928,8 @@ begin
 
   if(QEvent_type(Event)=QEventType_RedrawTableList)then
   begin
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
       begin
         if Assigned(PaletteModelFrom) then
           PaletteModelFrom.TablesTreeView.Repaint;
@@ -1940,10 +1942,10 @@ begin
   begin
     if(QCustomEvent_data(QCustomEventH(Event))<>nil)then
       PaletteNavForm.SetModelImg(TEERModel(QCustomEvent_data(QCustomEventH(Event))))
-    else if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
+    else if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
       begin
-        PaletteNavForm.SetModelImg(TEERForm(ActiveMDIChild).EERModel);
+        PaletteNavForm.SetModelImg(TEERForm(FActiveEERForm).EERModel);
       end;
 
     Result:=True;
@@ -1951,9 +1953,9 @@ begin
 
   if(QEvent_type(Event)=QEventType_RefreshGridBtn)then
   begin
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
-        SnapToGridBtn.Down:=TEERForm(ActiveMDIChild).EERModel.UsePositionGrid;
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
+        SnapToGridBtn.Down:=TEERForm(FActiveEERForm).EERModel.UsePositionGrid;
 
     Result:=True;
 
@@ -1968,20 +1970,20 @@ begin
 
   if(QEvent_type(Event)=QEventType_RefreshInfoPalette)then
   begin
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
-        PaletteNavForm.RefreshInfo(TEERForm(ActiveMDIChild).EERModel);
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
+        PaletteNavForm.RefreshInfo(TEERForm(FActiveEERForm).EERModel);
 
     Result:=True;
   end;
 
   if(QEvent_type(Event)=QEventType_UpdateStatusBar)then
   begin
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
       begin
         ZoomLbl.Caption:=
-          FormatFloat('###0.##', TEERForm(ActiveMDIChild).EERModel.GetZoomFac)+' %';
+          FormatFloat('###0.##', TEERForm(FActiveEERForm).EERModel.GetZoomFac)+' %';
 
         PaletteNavForm.RefreshZoomSettings;
       end
@@ -2001,21 +2003,21 @@ begin
 
   if(QEvent_type(Event)=QEventType_SetSaveImgs)then
   begin
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
       begin
         if Assigned(PaletteModelFrom) then
-          PaletteModelFrom.RefreshTablesTreeView(TEERForm(ActiveMDIChild).EERModel);
+          PaletteModelFrom.RefreshTablesTreeView(TEERForm(FActiveEERForm).EERModel);
         if Assigned(PaletteDataTypesForm) then
-          PaletteDataTypesForm.DisplayDataTypes(TEERForm(ActiveMDIChild).EERModel);
+          PaletteDataTypesForm.DisplayDataTypes(TEERForm(FActiveEERForm).EERModel);
         if Assigned(PaletteNavForm) then
-          PaletteNavForm.SetModelImg(TEERForm(ActiveMDIChild).EERModel);
+          PaletteNavForm.SetModelImg(TEERForm(FActiveEERForm).EERModel);
         if Assigned(DockedEditorQueryForm) then
         begin
-          TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(TEERForm(ActiveMDIChild).EERModel);
-          TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(TEERForm(ActiveMDIChild).EERModel);
+          TEditorQueryForm(DockedEditorQueryForm).RefreshStoredSQLTreeView(TEERForm(FActiveEERForm).EERModel);
+          TEditorQueryForm(DockedEditorQueryForm).RefreshTempSQLStoreBtns(TEERForm(FActiveEERForm).EERModel);
         end;
-        if(TEERForm(ActiveMDIChild).EERModel.IsChanged)then
+        if(TEERForm(FActiveEERForm).EERModel.IsChanged)then
           EnableSaveImgs
         else
           DisableSaveImgs;
@@ -2026,6 +2028,12 @@ begin
 
   if(QEvent_type(Event)=QEventType_RefreshDataTypesPalette)then
   begin
+    // Track the active EER form when it activates (sends this event with EERModel)
+    if (QCustomEvent_data(QCustomEventH(Event)) <> nil) then
+      if TObject(QCustomEvent_data(QCustomEventH(Event))).ClassNameIs('TEERModel') then
+        if TEERModel(QCustomEvent_data(QCustomEventH(Event))).Parent is TEERForm then
+          FActiveEERForm := TCustomForm(TEERModel(QCustomEvent_data(QCustomEventH(Event))).Parent);
+
     if(Assigned(PaletteDataTypesForm))then
       PaletteDataTypesForm.DisplayDataTypes(QCustomEvent_data(QCustomEventH(Event)));
 
@@ -2050,6 +2058,8 @@ begin
   if(QEvent_type(Event)=QEventType_EnableMainFormRefreshTmr)then
   begin
     RefreshTmr.Enabled:=True;
+    // Clear active form reference when a child form closes
+    FActiveEERForm := nil;
 
     Result:=True;
   end;
@@ -2180,15 +2190,15 @@ begin
   begin
     Ppoint:=QCustomEvent_data(QCustomEventH(Event));
 
-    if(ActiveMDIChild<>nil)then
-      if(ActiveMDIChild.Classname='TEERForm')then
+    if(FActiveEERForm<>nil)then
+      if(FActiveEERForm.Classname='TEERForm')then
       begin
         if(QEvent_type(Event)=QEventType_PlaceModelFromFile)then
-          PlaceModel(TEERForm(ActiveMDIChild).EERModel, Ppoint^, PlaceFromFile)
+          PlaceModel(TEERForm(FActiveEERForm).EERModel, Ppoint^, PlaceFromFile)
         else if(QEvent_type(Event)=QEventType_PlaceModelFromDB)then
-          PlaceModel(TEERForm(ActiveMDIChild).EERModel, Ppoint^, PlaceFromDB)
+          PlaceModel(TEERForm(FActiveEERForm).EERModel, Ppoint^, PlaceFromDB)
         else if(QEvent_type(Event)=QEventType_PlaceModelFromLibrary)then
-          PlaceModel(TEERForm(ActiveMDIChild).EERModel, Ppoint^, PlaceFromLibrary);
+          PlaceModel(TEERForm(FActiveEERForm).EERModel, Ppoint^, PlaceFromLibrary);
       end;
 
     Result:=True;
@@ -2299,10 +2309,10 @@ procedure TMainForm.DisplaySelectedWorkTool(WorkTool: integer);
 begin
   //Do actions before changing tool
   if(MainForm.MDIChildCount>0)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
       //Reset Rel_SrcTable if
       if(not((DMEER.CurrentWorkTool=wtRel1n)or(DMEER.CurrentWorkTool=wtRel1nSub)or(DMEER.CurrentWorkTool=wtRel11)))then
-         TEERForm(MainForm.ActiveMDIChild).EERModel.Rel_SrcTable:=nil;
+         TEERForm(MainForm.FActiveEERForm).EERModel.Rel_SrcTable:=nil;
 
   //Display selected WorkTool
   with PaletteToolsForm do
@@ -2583,8 +2593,8 @@ var thePath, theModelFilename: string;
   theFileDate: TDateTime;
   PluginChangedModel: Boolean;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       PluginChangedModel:=False;
 
@@ -2593,10 +2603,10 @@ begin
       DeleteFile(thePath+'plugin_tmp.xml');
 
       //remember Filename
-      theModelFilename:=TEERForm(MainForm.ActiveMDIChild).EERModel.ModelFilename;
+      theModelFilename:=TEERForm(MainForm.FActiveEERForm).EERModel.ModelFilename;
 
       //Save the current Model
-      TEERForm(MainForm.ActiveMDIChild).EERModel.SaveToFile(
+      TEERForm(MainForm.FActiveEERForm).EERModel.SaveToFile(
         thePath+'plugin_tmp.xml',
         True, False, False);
 
@@ -2616,13 +2626,13 @@ begin
         if(theFileDate<>DMMain.GetFileDate(thePath+'plugin_tmp.xml'))then
         begin
           //Replace current model data with the data from plugin_tmp.xml
-          TEERForm(MainForm.ActiveMDIChild).EERModel.LoadFromFile(thePath+'plugin_tmp.xml',
+          TEERForm(MainForm.FActiveEERForm).EERModel.LoadFromFile(thePath+'plugin_tmp.xml',
             True, False, True, False);
 
           //Mark model as changed
-          TEERForm(MainForm.ActiveMDIChild).EERModel.ModelHasChanged;
+          TEERForm(MainForm.FActiveEERForm).EERModel.ModelHasChanged;
 
-          TEERForm(MainForm.ActiveMDIChild).EERModel.ModelFilename:=theModelFilename;
+          TEERForm(MainForm.FActiveEERForm).EERModel.ModelFilename:=theModelFilename;
 
           PluginChangedModel:=True;
         end;
@@ -2713,17 +2723,17 @@ end;
 procedure TMainForm.CopyMouseOverObjToClipboard;
 var theObj: TObject;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
-      theObj:=TEERForm(ActiveMDIChild).EERModel.GetMouseOverObj;
+      theObj:=TEERForm(FActiveEERForm).EERModel.GetMouseOverObj;
       if(theObj<>nil)then
         if(theObj.ClassNameIs('TEERTable'))then
         begin
           //Copy Column name
-          if(TEERForm(ActiveMDIChild).EERModel.GetMouseOverSubObj<>nil)then
+          if(TEERForm(FActiveEERForm).EERModel.GetMouseOverSubObj<>nil)then
           begin
-            Clipboard.AsText:=TEERColumn(TEERForm(ActiveMDIChild).EERModel.GetMouseOverSubObj).ColName;
+            Clipboard.AsText:=TEERColumn(TEERForm(FActiveEERForm).EERModel.GetMouseOverSubObj).ColName;
             //WindowState:=wsMinimized;
           end
           //Copy Table name
@@ -2739,17 +2749,17 @@ end;
 procedure TMainForm.CopyMouseOverObjToSQLMemo(Key: integer);
 var theObj: TObject;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
-      theObj:=TEERForm(ActiveMDIChild).EERModel.GetMouseOverObj;
+      theObj:=TEERForm(FActiveEERForm).EERModel.GetMouseOverObj;
       if(theObj<>nil)then
         if(theObj.ClassNameIs('TEERTable'))then
         begin
-          if(TEERForm(ActiveMDIChild).EERModel.GetMouseOverSubObj<>nil)then
+          if(TEERForm(FActiveEERForm).EERModel.GetMouseOverSubObj<>nil)then
           begin
             TEditorQueryForm(DockedEditorQueryForm).ProcessKey(Key,
-              TEERColumn(TEERForm(ActiveMDIChild).EERModel.GetMouseOverSubObj));
+              TEERColumn(TEERForm(FActiveEERForm).EERModel.GetMouseOverSubObj));
           end;
         end;
     end;
@@ -2928,10 +2938,10 @@ begin
       if(Key=30)then //Strange behaviour of Ctrl+Shift+Key_6
         Key:=Key_6;
 
-      if(ActiveMDIChild<>nil)then
-        if(ActiveMDIChild.Classname='TEERForm')then
+      if(FActiveEERForm<>nil)then
+        if(FActiveEERForm.Classname='TEERForm')then
         begin
-          TEERForm(ActiveMDIChild).EERModel.SetPositionMarker(Key-Key_0);
+          TEERForm(FActiveEERForm).EERModel.SetPositionMarker(Key-Key_0);
 
           StatusCaptionLbl.Caption:='Position Marker '+IntToStr(Key-Key_0)+' set.';
 
@@ -2941,10 +2951,10 @@ begin
     else if(Key>=Key_0)and(Key<=Key_9)and
       (theShiftState=[ssCtrl])then
     begin
-      if(ActiveMDIChild<>nil)then
-        if(ActiveMDIChild.Classname='TEERForm')then
+      if(FActiveEERForm<>nil)then
+        if(FActiveEERForm.Classname='TEERForm')then
         begin
-          TEERForm(ActiveMDIChild).EERModel.GotoPositionMarker(Key-Key_0);
+          TEERForm(FActiveEERForm).EERModel.GotoPositionMarker(Key-Key_0);
 
           Handled:=True;
         end;
@@ -3098,10 +3108,10 @@ begin
       begin
         try
           if(Not(EditorIsActive))then
-            if(ActiveMDIChild<>nil)and(ActiveControl=nil)then
-              if(ActiveMDIChild.Classname='TEERForm')then
+            if(FActiveEERForm<>nil)and(ActiveControl=nil)then
+              if(FActiveEERForm.Classname='TEERForm')then
               begin
-                TEERForm(ActiveMDIChild).EERModel.MoveSelectedEERObjects(
+                TEERForm(FActiveEERForm).EERModel.MoveSelectedEERObjects(
                   (Ord(Key=VK_RIGHT)-Ord(Key=VK_LEFT))*
                     (1+9*Ord(theShiftState=[ssShift]))*
                     (1+49*Ord(theShiftState=[ssCtrl, ssShift])),
@@ -3312,9 +3322,9 @@ end;
 procedure TMainForm.SnapToGridBtnMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(ActiveMDIChild).EERModel.UsePositionGrid:=Not(SnapToGridBtn.Down);
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      TEERForm(FActiveEERForm).EERModel.UsePositionGrid:=Not(SnapToGridBtn.Down);
 end;
 
 procedure TMainForm.SubmitabugfeaturerequestMIClick(Sender: TObject);
@@ -3333,9 +3343,9 @@ end;
 
 procedure TMainForm.CenterModelMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      DMEER.CenterModel(TEERForm(ActiveMDIChild).EERModel);
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      DMEER.CenterModel(TEERForm(FActiveEERForm).EERModel);
 end;
 
 procedure TMainForm.ImportERwin41XMLModelMIClick(Sender: TObject);
@@ -3365,11 +3375,11 @@ begin
     begin
       theEERForm:=nil;
 
-      if(ActiveMDIChild<>nil)then
-        if(ActiveMDIChild.Classname='TEERForm')then
-          if(CompareText(Copy(TEERForm(ActiveMDIChild).EERModel.ModelFilename, 1, 6), 'Noname')=0)and
-            (Not(TEERForm(ActiveMDIChild).EERModel.IsChanged))then
-            theEERForm:=TEERForm(ActiveMDIChild);
+      if(FActiveEERForm<>nil)then
+        if(FActiveEERForm.Classname='TEERForm')then
+          if(CompareText(Copy(TEERForm(FActiveEERForm).EERModel.ModelFilename, 1, 6), 'Noname')=0)and
+            (Not(TEERForm(FActiveEERForm).EERModel.IsChanged))then
+            theEERForm:=TEERForm(FActiveEERForm);
 
       if(theEERForm=nil)then
         theEERForm:=TEERForm(NewEERModel);
@@ -3387,9 +3397,9 @@ procedure TMainForm.ConnecttoDatabaseMIClick(Sender: TObject);
 begin
   DMDB.DisconnectFromDB;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      DMDB.GetDBConnButtonClick(Sender, TEERForm(TForm(Application.MainForm).ActiveMDIChild).EERModel.DefQueryDBConn)
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      DMDB.GetDBConnButtonClick(Sender, TEERForm(TMainForm(Application.MainForm).FActiveEERForm).EERModel.DefQueryDBConn)
     else
       DMDB.GetDBConnButtonClick(Sender, '');
 end;
@@ -3410,7 +3420,7 @@ begin
   //Save File
   ModelBmp:=TBitmap.Create;
   try
-    TEERForm(ActiveMDIChild).EERModel.PaintModelToImage(ModelBmp, True);
+    TEERForm(FActiveEERForm).EERModel.PaintModelToImage(ModelBmp, True);
 
     // TODO: Copy bitmap to clipboard using LCL API
     Clipboard.Assign(ModelBmp);
@@ -3437,12 +3447,12 @@ end;
 
 procedure TMainForm.SQLOptimizeTableScriptMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       EERExportSQLScriptFrom:=TEERExportSQLScriptFrom.Create(self);
       try
-        EERExportSQLScriptFrom.SetModel(TEERForm(ActiveMDIChild).EERModel, 2);
+        EERExportSQLScriptFrom.SetModel(TEERForm(FActiveEERForm).EERModel, 2);
         EERExportSQLScriptFrom.ShowModal;
       finally
         EERExportSQLScriptFrom.Free;
@@ -3486,12 +3496,12 @@ end;
 procedure TMainForm.PlaceModel(theModel: TEERModel; P: TPoint; PlaceFrom: integer);
 var EERPlaceModelForm: TEERPlaceModelForm;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       EERPlaceModelForm:=TEERPlaceModelForm.Create(self);
       try
-        if(EERPlaceModelForm.SetData(TEERForm(ActiveMDIChild).EERModel, P, PlaceFrom))then
+        if(EERPlaceModelForm.SetData(TEERForm(FActiveEERForm).EERModel, P, PlaceFrom))then
           EERPlaceModelForm.ShowModal;
       finally
         EERPlaceModelForm.Free;
@@ -3518,20 +3528,20 @@ procedure TMainForm.ShowLinkedModelsMIShow(Sender: TObject);
 begin
   TMenuItem(Sender).Enabled:=False;
 
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
-      TMenuItem(Sender).Enabled:=(TEERForm(ActiveMDIChild).EERModel.LinkedModels.Count>0);
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
+      TMenuItem(Sender).Enabled:=(TEERForm(FActiveEERForm).EERModel.LinkedModels.Count>0);
 end;
 
 procedure TMainForm.ShowLinkedModelsMIClick(Sender: TObject);
 var EERPlaceModelForm: TEERPlaceModelForm;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       EERPlaceModelForm:=TEERPlaceModelForm.Create(self);
       try
-        EERPlaceModelForm.DisplayLinkedModels(TEERForm(ActiveMDIChild).EERModel);
+        EERPlaceModelForm.DisplayLinkedModels(TEERForm(FActiveEERForm).EERModel);
         EERPlaceModelForm.ShowModal;
       finally
         EERPlaceModelForm.Free;
@@ -3542,16 +3552,16 @@ end;
 procedure TMainForm.RefreshLinkedObjectsMIClick(Sender: TObject);
 var EERPlaceModelForm: TEERPlaceModelForm;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       if(MessageDlg(DMMain.GetTranslatedMessage(
-        'Are you shure you want to refresh the Linked Objects?', 248), mtConfirmation, [mbYes, mbNo], 0)=mrYes)then
+        'Are you sure you want to refresh the Linked Objects?', 248), mtConfirmation, [mbYes, mbNo], 0)=mrYes)then
       begin
         EERPlaceModelForm:=TEERPlaceModelForm.Create(self);
         try
           //Refresh all Linked Models
-          EERPlaceModelForm.RefreshLinkedModel(TEERForm(ActiveMDIChild).EERModel, -1);
+          EERPlaceModelForm.RefreshLinkedModel(TEERForm(FActiveEERForm).EERModel, -1);
         finally
           EERPlaceModelForm.Free;
         end;
@@ -3561,12 +3571,12 @@ end;
 
 procedure TMainForm.SQLRepairTableScriptMIClick(Sender: TObject);
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       EERExportSQLScriptFrom:=TEERExportSQLScriptFrom.Create(self);
       try
-        EERExportSQLScriptFrom.SetModel(TEERForm(ActiveMDIChild).EERModel, 3);
+        EERExportSQLScriptFrom.SetModel(TEERForm(FActiveEERForm).EERModel, 3);
         EERExportSQLScriptFrom.ShowModal;
       finally
         EERExportSQLScriptFrom.Free;
@@ -3639,8 +3649,8 @@ end;
 procedure TMainForm.ExportMDBXMLFileMIClick(Sender: TObject);
 var theSaveDialog: TSaveDialog;
 begin
-  if(ActiveMDIChild<>nil)then
-    if(ActiveMDIChild.Classname='TEERForm')then
+  if(FActiveEERForm<>nil)then
+    if(FActiveEERForm.Classname='TEERForm')then
     begin
       theSaveDialog:=TSaveDialog.Create(nil);
       try
@@ -3673,7 +3683,7 @@ begin
               [mbYes, mbNo], 0)=mrNo)then
               Exit;
 
-          DMEERExportImport.ExportMDBXMLFile(TEERForm(ActiveMDIChild).EERModel,
+          DMEERExportImport.ExportMDBXMLFile(TEERForm(FActiveEERForm).EERModel,
             theSaveDialog.Filename);
         end;
       finally

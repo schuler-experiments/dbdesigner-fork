@@ -393,9 +393,9 @@ end;
 
 procedure TPaletteModelFrom.RefreshPalMIClick(Sender: TObject);
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-      RefreshTablesTreeView(TEERForm(MainForm.ActiveMDIChild).EERModel);
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
+      RefreshTablesTreeView(TEERForm(MainForm.FActiveEERForm).EERModel);
 end;
 
 procedure TPaletteModelFrom.FormActivate(Sender: TObject);
@@ -407,14 +407,14 @@ procedure TPaletteModelFrom.AddBtnClick(Sender: TObject);
 var theEERTable: TEERTable;
   theEvent: QCustomEventH;
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
     begin
       //Create the new table
-      theEERTable:=TEERForm(MainForm.ActiveMDIChild).EERModel.NewTable(100, 100, True);
+      theEERTable:=TEERForm(MainForm.FActiveEERForm).EERModel.NewTable(100, 100, True);
 
       //Refresh the TreeView
-      RefreshTablesTreeView(TEERForm(MainForm.ActiveMDIChild).EERModel);
+      RefreshTablesTreeView(TEERForm(MainForm.FActiveEERForm).EERModel);
 
       //Edit the new created table
       theEvent := QCustomEvent_create(QEventType_EditTable, theEERTable);
@@ -441,9 +441,9 @@ begin
       (TablesTreeView.Selected.ImageIndex<>1)and
       (TablesTreeView.Selected.ImageIndex<>2)then
     begin
-      if(MainForm.ActiveMDIChild<>nil)then
-        if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-          TEERForm(MainForm.ActiveMDIChild).ScrollInView(
+      if(MainForm.FActiveEERForm<>nil)then
+        if(MainForm.FActiveEERForm.Classname='TEERForm')then
+          TEERForm(MainForm.FActiveEERForm).ScrollInView(
             TEERObj(TablesTreeView.Selected.Data));
     end;
 end;
@@ -498,7 +498,7 @@ procedure TPaletteModelFrom.TablesTreeViewMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var theNode: TTreeNode;
 begin
-  if(MainForm.ActiveMDIChild=nil)then
+  if(MainForm.FActiveEERForm=nil)then
     Exit;
 
   theNode:=TablesTreeView.GetNodeAt(X, Y);
@@ -516,7 +516,7 @@ end;
 procedure TPaletteModelFrom.TablesTreeViewDragOver(Sender, Source: TObject;
   X, Y: Integer; State: TDragState; var Accept: Boolean);
 begin
-  if(MainForm.ActiveMDIChild=nil)then
+  if(MainForm.FActiveEERForm=nil)then
     Exit;
 
   Accept:=False;
@@ -534,7 +534,7 @@ var theNode: TTreeNode;
   DraggedTable, TargetTable: TEERTable;
   SelectedItemsList: TList;
 begin
-  if(Source is TTreeView)and(MainForm.ActiveMDIChild<>nil)then
+  if(Source is TTreeView)and(MainForm.FActiveEERForm<>nil)then
     if(TTreeView(Source).Name='TablesTreeView')then
     begin
       TargetTable:=nil;

@@ -221,20 +221,20 @@ begin
 
     //When sender is set to nil, don't draw SelectionRect
     if(Sender<>nil)then
-      if(MainForm.ActiveMDIChild<>nil)then
-        if(MainForm.ActiveMDIChild.Classname='TEERForm')then
+      if(MainForm.FActiveEERForm<>nil)then
+        if(MainForm.FActiveEERForm.Classname='TEERForm')then
         begin
           Pen.Color:=clNavy;
           Pen.Width:=2;
           Brush.Style:=bsClear;
 
-          XFac:=NavPBox.Width/MainForm.ActiveMDIChild.HorzScrollBar.Range;
-          YFac:=NavPBox.Height/MainForm.ActiveMDIChild.VertScrollBar.Range;
+          XFac:=NavPBox.Width/MainForm.FActiveEERForm.HorzScrollBar.Range;
+          YFac:=NavPBox.Height/MainForm.FActiveEERForm.VertScrollBar.Range;
 
-          x:=Round(MainForm.ActiveMDIChild.HorzScrollBar.Position*XFac)+1;
-          y:=Round(MainForm.ActiveMDIChild.VertScrollBar.Position*YFac)+1;
-          w:=Round(MainForm.ActiveMDIChild.Width*XFac);
-          h:=Round(MainForm.ActiveMDIChild.Height*YFac);
+          x:=Round(MainForm.FActiveEERForm.HorzScrollBar.Position*XFac)+1;
+          y:=Round(MainForm.FActiveEERForm.VertScrollBar.Position*YFac)+1;
+          w:=Round(MainForm.FActiveEERForm.Width*XFac);
+          h:=Round(MainForm.FActiveEERForm.Height*YFac);
 
           if(x+w>NavPBox.Width-1)then
             w:=NavPBox.Width-x;
@@ -246,11 +246,11 @@ begin
         end;
   end;
 
-  {if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
+  {if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
     begin
-      TEERForm(MainForm.ActiveMDIChild).EERModel.PaintModel(NavPBox.Canvas,
-        (NavPBox.Width/TEERForm(MainForm.ActiveMDIChild).EERModel.EERModel_Width)*100*2,
+      TEERForm(MainForm.FActiveEERForm).EERModel.PaintModel(NavPBox.Canvas,
+        (NavPBox.Width/TEERForm(MainForm.FActiveEERForm).EERModel.EERModel_Width)*100*2,
         0, 0, 0, 0, [EERTable, EERRegion, EERNote, EERImage]);
     end;}
 end;
@@ -259,9 +259,9 @@ procedure TPaletteNavForm.ZoomLblClick(Sender: TObject);
 begin
   ZoomEd.Left:=0;
 
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-      ZoomEd.Text:=FormatFloat('##0.##', TEERForm(MainForm.ActiveMDIChild).EERModel.GetZoomFac)+ '%';
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
+      ZoomEd.Text:=FormatFloat('##0.##', TEERForm(MainForm.FActiveEERForm).EERModel.GetZoomFac)+ '%';
 
   ZoomEd.SelectAll;
   ZoomEd.Show;
@@ -289,9 +289,9 @@ begin
 
       theNewZoomFac:=StrToFloat(ZoomEd.Text);
 
-      if(MainForm.ActiveMDIChild<>nil)then
-        if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-          TEERForm(MainForm.ActiveMDIChild).EERModel.SetZoomFac(theNewZoomFac);
+      if(MainForm.FActiveEERForm<>nil)then
+        if(MainForm.FActiveEERForm.Classname='TEERForm')then
+          TEERForm(MainForm.FActiveEERForm).EERModel.SetZoomFac(theNewZoomFac);
     except
     end;
 
@@ -305,13 +305,13 @@ end;
 
 procedure TPaletteNavForm.RefreshZoomSettings;
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
     begin
-      ZoomLbl.Caption:=FormatFloat('##0.##', TEERForm(MainForm.ActiveMDIChild).EERModel.GetZoomFac)+ '%';
+      ZoomLbl.Caption:=FormatFloat('##0.##', TEERForm(MainForm.FActiveEERForm).EERModel.GetZoomFac)+ '%';
       ZoomTrackBarActive:=False;
       try
-        ZoomTrackBar.Position:=Round(TEERForm(MainForm.ActiveMDIChild).EERModel.GetZoomFac);
+        ZoomTrackBar.Position:=Round(TEERForm(MainForm.FActiveEERForm).EERModel.GetZoomFac);
       finally
         ZoomTrackBarActive:=True;
       end;
@@ -320,20 +320,20 @@ end;
 
 procedure TPaletteNavForm.ZoomInSBtnClick(Sender: TObject);
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(MainForm.ActiveMDIChild).EERModel.ZoomIn(MainForm.ActiveMDIChild.Width div 2,
-        MainForm.ActiveMDIChild.Height div 2);
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
+      TEERForm(MainForm.FActiveEERForm).EERModel.ZoomIn(MainForm.FActiveEERForm.Width div 2,
+        MainForm.FActiveEERForm.Height div 2);
 
   Application.MainForm.SetFocus;
 end;
 
 procedure TPaletteNavForm.ZoomOutSBtnClick(Sender: TObject);
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(MainForm.ActiveMDIChild).EERModel.ZoomOut(MainForm.ActiveMDIChild.Width div 2,
-        MainForm.ActiveMDIChild.Height div 2);
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
+      TEERForm(MainForm.FActiveEERForm).EERModel.ZoomOut(MainForm.FActiveEERForm.Width div 2,
+        MainForm.FActiveEERForm.Height div 2);
 
   Application.MainForm.SetFocus;
 end;
@@ -351,9 +351,9 @@ procedure TPaletteNavForm.TrackBarTimerTimer(Sender: TObject);
 begin
   TrackBarTimer.Enabled:=False;
 
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(MainForm.ActiveMDIChild).EERModel.SetZoomFac(ZoomTrackBar.Position);
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
+      TEERForm(MainForm.FActiveEERForm).EERModel.SetZoomFac(ZoomTrackBar.Position);
 end;
 
 procedure TPaletteNavForm.RefreshInfo(theModel: TEERModel);
@@ -460,21 +460,21 @@ procedure TPaletteNavForm.NavPBoxMouseDown(Sender: TObject;
 var XFac, YFac: double;
   w, h: integer;
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
       if(Button=mbLeft)then
       begin
         mouse_absx:=Mouse.CursorPos.X;
         mouse_absy:=Mouse.CursorPos.Y;
 
-        XFac:=NavPBox.Width/MainForm.ActiveMDIChild.HorzScrollBar.Range;
-        YFac:=NavPBox.Height/MainForm.ActiveMDIChild.VertScrollBar.Range;
+        XFac:=NavPBox.Width/MainForm.FActiveEERForm.HorzScrollBar.Range;
+        YFac:=NavPBox.Height/MainForm.FActiveEERForm.VertScrollBar.Range;
 
-        {mouse_posx:=Round(MainForm.ActiveMDIChild.HorzScrollBar.Position*XFac)+1;
-        mouse_posy:=Round(MainForm.ActiveMDIChild.VertScrollBar.Position*YFac)+1;}
+        {mouse_posx:=Round(MainForm.FActiveEERForm.HorzScrollBar.Position*XFac)+1;
+        mouse_posy:=Round(MainForm.FActiveEERForm.VertScrollBar.Position*YFac)+1;}
 
-        w:=Round(MainForm.ActiveMDIChild.Width*XFac);
-        h:=Round(MainForm.ActiveMDIChild.Height*YFac);
+        w:=Round(MainForm.FActiveEERForm.Width*XFac);
+        h:=Round(MainForm.FActiveEERForm.Height*YFac);
 
         mouse_posx:=x-w div 2;
         mouse_posy:=y-h div 2;
@@ -492,8 +492,8 @@ var XFac, YFac: double;
 begin
   if(Shift=[ssLeft])and(MouseIsDown)then
   begin
-    XFac:=NavPBox.Width/MainForm.ActiveMDIChild.HorzScrollBar.Range;
-    YFac:=NavPBox.Height/MainForm.ActiveMDIChild.VertScrollBar.Range;
+    XFac:=NavPBox.Width/MainForm.FActiveEERForm.HorzScrollBar.Range;
+    YFac:=NavPBox.Height/MainForm.FActiveEERForm.VertScrollBar.Range;
 
     newXpos:=Round((mouse_posx+Mouse.CursorPos.X-mouse_absx)/XFac);
     newYpos:=Round((mouse_posy+Mouse.CursorPos.Y-mouse_absy)/YFac);
@@ -504,15 +504,15 @@ begin
     if(newYpos<0)then
       newYpos:=0;
 
-    if(newXpos>MainForm.ActiveMDIChild.HorzScrollBar.Range-MainForm.ActiveMDIChild.Width)then
-      newXpos:=MainForm.ActiveMDIChild.HorzScrollBar.Range-MainForm.ActiveMDIChild.Width;
+    if(newXpos>MainForm.FActiveEERForm.HorzScrollBar.Range-MainForm.FActiveEERForm.Width)then
+      newXpos:=MainForm.FActiveEERForm.HorzScrollBar.Range-MainForm.FActiveEERForm.Width;
 
-    if(newYpos>MainForm.ActiveMDIChild.VertScrollBar.Range-MainForm.ActiveMDIChild.Height)then
-      newYpos:=MainForm.ActiveMDIChild.VertScrollBar.Range-MainForm.ActiveMDIChild.Height;
+    if(newYpos>MainForm.FActiveEERForm.VertScrollBar.Range-MainForm.FActiveEERForm.Height)then
+      newYpos:=MainForm.FActiveEERForm.VertScrollBar.Range-MainForm.FActiveEERForm.Height;
 
 
-    MainForm.ActiveMDIChild.HorzScrollBar.Position:=newXpos;
-    MainForm.ActiveMDIChild.VertScrollBar.Position:=newYpos;
+    MainForm.FActiveEERForm.HorzScrollBar.Position:=newXpos;
+    MainForm.FActiveEERForm.VertScrollBar.Position:=newYpos;
 
     NavPBoxPaint(self);
   end;
@@ -571,12 +571,12 @@ end;
 
 procedure TPaletteNavForm.ModelImgChangTmrTimer(Sender: TObject);
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-      if(TEERForm(MainForm.ActiveMDIChild).EERModel.Need2RefreshNavImg)then
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
+      if(TEERForm(MainForm.FActiveEERForm).EERModel.Need2RefreshNavImg)then
       begin
-        TEERForm(MainForm.ActiveMDIChild).EERModel.Need2RefreshNavImg:=False;
-        SetModelImg(TEERForm(MainForm.ActiveMDIChild).EERModel);
+        TEERForm(MainForm.FActiveEERForm).EERModel.Need2RefreshNavImg:=False;
+        SetModelImg(TEERForm(MainForm.FActiveEERForm).EERModel);
       end;
 end;
 
@@ -587,9 +587,9 @@ end;
 
 procedure TPaletteNavForm.Zoom100MIClick(Sender: TObject);
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
-    if(MainForm.ActiveMDIChild.Classname='TEERForm')then
-      TEERForm(MainForm.ActiveMDIChild).EERModel.SetZoomFac(TMenuItem(Sender).Tag, 0, 0);
+  if(MainForm.FActiveEERForm<>nil)then
+    if(MainForm.FActiveEERForm.Classname='TEERForm')then
+      TEERForm(MainForm.FActiveEERForm).EERModel.SetZoomFac(TMenuItem(Sender).Tag, 0, 0);
 end;
 
 procedure TPaletteNavForm.LeftEditExit(Sender: TObject);

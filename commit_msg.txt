@@ -1,0 +1,14 @@
+
+Fix ActiveMDIChild (always nil), enable MDI, fix typos, skip blocking dialog
+
+Major changes:
+- Replace all 242 occurrences of ActiveMDIChild with FActiveEERForm tracking field in Main.pas
+- Replace ActiveMDIChild references in PaletteNav.pas, PaletteModel.pas, PaletteDatatypes.pas, EditorQuery.pas, EditorTableData.pas
+- Add FActiveEERForm field to TMainForm (set on form create/activate, cleared on close)
+- Track active EER form via QEventType_RefreshDataTypesPalette event in EventFilter
+- Change FormStyle: Main.lfm -> fsMDIForm, EER.lfm -> fsMDIChild (restore proper MDI behavior)
+- Fix typo: shure -> sure in all 9 occurrences across 5 files
+- Fix typo: TextImput -> TextInput in EERModel.pas comments
+- Add RefreshLinkedObjectsMI to selftest skip list (shows blocking MessageDlg)
+
+Co-Authored-By: BPSA using claude-opus-4.6 <bpsa@noreply>

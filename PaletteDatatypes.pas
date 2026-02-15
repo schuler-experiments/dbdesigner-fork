@@ -605,7 +605,7 @@ end;
 procedure TPaletteDataTypesForm.ReinitialMIClick(Sender: TObject);
 var i, j: integer;
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
+  if(MainForm.FActiveEERForm<>nil)then
     if(MessageDlg(DMMain.GetTranslatedMessage('Do you really want to reset the datatypes '+
         'to the initial configuration?'+#13#10+
         'Manual added datatypes will be replaced by the default datatype if they are used in existing tables.', 235),
@@ -633,7 +633,7 @@ end;
 
 procedure TPaletteDataTypesForm.ReplaceDatatypeMIClick(Sender: TObject);
 begin
-  if(MainForm.ActiveMDIChild<>nil)then
+  if(MainForm.FActiveEERForm<>nil)then
   begin
     PaletteDataTypesReplaceForm:=TPaletteDataTypesReplaceForm.Create(Application.MainForm);
     try

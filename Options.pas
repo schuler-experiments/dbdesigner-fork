@@ -375,7 +375,7 @@ end;
 procedure TOptionsForm.ResetPersonalSettingsBtnClick(Sender: TObject);
 begin
   if(MessageDlg(DMMain.GetTranslatedMessage('This action will overwrite your personal settings.'+#13#10+
-    'Are you shure?', 222), mtConfirmation, [mbYes, mbNo], 0)=mrYes)then
+    'Are you sure?', 222), mtConfirmation, [mbYes, mbNo], 0)=mrYes)then
     DMGUI.CopyInitialSettingsToPrivatSettingsDir;
 end;
 

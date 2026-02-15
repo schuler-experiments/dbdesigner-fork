@@ -145,7 +145,7 @@ end;
 // ---------------------------------------------------------------------------
 function IsUnsafe(const AName: string): Boolean;
 const
-  UnsafeNames: array[0..26] of string = (
+  UnsafeNames: array[0..27] of string = (
     'ExitMI', 'CloseMI', 'CloseAllMI',
     'SaveMI', 'SaveAsMI', 'SaveinDatabaseMI',
     'OpenMI', 'OpenfromDatabaseMI',
@@ -160,7 +160,8 @@ const
     'AddLinkModelfromOnlineLibraryMI',
     'ExportMDBXMLFileMI',
     'SaveModelasImageMI', 'ExportSelectedObjectsAsImgMi',
-    'Test1'
+    'Test1',
+    'RefreshLinkedObjectsMI'
   );
 var
   I: Integer;

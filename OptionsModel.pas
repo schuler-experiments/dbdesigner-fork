@@ -465,7 +465,7 @@ end;
 procedure TOptionsModelForm.RemovePluginDataClick(Sender: TObject);
 var i: integer;
 begin
-  if(MessageDlg(DMMain.GetTranslatedMessage('Are you shure you want to delete the selected Plugin Data?'+
+  if(MessageDlg(DMMain.GetTranslatedMessage('Are you sure you want to delete the selected Plugin Data?'+
     'This action cannot be made undone.', 230), mtConfirmation, [mbYes, mbNo], 0)=mrYes)then
   begin
     if(PluginRecordsStringGrid.Row-1<EERModel.PluginData.Count)then
