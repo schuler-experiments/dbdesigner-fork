@@ -1549,8 +1549,8 @@ object EditorQueryForm: TEditorQueryForm
         OnDragOver = StoredSQLTreeViewDragOver
         OnEdited = StoredSQLTreeViewEdited
         OnEditing = StoredSQLTreeViewEditing
-        OnItemEnter = StoredSQLTreeViewItemEnter
-        OnItemExitViewportEnter = StoredSQLTreeViewItemExitViewportEnter
+        OnChange = StoredSQLTreeViewItemEnter
+        OnMouseLeave = StoredSQLTreeViewItemExitViewportEnter
         OnMouseMove = StoredSQLTreeViewMouseMove
       end
       object StoredSQLHeaderPnl: TPanel
@@ -1752,7 +1752,6 @@ object EditorQueryForm: TEditorQueryForm
             Align = alClient
             Center = False
             DataSource = OutputDataSrc
-            TabOrder = 0
           end
         end
         object BlobSheet: TTabSheet
@@ -1796,7 +1795,6 @@ object EditorQueryForm: TEditorQueryForm
               '12F534855476A3CE')
             ParentFont = False
             TabOrder = 1
-            WrapBreak = wbAnywhere
           end
         end
       end
