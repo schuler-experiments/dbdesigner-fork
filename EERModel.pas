@@ -10867,7 +10867,7 @@ begin
           if(IsLinkedObject)then
             Pen.Color:=$00C66931
           else
-            Pen.Color:=clBtnFace;
+            Pen.Color:=clBlack;
         end
         else
         begin
@@ -10991,7 +10991,7 @@ begin
       //Rectangle(xo+0, yo+0, xo+width-1, yo+height-1);
 
       if(RelKind=rk_1nNonId)then
-        Pen.Color:=clBtnFace;
+        Pen.Color:=clBlack;
 
       for i:=0 to ord(selected) do
       begin
@@ -11008,7 +11008,7 @@ begin
             if(IsLinkedObject)then
               Pen.Color:=$00C66931
             else
-              Pen.Color:=clBtnFace;
+              Pen.Color:=clBlack;
           end
           else
           begin
@@ -11114,7 +11114,7 @@ begin
         j:=0;
 
       if(RelKind=rk_1nNonId)then
-        Pen.Color:=clBtnFace;
+        Pen.Color:=clBlack;
 
       //Draw 2nd time for selection
       for i:=0 to j do
@@ -11134,7 +11134,7 @@ begin
             if(IsLinkedObject)then
               Pen.Color:=$00C66931
             else
-              Pen.Color:=clBtnFace;
+              Pen.Color:=clBlack;
           end
           else
           begin
