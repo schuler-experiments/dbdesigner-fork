@@ -38,37 +38,38 @@ DBDesigner Fork provides a full-featured graphical environment for designing and
 
 ```
 DBDesignerFork/
-├── *.pas, *.xfm          # Core application source (main form, EER model engine,
-│                          #   editors, palettes, options, etc.)
-├── DBDesignerFork.dpr     # Main Delphi project file
-├── EmbeddedPDF/           # Built-in PDF document generation library
-├── SynEdit/               # Syntax-highlighting text editor component (for SQL editing)
+├── DBDesignerFork.lpi     # Lazarus project file
+├── DBDesignerFork.lpr     # Main program source
+├── README.md
+├── src/                   # Core application source
+│   ├── *.pas, *.lfm, *.xfm   # Main form, EER model engine, editors,
+│   │                          #   palettes, options, etc.
+│   ├── DBDesigner4.inc        # Shared compiler defines
+│   ├── clx_shims/             # CLX → LCL compatibility shim layer
+│   └── EmbeddedPDF/           # Built-in PDF document generation library
+├── tests/                 # Test programs
+│   ├── TestSQLExport.lpi      # Test project file
+│   └── Test*.pas              # Unit test sources
+├── docs/                  # Documentation
+│   ├── port-to-lazarus.md     # Detailed porting guide
+│   ├── port-to-lazarus-task-list.md  # Porting task checklist
+│   └── *.txt                  # License texts, build instructions
 ├── Plugins/               # Plugin projects
-│   ├── DataImporter/      #   - Data import tool
-│   ├── Demo/              #   - Demo/example plugin
-│   ├── HTMLReport/        #   - HTML report generator
-│   └── SimpleWebFront/    #   - Simple web front-end generator
-├── bin/                   # Runtime files
-│   ├── Data/              #   - Configuration, settings, translations
-│   ├── Doc/               #   - User documentation (HTML + PDF manual)
-│   ├── Examples/          #   - Example model files (XML)
-│   ├── Gfx/              #   - Graphics: cursors, icons, table bitmaps, splash screen
-│   └── dbxoodbc/          #   - Open ODBC DBExpress driver
-├── dcu/                   # Compiled unit output directory
-└── test-base/             # Test XML models and SQL export reference files
+│   ├── DataImporter/          # Data import tool
+│   ├── Demo/                  # Demo/example plugin
+│   ├── HTMLReport/            # HTML report generator
+│   └── SimpleWebFront/       # Simple web front-end generator
+├── bin/                   # Runtime files and compiled binaries
+│   ├── Data/                  # Configuration, settings, translations
+│   ├── Doc/                   # User documentation (HTML + PDF manual)
+│   ├── Examples/              # Example model files (XML)
+│   ├── Gfx/                   # Graphics: cursors, icons, splash screen
+│   └── dbxoodbc/              # Open ODBC DBExpress driver
+├── lib/                   # Compiled unit output directory
+├── test-base/             # Test XML models and SQL export reference files
+├── SynEdit_clx_original/  # Original Delphi-era SynEdit source (reference only)
+└── archive/               # Archived Delphi project files
 ```
-
-## Original Build Instructions
-
-### Windows
-- **Requirements:** Delphi 7 (Professional or Enterprise)
-- Open `DBDesignerFork.dpr` in Delphi, configure output directories, and build.
-
-### Linux
-- **Requirements:** Kylix 3 (Professional or Enterprise)
-- Open the project in Kylix, configure output directories, and build.
-
-See [`_How to compile DBDesigner4.txt`](_How%20to%20compile%20DBDesigner4.txt) for detailed original instructions.
 
 ## 🚀 Porting to Free Pascal / Lazarus
 
@@ -105,6 +106,12 @@ The main areas that require attention during the port include:
 | SimpleWebFront Plugin | 40,096 | `bin/DBDplugin_SimpleWebFront` |
 | **Total** | **~150,000** | |
 
+### AI-Assisted Porting
+
+The porting of this codebase from Delphi/CLX to Free Pascal/Lazarus has been carried out entirely by Artificial Intelligence, with guidance and review from human developers. This includes the CLX-to-LCL migration, the creation of the compatibility shim layer, form conversions, database driver replacements, and the automated test infrastructure.
+
+This project serves as a real-world benchmark of how far AI-assisted software engineering has evolved — from understanding legacy codebases, to making architectural decisions, to producing working, compilable code across a ~175,000-line project.
+
 ### Building with Lazarus
 
 **Requirements:**
@@ -128,27 +135,50 @@ All binaries are output to the `bin/` directory.
 
 ### Porting Approach
 
-The port uses a **compatibility shim layer** (`clx_shims/` directory) to minimize changes to original source files:
+The port uses a **compatibility shim layer** ([`src/clx_shims/`](src/clx_shims/)) to minimize changes to original source files:
 
 - **CLX → LCL shims**: Units like `QForms.pas`, `QControls.pas` etc. that re-export LCL equivalents
 - **Qt shim** (`qt.pas`): Maps Qt widget types and key constants to LCL equivalents
 - **Database shims** (`sqlexpr.pas`, `dbclient.pas`, `provider.pas`): Wrap FPC's SQLDB behind Delphi DBExpress-compatible interfaces
 - **XML shims** (`xmlintf.pas`, `xmldoc.pas`, `xmldom.pas`): Wrap `laz2_DOM` behind Delphi XML DOM interfaces
 
-See [`port-to-lazarus.md`](port-to-lazarus.md) for the detailed porting guide and [`port-to-lazarus-task-list.md`](port-to-lazarus-task-list.md) for the task checklist (195/229 tasks complete).
+See [`docs/port-to-lazarus.md`](docs/port-to-lazarus.md) for the detailed porting guide and [`docs/port-to-lazarus-task-list.md`](docs/port-to-lazarus-task-list.md) for the task checklist (195/229 tasks complete).
 
 ### Runtime Testing Status
 
-⚠️ **Runtime testing is still needed.** The application compiles and links but has not yet been tested with a display server. Known areas requiring runtime verification:
-- Application launch and UI rendering
-- Database connectivity (MySQL, PostgreSQL, SQLite)
-- Model loading/saving
+✅ **Application launches and passes automated UI self-tests.**
+
+An automated **UI Test Runner** ([`src/UITestRunner.pas`](src/UITestRunner.pas)) is included that programmatically clicks all safe menu items and buttons, catching and reporting any unhandled exceptions with full stack traces.
+
+**Latest self-test results: 63 PASS, 0 FAIL, 79 SKIP (142 components tested)**
+
+To run the self-test:
+```bash
+# Automated (exits with 0 on success, non-zero on failure)
+./bin/DBDesignerFork --selftest
+
+# Results are logged to /tmp/UITestResults.log
+```
+
+The self-test covers:
+- ✅ Application launch and UI rendering
+- ✅ All display/notation/style menu items
+- ✅ All toolbar speed buttons (29 tool selectors)
+- ✅ Palette show/hide/dock/undock operations
+- ✅ Window arrangement (cascade, tile)
+- ✅ Design/query mode switching
+- ✅ New model creation
+
+Areas still requiring manual or integration testing:
+- Database connectivity (MySQL, PostgreSQL — SQLite verified via test programs)
+- Model loading/saving through the UI
 - PDF export
 - Plugin loading
+- Print / page setup
 
 ## License
 
-This project is licensed under the **GNU General Public License v2**. See [`Copying.txt`](Copying.txt) for the full license text.
+This project is licensed under the **GNU General Public License v2**. See [`docs/Copying.txt`](docs/Copying.txt) for the full license text.
 
 ## Contributing
 

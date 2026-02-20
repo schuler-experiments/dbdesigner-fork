@@ -684,7 +684,7 @@ object MainForm: TMainForm
 
     ActivePage = GridTabSheet
 
-    Style = tsNoTabs
+    ShowTabs = False
 
     TabOrder = 0
 
@@ -1156,7 +1156,7 @@ object MainForm: TMainForm
 
           TabStop = False
 
-          Color = clNormalBackground
+          Color = clWindow
 
           ReadOnly = True
 
@@ -1178,7 +1178,7 @@ object MainForm: TMainForm
 
           TabStop = False
 
-          Color = clNormalBackground
+          Color = clWindow
 
           ReadOnly = True
 
@@ -1200,7 +1200,7 @@ object MainForm: TMainForm
 
           TabStop = False
 
-          Color = clNormalBackground
+          Color = clWindow
 
           ReadOnly = True
 
@@ -1222,7 +1222,7 @@ object MainForm: TMainForm
 
           TabStop = False
 
-          Color = clNormalBackground
+          Color = clWindow
 
           ReadOnly = True
 
@@ -1240,7 +1240,7 @@ object MainForm: TMainForm
 
           Height = 57
 
-          Color = clNormalBackground
+          Color = clWindow
 
           Lines.Strings = (
 
@@ -3338,7 +3338,6 @@ object MainForm: TMainForm
 
     Font.Style = []
 
-    Font.Weight = 40
 
     Items.Data = {
 
@@ -3379,7 +3378,7 @@ object MainForm: TMainForm
     BevelOuter = bvNone
 
 
-    Color = clDark
+    Color = clBtnShadow
 
     TabOrder = 2
 
@@ -3395,7 +3394,6 @@ object MainForm: TMainForm
 
       Caption = 'General Options'
 
-      Masked = True
 
       Transparent = True
 

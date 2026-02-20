@@ -1,0 +1,164 @@
+object SplashForm: TSplashForm
+  Left = 310
+  Top = 257
+  BorderStyle = bsNone
+  Caption = 'DB Designer Fork'
+  ClientHeight = 358
+  ClientWidth = 700
+  Color = clBtnFace
+  FormStyle = fsStayOnTop
+  Position = poMainFormCenter
+  Scaled = False
+  OnClick = FormClick
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnMouseUp = FormMouseUp
+  OnPaint = FormPaint
+  PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
+  object InfoLbl1: TLabel
+    Left = 339
+    Top = 185
+    AutoSize = True
+    AutoSize = False
+    Caption = 
+      'Fabulous Force Database Designer 4  for Windows 2k/XP and Linux ' +
+      'KDE/Gnome.'
+    Font.CharSet = 0
+    Font.Color = clBlack
+    Font.Height = 9
+    Font.Name = 'Sans'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
+  end
+  object VersionLbl: TLabel
+    Left = 627
+    Top = 298
+    Width = 56
+    Alignment = taRightJustify
+    Caption = '4.0.0.0'
+    Transparent = True
+    Visible = False
+  end
+  object InfoLbl5: TLabel
+    Left = 339
+    Top = 241
+    AutoSize = True
+    AutoSize = False
+    Caption = 
+      'Distribution includes Edward Benson'#39's LGPL DBExpress driver 2.0.' +
+      '7 for ODBC,'
+    Font.CharSet = 0
+    Font.Color = clBlack
+    Font.Height = 9
+    Font.Name = 'Sans'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
+    WordWrap = True
+  end
+  object InfoLbl2: TLabel
+    Left = 339
+    Top = 197
+    AutoSize = True
+    AutoSize = False
+    Caption = 
+      'Copyright (C) 2003 by Michael G. Zinner. This software is distri' +
+      'buted under the'
+    Font.CharSet = 0
+    Font.Color = clBlack
+    Font.Height = 9
+    Font.Name = 'Sans'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
+    WordWrap = True
+  end
+  object InfoLbl4: TLabel
+    Left = 339
+    Top = 223
+    AutoSize = True
+    AutoSize = False
+    Caption = 'Taxacher, Georg Richter, Jens Oberender.'
+    Font.CharSet = 0
+    Font.Color = clBlack
+    Font.Height = 9
+    Font.Name = 'Sans'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
+    WordWrap = True
+  end
+  object InfoLbl3: TLabel
+    Left = 339
+    Top = 210
+    AutoSize = True
+    AutoSize = False
+    Caption = 
+      'terms of the GNU GPL. Special thanks to Katharina Peter, Ulrich ' +
+      'Bayer, Johannes'
+    Font.CharSet = 0
+    Font.Color = clBlack
+    Font.Height = 9
+    Font.Name = 'Sans'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
+    WordWrap = True
+  end
+  object InfoLbl6: TLabel
+    Left = 339
+    Top = 253
+    AutoSize = True
+    AutoSize = False
+    Caption = 
+      'the SQLite Engine, Marco Wobben'#39's DBExpress driver 2.3.4 for SQL' +
+      'ite and'
+    Font.CharSet = 0
+    Font.Color = clBlack
+    Font.Height = 9
+    Font.Name = 'Sans'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
+    WordWrap = True
+  end
+  object InfoLbl7: TLabel
+    Left = 339
+    Top = 265
+    AutoSize = True
+    AutoSize = False
+    Caption = 'Stefan Heymann'#39's XML Parser.'
+    Font.CharSet = 0
+    Font.Color = clBlack
+    Font.Height = 9
+    Font.Name = 'Sans'
+    Font.Pitch = fpVariable
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
+    WordWrap = True
+  end
+  object CloseTimer: TTimer
+    Interval = 5000
+    OnTimer = CloseTimerTimer
+    Left = 216
+    Top = 20
+  end
+end

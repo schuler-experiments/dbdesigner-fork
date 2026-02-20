@@ -1,0 +1,714 @@
+object OptionsModelForm: TOptionsModelForm
+  Left = 221
+  Top = 225
+  ActiveControl = PageControl
+  BorderStyle = bsToolWindow
+  Caption = 'Model Options'
+  ClientHeight = 500
+  ClientWidth = 900
+  Color = clBtnFace
+  FormStyle = fsStayOnTop
+  Position = poOwnerFormCenter
+  Scaled = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
+  object PageControlTitleShape: TShape
+    Left = 186
+    Top = 14
+    Width = 700
+    Height = 28
+    Brush.Color = clBtnFace
+    Brush.Style = bsClear
+    Pen.Color = clSilver
+  end
+  object PageControl: TPageControl
+    Left = 186
+    Top = 44
+    Width = 700
+    Height = 410
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ActivePage = EditOptionsSheet
+    ShowTabs = False
+    TabOrder = 0
+    OnChange = PageControlChange
+    object GeneralSheet: TTabSheet
+      Caption = 'GeneralSheet'
+      object Label11: TLabel
+        Left = 348
+        Top = 36
+        AutoSize = True
+        Caption = 'Region Colors'
+      end
+      object Label10: TLabel
+        Left = 348
+        Top = 210
+        AutoSize = True
+        Caption = '(Format: Colorname=#RRGGBB)'
+        Color = clBtnFace
+        Font.Color = clGray
+        Font.Height = 11
+        Font.Name = 'Sans'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object RegionColorsMemo: TMemo
+        Left = 348
+        Top = 54
+        Width = 330
+        Height = 150
+        ScrollBars = ssVertical
+        TabOrder = 4
+      end
+      object Label1: TLabel
+        Left = 0
+        Top = 8
+        Width = 83
+        Alignment = taRightJustify
+        Caption = 'Model Name:'
+      end
+      object ModelNameEd: TEdit
+        Left = 88
+        Top = 4
+        Width = 240
+        Height = 25
+        TabOrder = 0
+      end
+      object Label2: TLabel
+        Left = 348
+        Top = 8
+        Width = 95
+        Alignment = taRightJustify
+        Caption = 'Default Font:'
+      end
+      object FontCBox: TComboBox
+        Left = 448
+        Top = 4
+        Width = 228
+        Height = 25
+        DropDownCount = 16
+        ItemHeight = 15
+        TabOrder = 3
+      end
+      object Label12: TLabel
+        Left = 11
+        Top = 68
+        Width = 72
+        Alignment = taRightJustify
+        Caption = 'Comments:'
+      end
+      object ModelCommentsMemo: TMemo
+        Left = 88
+        Top = 68
+        Width = 240
+        Height = 150
+        TabOrder = 2
+      end
+      object VersionEd: TEdit
+        Left = 88
+        Top = 34
+        Width = 240
+        Height = 25
+        TabOrder = 1
+      end
+      object Label13: TLabel
+        Left = 19
+        Top = 36
+        Width = 64
+        Alignment = taRightJustify
+        Caption = 'Version:'
+      end
+    end
+    object EditOptionsSheet: TTabSheet
+      Caption = 'EditOptionsSheet'
+      ImageIndex = 3
+      object GroupBox1: TGroupBox
+        Left = 490
+        Top = 4
+        Width = 190
+        Height = 90
+        Caption = ' '
+        TabOrder = 0
+        object GridWidthLbl: TLabel
+          Left = 0
+          Top = 24
+          Width = 67
+          Alignment = taRightJustify
+          Caption = 'Grid width:'
+        end
+        object GridXEd: TEdit
+          Left = 72
+          Top = 20
+          Width = 39
+          Height = 21
+          TabOrder = 1
+        end
+        object GridHeightLbl: TLabel
+          Left = 0
+          Top = 52
+          Width = 67
+          Alignment = taRightJustify
+          Caption = 'Grid height:'
+        end
+        object GridYEd: TEdit
+          Left = 72
+          Top = 48
+          Width = 39
+          Height = 21
+          TabOrder = 3
+        end
+        object GridWidthUnitsLbl: TLabel
+          Left = 116
+          Top = 24
+          AutoSize = True
+          Caption = 'Units'
+        end
+        object GridHeightUnitsLbl: TLabel
+          Left = 116
+          Top = 52
+          AutoSize = True
+          Caption = 'Units'
+        end
+      end
+      object UsePosGridCBox: TCheckBox
+        Left = 500
+        Top = 1
+        Width = 160
+        Height = 19
+        Caption = 'Enable Snap to Grid'
+        TabOrder = 1
+        OnClick = UsePosGridCBoxClick
+      end
+      object GroupBox2: TGroupBox
+        Left = 4
+        Top = 170
+        Width = 470
+        Height = 60
+        Caption = 'Default Table Settings (MySql only)'
+        TabOrder = 2
+        object Label18: TLabel
+          Left = 21
+          Top = 24
+          AutoSize = True
+          Caption = 'Default Table Type:'
+        end
+        object DefaultTableTypeCBox: TComboBox
+          Left = 140
+          Top = 24
+          Width = 310
+          Height = 25
+          Style = csDropDownList
+          ItemHeight = 15
+          Items.Strings = (
+            'MYISAM  (Standard)'
+            'InnoDB  (Transaction-safe tables with row locking)'
+            'HEAP  (The data for this table is only stored in memory)'
+            'BDB  (Transaction-safe tables with page locking)'
+            'ISAM  (The original (old) table handler)'
+            'MERGE  (A collection of MyISAM tables used as one table)')
+          ItemIndex = 0
+          TabOrder = 1
+          Text = 'MYISAM  (Standard)'
+        end
+      end
+      object GroupBox3: TGroupBox
+        Left = 4
+        Top = 4
+        Width = 470
+        Height = 160
+        Caption = 'Default Relation Settings / Foreign Keys Settings'
+        TabOrder = 3
+        object Label19: TLabel
+          Left = 41
+          Top = 64
+          AutoSize = True
+          Caption = 'Reference Definition is activated for the Relation (for InnoDB)'
+          Transparent = True
+        end
+        object TableNameInRefsCBox: TCheckBox
+          Left = 22
+          Top = 85
+          Width = 309
+          Height = 19
+          Hint = 
+            'The name of the soure table will be included in the foreign key ' +
+            'columns'#39' name'
+          Caption = 'Add Source Table Name to Foreign Key Columns'#39' Names'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+        end
+        object Label23: TLabel
+          Left = 22
+          Top = 113
+          AutoSize = True
+          Caption = 'Foreign Key Prefix:'
+        end
+        object FKPrefixEd: TEdit
+          Left = 114
+          Top = 109
+          Width = 43
+          Height = 21
+          Hint = 'Prefix that will be added to all foreign key columns'#39' name'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+        end
+        object Label24: TLabel
+          Left = 171
+          Top = 113
+          AutoSize = True
+          Caption = 'Foreign Key Postfix:'
+        end
+        object FKPostfixEd: TEdit
+          Left = 268
+          Top = 109
+          Width = 43
+          Height = 21
+          Hint = 'Postfix that will be added to all foreign key columns'#39' name'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 4
+        end
+        object CreateFKRefDefIndexCBox: TCheckBox
+          Left = 22
+          Top = 47
+          Width = 317
+          Height = 19
+          Hint = 
+            'The Reference Definition will be turned on by default for new Re' +
+            'lations'
+          Caption = 'Automatically create Index on FK Fields in Destination Table if'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 5
+        end
+        object ActivateRefDefForNewRelationsCBox: TCheckBox
+          Left = 22
+          Top = 21
+          Width = 289
+          Height = 19
+          Hint = 
+            'The Reference Definition will be turned on by default for new Re' +
+            'lations'
+          Caption = 'Activate Reference Definitions for all new Relations'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 6
+        end
+      end
+      object GroupBox4: TGroupBox
+        Left = 490
+        Top = 100
+        Width = 190
+        Height = 90
+        Caption = 'Canvas Size'
+        TabOrder = 4
+        object Label20: TLabel
+          Left = 18
+          Top = 24
+          Width = 49
+          Alignment = taRightJustify
+          Caption = 'Width:'
+        end
+        object CanvasWidthEd: TEdit
+          Left = 72
+          Top = 20
+          Width = 39
+          Height = 21
+          TabOrder = 1
+          OnChange = CanvasWidthEdChange
+        end
+        object Label21: TLabel
+          Left = 116
+          Top = 24
+          AutoSize = True
+          Caption = 'Units'
+        end
+        object Label22: TLabel
+          Left = 11
+          Top = 53
+          Width = 56
+          Alignment = taRightJustify
+          Caption = 'Height:'
+        end
+        object CanvasHeightEd: TEdit
+          Left = 72
+          Top = 49
+          Width = 39
+          Height = 21
+          TabOrder = 4
+          OnChange = CanvasHeightEdChange
+        end
+        object Label25: TLabel
+          Left = 116
+          Top = 53
+          AutoSize = True
+          Caption = 'Units'
+        end
+      end
+    end
+    object DatabaseSheet: TTabSheet
+      Caption = 'DatabaseSheet'
+      ImageIndex = 2
+      object NewTblPrefixBtn: TSpeedButton
+        Left = 646
+        Top = 4
+        Width = 23
+        Height = 22
+        Flat = True
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000120B0000120B00000000000000000000C8D0D4C8D0D4
+          C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0
+          D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4A98391AC7C7FB08383B0
+          8383B08383B08383B08383B08383B08383B08383B08383A57373C8D0D4C8D0D4
+          C8D0D4C8D0D4A57C8AF2EAEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFB18384C8D0D4C8D0D4C8D0D4C8D0D4A57C8AEEE3E6FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB08383C8D0D4C8D0D4
+          C8D0D4C8D0D4A57C8AEEE3E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFB08383C8D0D4C8D0D4C8D0D4C8D0D4A67D8AEEE3E6FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB08383C8D0D4C8D0D4
+          C8D0D4C8D0D4A67C88FDEEEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFB18383C8D0D4C8D0D4C0C9D39AA4BF644C74B5B4C1FDFEFEFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAB8083C8D0D4C8D0D4
+          9CACC0274FAA123FBB043B7FEEF1F1FBFBFAFAFAFAFAFAFAFAFAFAFAFAFAFAFA
+          FAFAFAFAFDFEFE9E7982C8D0D4C8D0D498ADBF0F65B62CA5FF0A4F92EAE7E5F7
+          F4F0EFEFEDECECECECECECECEDEDEDEDEDEDEDEDF3F6F59E78803684B01F6EAE
+          12589A136DB42EB0FE0864AF1A64A42E5D95A9B1CFEBEAE5E1E1E1E1E1E0DDDA
+          D9DCD8D8DFDEDD9C757C1C65B875C7EF46AFF33FACF334A7F442AEF350B7F347
+          9CD85E87C0F2EBE3DFE1E1D5CCC89F695CA57A7CAE8182A471622971F372ADF8
+          7BB1F879BEF677D0F379B6F76FACFD3F8CFF6794E3E1DACDD1D2D3BAAFAAAF86
+          79E0E7E7F4FEFFAD80768DBCDA729DE85386EE3D91FB7DDAF22173FD5C87E26A
+          9BDCA5C3C9C7C6C5C2C6C8ABA29FC2998CFFFFFFD3C2C2B3999CC8D0D4C8D0D4
+          A1B8DD569BFAACE6F2337CFDCFB8B0DDBFACD4B9AFCDB8B0CEB9B1B8968DA874
+          67BA9294B49D9FC8D0D4C8D0D4C8D0D4A4C3D73C8DEF3476FB4498E6C9CCCDCA
+          CDCFCACDCFCACDCFCACDCFC7C8CAC3C3C5C2C2C6C8D0D4C8D0D4}
+        OnClick = NewTblPrefixBtnClick
+      end
+      object DelTblPrefixBtn: TSpeedButton
+        Left = 646
+        Top = 28
+        Width = 23
+        Height = 22
+        Flat = True
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000120B0000120B00000000000000000000C8D0D4C8D0D4
+          C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0
+          D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
+          D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4A77048AB7346
+          A3652EA46731A46731A46731A3642EAC7546A76F45A67247C3C2C0C8D0D4C8D0
+          D4C8D0D4C8D0D4C8D0D4B5835DD7AD83B5702DB97738B97738B97738B46E2BDB
+          B38BC29571AB651CAB7748C2C0BDC8D0D4C8D0D4C8D0D4C8D0D4B17F58D5AF8F
+          BD7645BF7A4ABF7A4BBF7A4BB9713EDCB18FBC9270AB661EB77428A87142B8C0
+          CBC8D0D4C8D0D4C8D0D4A07759C2B1A0E7B896DCA681DDA884DEA884E1AA86EF
+          D0B9C1BCB79A5F2CB87324B473295F6793B8C1CDC8D0D4C8D0D4C3C2C0B38867
+          E6BE9BECC29FE8BE9AE9BF9BF2CCACEECDB3E9C3A5BD7C4AAA6621B977296778
+          9A5268A5B4BDCBC8D0D4C8D0D4C3C3C2B37D56E49F6BEBA672E7A26EE6A06CE6
+          A06BE9A36EEAA877BD7B47AA68238694B35F80B750649DB5BECBC8D0D4C8D0D4
+          C4C6C5B17E57E8A36CF1A76DEBA169ECA26AEBA26AEEA46CF0A56DC1773F5564
+          8D7796CA6380B26977A9C8D0D4C8D0D4C8D0D4C3C3C1A17B69C5AFA5D4BDA9CE
+          B6A5CEB7A5CEB6A5D0B8A6D2BBA96B7CAC45629E7B97C66E7CACC8D0D4C8D0D4
+          C8D0D4C8D0D4BDC1C6627EBEA6CDEDAFD7F4A8D1EFA9D1EFA9D1EFABD4F1B1D3
+          EC677FB349649D6D7AAAC8D0D4C8D0D4C8D0D4C8D0D4C8D0D4BBC4CF697BAFA9
+          C9E4B2D4EBACCDE7ADCEE7ADCEE7B0D2E9B3D4EB6B85B845579CC8D0D4C8D0D4
+          C8D0D4C8D0D4C8D0D4C8D0D4B7C0CC7187B26881B56279B2637AB2637AB2637A
+          B2657DB3657DB35B71ACC8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
+          D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4
+          C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0
+          D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
+          D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
+        OnClick = DelTblPrefixBtnClick
+      end
+      object Bevel1: TBevel
+        Left = 12
+        Top = 38
+        Width = 211
+        Height = 3
+        Shape = bsTopLine
+      end
+      object Label4: TLabel
+        Left = 248
+        Top = 14
+        Width = 116
+        Alignment = taRightJustify
+        Caption = 'Table Prefixes:'
+      end
+      object TablePrefixCLBox: TCheckListBox
+        Left = 370
+        Top = 4
+        Width = 270
+        Height = 120
+        TabOrder = 1
+        OnClickCheck = TablePrefixCLBoxClickCheck
+        OnDblClick = TablePrefixCLBoxDblClick
+      end
+      object Label5: TLabel
+        Left = 370
+        Top = 130
+        AutoSize = True
+        AutoSize = False
+        Caption = '(use Table Prefixes to work with several'
+        Font.Color = clGray
+        Font.Height = 11
+        Font.Name = 'Sans'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label6: TLabel
+        Left = 370
+        Top = 178
+        AutoSize = True
+        AutoSize = False
+        Caption = '(when working with Oracle use the Table'
+        Font.Color = clGray
+        Font.Height = 11
+        Font.Name = 'Sans'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object DefDatatypeCBox: TComboBox
+        Left = 140
+        Top = 10
+        Width = 120
+        Height = 25
+        Style = csDropDownList
+        ItemHeight = 15
+        TabOrder = 4
+      end
+      object Label7: TLabel
+        Left = 0
+        Top = 14
+        Width = 135
+        Alignment = taRightJustify
+        Caption = 'Default Datatype:'
+      end
+      object Label3: TLabel
+        Left = 0
+        Top = 80
+        Width = 135
+        Alignment = taRightJustify
+        Caption = 'Database Type:'
+        Visible = False
+      end
+      object DBTypeEd: TEdit
+        Left = 140
+        Top = 76
+        Width = 85
+        Height = 21
+        Color = clBtnHighlight
+        ReadOnly = True
+        TabOrder = 7
+        Visible = False
+      end
+      object Label14: TLabel
+        Left = 370
+        Top = 144
+        AutoSize = True
+        AutoSize = False
+        Caption = 'MySQL-DBs at once, e.g. store.product and'
+        Font.Color = clGray
+        Font.Height = 11
+        Font.Name = 'Sans'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label15: TLabel
+        Left = 370
+        Top = 158
+        AutoSize = True
+        AutoSize = False
+        Caption = 'stock.inventory)'
+        Font.Color = clGray
+        Font.Height = 11
+        Font.Name = 'Sans'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label16: TLabel
+        Left = 370
+        Top = 210
+        AutoSize = True
+        AutoSize = False
+        Caption = 'e.g. scott.product and tom.statistic)'
+        Font.Color = clGray
+        Font.Height = 11
+        Font.Name = 'Sans'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label17: TLabel
+        Left = 370
+        Top = 196
+        AutoSize = True
+        AutoSize = False
+        Caption = 'Prefixes to access tables from different users,'
+        Font.Color = clGray
+        Font.Height = 11
+        Font.Name = 'Sans'
+        Font.Pitch = fpVariable
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object CreateSQLforLinkedObjectsCBox: TCheckBox
+        Left = 12
+        Top = 49
+        Width = 209
+        Height = 19
+        Hint = 
+          'To exclude the Linked Objects from SQL Create/Drop Codes select ' +
+          'this option'
+        Caption = 'Create SQL Code for Linked Objects'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 12
+      end
+    end
+    object PluginSheet: TTabSheet
+      Caption = 'PluginSheet'
+      ImageIndex = 1
+      object Label8: TLabel
+        Left = 2
+        Top = 2
+        AutoSize = True
+        Caption = 'Plugin Data:'
+      end
+      object PluginRecordsStringGrid: TStringGrid
+        Left = 4
+        Top = 20
+        Width = 250
+        Height = 330
+        ColCount = 2
+        DefaultRowHeight = 16
+        FixedCols = 0
+        ScrollBars = ssVertical
+        TabOrder = 1
+        OnClick = PluginRecordsStringGridClick
+      end
+      object Label9: TLabel
+        Left = 268
+        Top = 2
+        AutoSize = True
+        Caption = 'Data Sub-Parameters:'
+      end
+      object PluginParamsStringGrid: TStringGrid
+        Left = 268
+        Top = 20
+        Width = 410
+        Height = 330
+        ColCount = 1
+        DefaultColWidth = 600
+        DefaultRowHeight = 16
+        FixedCols = 0
+        FixedRows = 0
+        TabOrder = 3
+      end
+      object RemovePluginData: TBitBtn
+        Left = 4
+        Top = 356
+        Width = 250
+        Height = 28
+        Caption = 'Remove selected Plugin Data'
+        TabOrder = 4
+        OnClick = RemovePluginDataClick
+      end
+    end
+  end
+  object BottomPnl: TPanel
+    Left = 0
+    Top = 458
+    Width = 900
+    Height = 42
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 1
+    object AbortBtn: TButton
+      Left = 720
+      Top = 8
+      Width = 80
+      Height = 28
+      Anchors = [akRight, akBottom]
+      Caption = 'Cancel'
+      TabOrder = 1
+      OnClick = AbortBtnClick
+    end
+    object SubmitBtn: TButton
+      Left = 808
+      Top = 8
+      Width = 80
+      Height = 28
+      Anchors = [akRight, akBottom]
+      Caption = 'OK'
+      Default = True
+      TabOrder = 2
+      OnClick = SubmitBtnClick
+    end
+    object MakeEditSettingsDefaultBtn: TBitBtn
+      Left = 10
+      Top = 8
+      Width = 380
+      Height = 28
+      Caption = 'Make these Settings the Default Settings for all new Models'
+      TabOrder = 0
+      Visible = False
+      OnClick = MakeEditSettingsDefaultBtnClick
+    end
+  end
+  object PageControlTreeView: TTreeView
+    Left = 10
+    Top = 15
+    Width = 170
+    Height = 438
+    Anchors = [akTop, akLeft, akBottom]
+    Items.Data = {
+      0400000028000000FFFFFFFFFFFFFFFF0020EE02000000000000000000000000
+      0F47656E6572616C204F7074696F6E7328000000FFFFFFFFFFFFFFFF0020EE02
+      0000000000000000000000000F45646974696E67204F7074696F6E7329000000
+      FFFFFFFFFFFFFFFF0020EE020000000000000000000000001044617461626173
+      65204F7074696F6E7324000000FFFFFFFFFFFFFFFF0020EE0200000000000000
+      00000000000B506C7567696E2044617461}
+    ReadOnly = True
+    TabOrder = 2
+    OnChange = PageControlTreeViewChange
+  end
+  object PageControlTitlePnl: TPanel
+    Left = 186
+    Top = 14
+    Width = 700
+    Height = 28
+    Anchors = [akTop, akLeft, akRight]
+    BevelOuter = bvNone
+    Color = clHighlight
+    Font.Color = clWhite
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    object PageControlTitleLbl: TLabel
+      Left = 8
+      Top = 5
+      AutoSize = True
+      Caption = 'Indices'
+      Font.Color = clWhite
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+  end
+end
