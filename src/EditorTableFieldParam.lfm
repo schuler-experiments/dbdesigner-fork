@@ -18,6 +18,8 @@ object EditorTableFieldParamForm: TEditorTableFieldParamForm
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object MainPnl: TPanel
     Left = 0
     Top = 0

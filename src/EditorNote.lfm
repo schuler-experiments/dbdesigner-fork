@@ -18,6 +18,8 @@ object EditorNoteForm: TEditorNoteForm
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object NoteMemo: TMemo
     Left = 16
     Top = 24
@@ -45,6 +47,7 @@ object EditorNoteForm: TEditorNoteForm
       Top = 0
       Width = 23
       Height = 22
+      Anchors = [akTop, akRight]
       Enabled = False
       Flat = True
       Glyph.Data = {
@@ -158,6 +161,7 @@ object EditorNoteForm: TEditorNoteForm
       Top = 0
       Width = 23
       Height = 22
+      Anchors = [akTop, akRight]
       Enabled = False
       Flat = True
       Glyph.Data = {

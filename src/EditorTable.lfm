@@ -19,6 +19,8 @@ object EditorTableForm: TEditorTableForm
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object OptionSplitter: TSplitter
     Left = 0
     Top = 278
@@ -41,6 +43,7 @@ object EditorTableForm: TEditorTableForm
       Top = 6
       Width = 533
       Height = 23
+      Anchors = [akTop, akLeft, akRight]
       Brush.Color = clBtnFace
       Brush.Style = bsClear
     end
@@ -49,6 +52,7 @@ object EditorTableForm: TEditorTableForm
       Top = 32
       Width = 541
       Height = 135
+      Anchors = [akTop, akLeft, akRight, akBottom]
       ActivePage = IndexSheet
       ShowTabs = False
       TabOrder = 0
@@ -545,6 +549,7 @@ object EditorTableForm: TEditorTableForm
       Top = 7
       Width = 531
       Height = 21
+      Anchors = [akTop, akLeft, akRight]
       BevelOuter = bvNone
       Color = clBtnShadow
       TabOrder = 2
@@ -720,6 +725,7 @@ object EditorTableForm: TEditorTableForm
         Top = 0
         Width = 23
         Height = 22
+        Anchors = [akTop, akRight]
         Enabled = False
         Flat = True
         Glyph.Data = {
@@ -850,6 +856,7 @@ object EditorTableForm: TEditorTableForm
         Top = 0
         Width = 23
         Height = 22
+        Anchors = [akTop, akRight]
         Enabled = False
         Flat = True
         Glyph.Data = {

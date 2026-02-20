@@ -1990,7 +1990,7 @@ begin
     try
 {$IFDEF LINUX}
       ApplicationFontName:=theIni.ReadString('GeneralSettings', 'ApplicationFontName', 'Nimbus Sans L');
-      ApplicationFontSize:=StrToInt(theIni.ReadString('GeneralSettings', 'ApplicationFontSize', '11'));
+      ApplicationFontSize:=StrToInt(theIni.ReadString('GeneralSettings', 'ApplicationFontSize', '8'));
 {$ELSE}
       ApplicationFontName:=theIni.ReadString('GeneralSettings', 'ApplicationFontName', 'MS Sans Serif');
       ApplicationFontSize:=StrToInt(theIni.ReadString('GeneralSettings', 'ApplicationFontSize', '8'));
@@ -2008,7 +2008,7 @@ begin
     except
 {$IFDEF LINUX}
       ApplicationFontName:='Nimbus Sans L';
-      ApplicationFontSize:=11;
+      ApplicationFontSize:=8;
       ApplicationFontStyle:=[];
 {$ELSE}
       ApplicationFontName:='MS Sans Serif';

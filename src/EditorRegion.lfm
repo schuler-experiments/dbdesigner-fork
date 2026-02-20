@@ -18,6 +18,8 @@ object EditorRegionForm: TEditorRegionForm
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object Label1: TLabel
     Left = 20
     Top = 10
@@ -151,6 +153,7 @@ object EditorRegionForm: TEditorRegionForm
       Top = 0
       Width = 23
       Height = 22
+      Anchors = [akTop, akRight]
       Enabled = False
       Flat = True
       Glyph.Data = {
@@ -264,6 +267,7 @@ object EditorRegionForm: TEditorRegionForm
       Top = 0
       Width = 23
       Height = 22
+      Anchors = [akTop, akRight]
       Enabled = False
       Flat = True
       Glyph.Data = {

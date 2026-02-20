@@ -146,7 +146,7 @@ begin
     try
 {$IFDEF LINUX}
       Screen.SystemFont.Name:=theIni.ReadString('GeneralSettings', 'ApplicationFontName', 'Sans');
-      Screen.SystemFont.Size:=StrToInt(theIni.ReadString('GeneralSettings', 'ApplicationFontSize', '11'));
+      Screen.SystemFont.Size:=StrToInt(theIni.ReadString('GeneralSettings', 'ApplicationFontSize', '8'));
 {$ELSE}
       Screen.SystemFont.Name:=theIni.ReadString('GeneralSettings', 'ApplicationFontName', 'MS Sans Serif');
       Screen.SystemFont.Size:=StrToInt(theIni.ReadString('GeneralSettings', 'ApplicationFontSize', '8'));

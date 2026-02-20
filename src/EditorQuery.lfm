@@ -19,6 +19,8 @@ object EditorQueryForm: TEditorQueryForm
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object TopPnl: TPanel
     Left = 0
     Top = 0
@@ -32,6 +34,7 @@ object EditorQueryForm: TEditorQueryForm
       Top = 30
       Width = 29
       Height = 25
+      Anchors = [akTop, akRight]
       Flat = True
       Glyph.Data = {
         C6060000424DC60600000000000036000000280000001B000000140000000100
@@ -100,6 +103,7 @@ object EditorQueryForm: TEditorQueryForm
     object Label1: TLabel
       Left = 428
       Top = 18
+      Anchors = [akTop, akRight]
       AutoSize = True
       Caption = 'Database Connection'
     end
@@ -108,6 +112,7 @@ object EditorQueryForm: TEditorQueryForm
       Top = 32
       Width = 285
       Height = 21
+      Anchors = [akTop, akLeft, akRight]
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 2

@@ -12,6 +12,8 @@ object ZoomSelForm: TZoomSelForm
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object ZoomPnl: TPanel
     Left = 0
     Top = 0

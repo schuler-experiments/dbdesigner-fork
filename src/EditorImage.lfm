@@ -16,6 +16,8 @@ object EditorImageForm: TEditorImageForm
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object LoadImgBtn: TSpeedButton
     Left = 415
     Top = 22
@@ -103,6 +105,7 @@ object EditorImageForm: TEditorImageForm
     Top = 80
     Width = 131
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = 'Clear Image'
     TabOrder = 3
     OnClick = ClearImgBtnClick
@@ -112,6 +115,7 @@ object EditorImageForm: TEditorImageForm
     Top = 80
     Width = 131
     Height = 25
+    Anchors = [akLeft, akBottom]
     Caption = 'Restore Aspect Ratio'
     TabOrder = 4
     OnClick = RestoreAspectRationBtnClick
@@ -121,6 +125,7 @@ object EditorImageForm: TEditorImageForm
     Top = 80
     Width = 131
     Height = 25
+    Anchors = [akLeft, akBottom]
     Caption = 'Restore Size'
     TabOrder = 5
     OnClick = RestoreSizeBtnClick

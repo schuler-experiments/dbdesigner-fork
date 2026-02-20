@@ -15,6 +15,8 @@ object DBConnLoginForm: TDBConnLoginForm
   OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object GroupBox1: TGroupBox
     Left = 18
     Top = 16
@@ -27,6 +29,7 @@ object DBConnLoginForm: TDBConnLoginForm
       Top = 56
       Width = 91
       Height = 22
+      Anchors = [akRight, akBottom]
       Caption = 'Abort'
       Glyph.Data = {
         26040000424D2604000000000000360000002800000012000000120000000100
@@ -101,6 +104,7 @@ object DBConnLoginForm: TDBConnLoginForm
       Top = 24
       Width = 91
       Height = 25
+      Anchors = [akRight, akBottom]
       Caption = 'Connect'
       Default = True
       ModalResult = 1

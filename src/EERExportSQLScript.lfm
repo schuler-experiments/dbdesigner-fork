@@ -12,6 +12,8 @@ object EERExportSQLScriptFrom: TEERExportSQLScriptFrom
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object Settings: TGroupBox
     Left = 0
     Top = 1
@@ -202,6 +204,7 @@ object EERExportSQLScriptFrom: TEERExportSQLScriptFrom
       Top = 0
       Width = 130
       Height = 33
+      Anchors = [akTop, akRight]
       Caption = 'Save Script to file'
       Glyph.Data = {
         B6050000424DB605000000000000360000002800000015000000160000000100
@@ -258,6 +261,7 @@ object EERExportSQLScriptFrom: TEERExportSQLScriptFrom
       Top = 0
       Width = 49
       Height = 33
+      Anchors = [akTop, akRight]
       Glyph.Data = {
         26040000424D2604000000000000360000002800000012000000120000000100
         180000000000F0030000120B0000120B00000000000000000000E9EBEBE9EBEB

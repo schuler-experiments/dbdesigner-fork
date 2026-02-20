@@ -18,6 +18,8 @@ object DBConnSelectForm: TDBConnSelectForm
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object HSplitter: TSplitter
     Left = 229
     Top = 29
@@ -85,6 +87,7 @@ object DBConnSelectForm: TDBConnSelectForm
         Top = 46
         Width = 91
         Height = 22
+        Anchors = [akTop, akRight]
         Caption = 'Abort'
         Glyph.Data = {
           26040000424D2604000000000000360000002800000012000000120000000100
@@ -159,6 +162,7 @@ object DBConnSelectForm: TDBConnSelectForm
         Top = 14
         Width = 91
         Height = 25
+        Anchors = [akTop, akRight]
         Caption = 'Connect'
         Default = True
         TabOrder = 3
@@ -368,6 +372,7 @@ object DBConnSelectForm: TDBConnSelectForm
         Top = 2
         Width = 37
         Height = 22
+        Anchors = [akTop, akRight]
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
           18000000000000030000120B0000120B00000000000000000000C8D0D4C8D0D4

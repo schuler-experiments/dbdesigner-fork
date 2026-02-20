@@ -13,11 +13,14 @@ object PaletteDataTypesReplaceForm: TPaletteDataTypesReplaceForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object Bevel1: TBevel
     Left = 20
     Top = 156
     Width = 351
     Height = 7
+    Anchors = [akLeft, akRight, akBottom]
     Shape = bsTopLine
   end
   object SubmitBtn: TSpeedButton
@@ -25,6 +28,7 @@ object PaletteDataTypesReplaceForm: TPaletteDataTypesReplaceForm
     Top = 164
     Width = 101
     Height = 32
+    Anchors = [akRight, akBottom]
     Caption = 'Execute'
     Flat = True
     Glyph.Data = {
@@ -107,6 +111,7 @@ object PaletteDataTypesReplaceForm: TPaletteDataTypesReplaceForm
     Top = 164
     Width = 73
     Height = 32
+    Anchors = [akRight, akBottom]
     Caption = 'Close'
     Flat = True
     Glyph.Data = {

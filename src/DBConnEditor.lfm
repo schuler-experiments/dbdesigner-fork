@@ -17,11 +17,14 @@ object DBConnEditorForm: TDBConnEditorForm
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object CancelBtn: TSpeedButton
     Left = 260
     Top = 398
     Width = 91
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = 'Abort'
     Glyph.Data = {
       26040000424D2604000000000000360000002800000012000000120000000100
@@ -67,6 +70,7 @@ object DBConnEditorForm: TDBConnEditorForm
     Top = 398
     Width = 91
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = 'OK'
     TabOrder = 0
     OnClick = ConnectBtnClick

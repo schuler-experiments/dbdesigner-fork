@@ -14,6 +14,8 @@ object OptionsModelForm: TOptionsModelForm
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object PageControlTitleShape: TShape
     Left = 186
     Top = 14

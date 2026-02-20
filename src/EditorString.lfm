@@ -14,6 +14,8 @@ object EditorStringForm: TEditorStringForm
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object PromtLbl: TLabel
     Left = 64
     Top = 24
@@ -32,6 +34,7 @@ object EditorStringForm: TEditorStringForm
       Top = 3
       Width = 33
       Height = 26
+      Anchors = [akTop, akRight]
       Flat = True
       Glyph.Data = {
         6E040000424D6E04000000000000360000002800000013000000120000000100
@@ -78,6 +81,7 @@ object EditorStringForm: TEditorStringForm
       Top = 3
       Width = 33
       Height = 26
+      Anchors = [akTop, akRight]
       Flat = True
       Glyph.Data = {
         26040000424D2604000000000000360000002800000012000000120000000100

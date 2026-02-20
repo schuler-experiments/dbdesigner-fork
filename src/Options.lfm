@@ -14,11 +14,14 @@ object OptionsForm: TOptionsForm
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object PageControlTitleShape: TShape
     Left = 197
     Top = 14
     Width = 527
     Height = 23
+    Anchors = [akTop, akLeft, akRight]
     Brush.Color = clBtnFace
     Brush.Style = bsClear
   end
@@ -27,6 +30,7 @@ object OptionsForm: TOptionsForm
     Top = 40
     Width = 535
     Height = 263
+    Anchors = [akTop, akLeft, akRight, akBottom]
     ActivePage = DBOptionsSheet
     ShowTabs = False
     TabOrder = 0
@@ -723,6 +727,7 @@ object OptionsForm: TOptionsForm
       Top = 0
       Width = 23
       Height = 22
+      Anchors = [akTop, akRight]
       Enabled = False
       Flat = True
       Glyph.Data = {
@@ -836,6 +841,7 @@ object OptionsForm: TOptionsForm
       Top = 0
       Width = 23
       Height = 22
+      Anchors = [akTop, akRight]
       Enabled = False
       Flat = True
       Glyph.Data = {
@@ -967,6 +973,7 @@ object OptionsForm: TOptionsForm
     Top = 15
     Width = 170
     Height = 284
+    Anchors = [akTop, akLeft, akBottom]
     Items.Data = {
       0400000028000000FFFFFFFFFFFFFFFF7805AF09000000000000000000000000
       0F47656E6572616C204F7074696F6E7327000000FFFFFFFFFFFFFFFF7805AF09
@@ -983,6 +990,7 @@ object OptionsForm: TOptionsForm
     Top = 15
     Width = 525
     Height = 21
+    Anchors = [akTop, akLeft, akRight]
     BevelOuter = bvNone
     Color = clBtnShadow
     TabOrder = 3

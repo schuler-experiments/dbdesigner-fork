@@ -16,11 +16,14 @@ object TipsForm: TTipsForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object Bevel1: TBevel
     Left = 28
     Top = 192
     Width = 345
     Height = 7
+    Anchors = [akLeft, akRight, akBottom]
     Shape = bsTopLine
   end
   object CancelBtn: TSpeedButton
@@ -28,6 +31,7 @@ object TipsForm: TTipsForm
     Top = 201
     Width = 170
     Height = 32
+    Anchors = [akRight, akBottom]
     Caption = 'Close Tip Window'
     Flat = True
     Glyph.Data = {
@@ -66,6 +70,7 @@ object TipsForm: TTipsForm
     Top = 40
     Width = 343
     Height = 141
+    Anchors = [akTop, akLeft, akRight, akBottom]
     Color = 16056319
     Lines.Strings = (
       ''
@@ -95,6 +100,7 @@ object TipsForm: TTipsForm
     Top = 208
     Width = 197
     Height = 19
+    Anchors = [akLeft, akBottom]
     Caption = 'Do not show tips on startup.'
     TabOrder = 2
   end

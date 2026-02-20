@@ -14,6 +14,8 @@ object EditorQueryDragTargetForm: TEditorQueryDragTargetForm
   OnPaint = FormPaint
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object DropSQLAddTbls2SelectPnl: TPanel
     Left = 4
     Top = 37

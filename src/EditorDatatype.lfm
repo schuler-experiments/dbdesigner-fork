@@ -18,6 +18,8 @@ object EditorDatatypeForm: TEditorDatatypeForm
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object Label1: TLabel
     Left = 20
     Top = 14
@@ -240,6 +242,7 @@ object EditorDatatypeForm: TEditorDatatypeForm
       Top = 8
       Width = 23
       Height = 22
+      Anchors = [akTop, akRight]
       Enabled = False
       Flat = True
       Glyph.Data = {
@@ -353,6 +356,7 @@ object EditorDatatypeForm: TEditorDatatypeForm
       Top = 8
       Width = 23
       Height = 22
+      Anchors = [akTop, akRight]
       Enabled = False
       Flat = True
       Glyph.Data = {

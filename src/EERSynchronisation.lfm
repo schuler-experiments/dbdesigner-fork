@@ -18,6 +18,8 @@ object EERSynchronisationForm: TEERSynchronisationForm
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object BottomPnl: TPanel
     Left = 0
     Top = 417
@@ -31,6 +33,7 @@ object EERSynchronisationForm: TEERSynchronisationForm
       Top = 28
       Width = 101
       Height = 32
+      Anchors = [akTop, akRight]
       Caption = 'Execute'
       Flat = True
       Glyph.Data = {
@@ -114,6 +117,7 @@ object EERSynchronisationForm: TEERSynchronisationForm
       Top = 28
       Width = 73
       Height = 32
+      Anchors = [akTop, akRight]
       Caption = 'Close'
       Flat = True
       Glyph.Data = {

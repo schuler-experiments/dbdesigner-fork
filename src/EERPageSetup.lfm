@@ -14,6 +14,8 @@ object EERPageSetupForm: TEERPageSetupForm
   OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object BottomPnl: TPanel
     Left = 0
     Top = 549

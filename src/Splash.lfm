@@ -16,6 +16,8 @@ object SplashForm: TSplashForm
   OnMouseUp = FormMouseUp
   OnPaint = FormPaint
   PixelsPerInch = 96
+  Font.Height = -11
+  Font.Name = 'Sans'
   object InfoLbl1: TLabel
     Left = 339
     Top = 185
